@@ -14,6 +14,8 @@ export class AppComponent implements OnInit{
   public users: User[] = [];
   // @ts-ignore
   public editUser: User | null;
+  // @ts-ignore
+  public deleteUser: User | null;
   constructor(private userService: UserService) {
   }
   ngOnInit() {
@@ -52,13 +54,37 @@ export class AppComponent implements OnInit{
       (response: User) => {
         console.log(response);
         this.getUsers();
-        updateForm.reset();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
-        updateForm.reset();
       }
     );
+  }
+  public onDeleteUser( userId:number|undefined): void {
+    this.userService.deleteUser(userId).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getUsers();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+  public searchUsers(keyWord: string): void {
+    console.log(keyWord);
+    const results: User[] = [];
+    for (const user of this.users) {
+      if (user.first_name.toLowerCase().indexOf(keyWord.toLowerCase()) !== -1
+        || user.email.toLowerCase().indexOf(keyWord.toLowerCase()) !== -1
+        || user.last_name.toLowerCase().indexOf(keyWord.toLowerCase()) !== -1) {
+        results.push(user);
+      }
+    }
+    this.users = results;
+    if (results.length === 0 || !keyWord) {
+      this.getUsers();
+    }
   }
   public onOpenModal(user: User|null, mode: string): void {
     const container = document.getElementById('main-container');
@@ -74,8 +100,8 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#updateUserModal');
     }
     if (mode === 'delete') {
-      // this.deleteEmployee = employee;
-      button.setAttribute('data-target', '#addUserModal');
+      this.deleteUser = user;
+      button.setAttribute('data-target', '#deleteUserModal');
     }
     // @ts-ignore
     container.appendChild(button);
