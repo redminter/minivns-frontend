@@ -19,10 +19,10 @@ export class UserService {
   public addUser(user:User):Observable<User>{
     return this.http.post<User>(`${this.apiServerUrl}/users`, user);
   }
-  public updateUser(userId:number, user:User):Observable<User>{
+  public updateUser(userId:number|undefined, user:User):Observable<User>{
     return this.http.put<User>(`${this.apiServerUrl}/users/${userId}`, user);
   }
-  public deleteUser(userId:number):Observable<void>{
+  public deleteUser(userId:number|undefined):Observable<void>{
     return this.http.delete<void>(`${this.apiServerUrl}/users/${userId}`);
   }
 }

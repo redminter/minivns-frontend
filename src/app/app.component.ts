@@ -12,6 +12,8 @@ import {NgForm} from "@angular/forms";
 export class AppComponent implements OnInit{
   title = 'minivns';
   public users: User[] = [];
+  // @ts-ignore
+  public editUser: User | null;
   constructor(private userService: UserService) {
   }
   ngOnInit() {
@@ -43,7 +45,21 @@ export class AppComponent implements OnInit{
       }
     );
   }
-
+  public onUpdateUser(updateForm: NgForm, userId:number|undefined): void {
+    // @ts-ignore
+    document.getElementById('update-user-form').click();
+    this.userService.updateUser(userId, updateForm.value).subscribe(
+      (response: User) => {
+        console.log(response);
+        this.getUsers();
+        updateForm.reset();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+        updateForm.reset();
+      }
+    );
+  }
   public onOpenModal(user: User|null, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -54,7 +70,8 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#addUserModal');
     }
     if (mode === 'edit') {
-      button.setAttribute('data-target', '#addUserModal');
+      this.editUser = user;
+      button.setAttribute('data-target', '#updateUserModal');
     }
     if (mode === 'delete') {
       // this.deleteEmployee = employee;
