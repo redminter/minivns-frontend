@@ -1,0 +1,254 @@
+<!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/users" style="color:white;">Minivns</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Subject
+        </a></li>
+      <li class="nav-item active">
+        <a class="nav-item nav-link" routerLink="/subjects">Subjects</a></li>>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input type="search" (ngModelChange)="searchSubjects(key.value)" #key="ngModel" ngModel
+             name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search subjects..." required>
+    </form>
+  </div>
+</nav>
+<div class="container" id="main-container">
+  <div class="row">
+    <div *ngFor="let subject of subjects" class="col-md-6 col-xl-3">
+      <div class="card m-b-30">
+        <div class="card-body row">
+          <div class="col-6">
+            <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""
+                            class="img-fluid rounded-circle w-60"></a>
+          </div>
+          <div class="col-6 card-title align-self-center mb-0">
+            <h5>{{subject.title}}</h5>
+          </div>
+<!--          <br>-->
+<!--          <ul class="list-group list-group-flush">-->
+<!--            <li class="list-group-item">VNS: {{subject?.vns_url}}</li>-->
+<!--          </ul>-->
+<!--          <ul class="list-group list-group-flush">-->
+<!--            <li class="list-group-item">Lection: {{subject?.lection_url}}</li>-->
+<!--          </ul>-->
+<!--          <ul class="list-group list-group-flush">-->
+<!--            <li class="list-group-item">Practical: {{subject?.pract_url}}</li>-->
+<!--          </ul>-->
+<!--          <ul class="list-group list-group-flush">-->
+<!--            <li class="list-group-item">Lab: {{subject?.lab_url}}</li>-->
+<!--          </ul>-->
+        </div>
+        <div class="card-body">
+          <div class="float-right btn-group btn-group-sm">
+            <a (click)="onOpenModal(subject, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+            <a (click)="onOpenModal(subject, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add subject Modal -->
+<div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addSubjectModalLabel">Add Subject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddSubject(addForm)">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" ngModel name="title" class="form-control" id="title" placeholder="Title" required>
+          </div>
+          <div class="form-group">
+            <label for="vns_url">Url for vns</label>
+            <input type="text" ngModel name="vns_url" class="form-control" id="vns_url" placeholder="Vns url" required>
+          </div>
+          <div class="form-group">
+            <label for="pract_url">URL for practical lesson</label>
+            <input type="text" ngModel name="pract_url" class="form-control" id="pract_url" placeholder="Pract url" required>
+          </div>
+          <div class="form-group">
+            <label for="lab_url">URL for lesson in laboratory</label>
+            <input type="text" ngModel name="lab_url" class="form-control" id="lab_url" placeholder="Lab url" required>
+          </div>
+          <div class="form-group">
+            <label for="lection_url">URL for lection</label>
+            <input type="text" ngModel name="lection_url" class="form-control" id="lection_url" placeholder="Lection url" required>
+          </div>
+          <div>
+            <label for="at_monday">Monday:</label>
+            <input type="checkbox" ngModel name = "at_monday" class="form-control" id="at_monday"/>
+          </div>
+          <div>
+            <label for="at_tuesday">Tuesday:</label>
+            <input type="checkbox" ngModel name = "at_tuesday" class="form-control" id="at_tuesday"/>
+          </div>
+          <div>
+            <label for="at_wednesday">Wednesday:</label>
+            <input type="checkbox" ngModel name = "at_wednesday" class="form-control" id="at_wednesday"/>
+          </div>
+          <div>
+            <label for="at_thursday">Thursday:</label>
+            <input type="checkbox" ngModel name = "at_thursday" class="form-control" id="at_thursday"/>
+          </div>
+          <div>
+            <label for="at_friday">Friday:</label>
+            <input type="checkbox" ngModel name = "at_friday" class="form-control" id="at_friday"/>
+          </div>
+            <div class="modal-footer">
+            <button type="button" id="add-subject-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Edit subject Modal -->
+<div class="modal fade" id="updateSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateSubjectModalLabel">Update Subject {{editSubject?.title}}</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" ngModel="{{editSubject?.title}}" name="title" class="form-control" id="update_title" placeholder="Title" required>
+          </div>
+          <input type="hidden" ngModel="{{editSubject?.id}}" name="subject_id" class="form-control" id="subject_id" placeholder="id">
+          <div class="form-group">
+            <label for="vns_url">Url for vns</label>
+            <input type="text" ngModel="{{editSubject?.vns_url}}" name="vns_url" class="form-control" id="update_vns_url" placeholder="Vns url" required>
+          </div>
+          <div class="form-group">
+            <label for="pract_url">URL for practical lesson</label>
+            <input type="text" ngModel="{{editSubject?.pract_url}}" name="pract_url" class="form-control" id="update_pract_url" placeholder="Pract url" required>
+          </div>
+          <div class="form-group">
+            <label for="lab_url">URL for lesson in laboratory</label>
+            <input type="text" ngModel="{{editSubject?.lab_url}}" name="lab_url" class="form-control" id="update_lab_url" placeholder="Lab url" required>
+          </div>
+          <div class="form-group">
+            <label for="lection_url">URL for lection</label>
+            <input type="text" ngModel="{{editSubject?.lection_url}}" name="lection_url" class="form-control" id="update_lection_url" placeholder="Lection url" required>
+          </div>
+          <div>
+            <label for="at_monday">Monday:</label>
+            <input type="checkbox" ngModel="{{editSubject?.atMonday}}" name = "at_monday" class="form-control" id="update_at_monday"/>
+          </div>
+          <div>
+            <label for="at_tuesday">Tuesday:</label>
+            <input type="checkbox" ngModel="{{editSubject?.atTuesday}}" name = "at_tuesday" class="form-control" id="update_at_tuesday"/>
+          </div>
+          <div>
+            <label for="at_wednesday">Wednesday:</label>
+            <input type="checkbox" ngModel="{{editSubject?.atWednesday}}" name = "at_wednesday" class="form-control" id="update_at_wednesday"/>
+          </div>
+          <div>
+            <label for="at_thursday">Thursday:</label>
+            <input type="checkbox" ngModel="{{editSubject?.atThursday}}" name = "at_thursday" class="form-control" id="update_at_thursday"/>
+          </div>
+          <div>
+            <label for="at_friday">Friday:</label>
+            <input type="checkbox" ngModel="{{editSubject?.atFriday}}" name = "at_friday" class="form-control" id="update_at_friday"/>
+          </div>
+          <br>
+          <div class="col-lg-12 col-md-12 col-xl-12">
+            <div class="alert alert-info" role="alert">
+              <h4 class="alert-heading">Check schedule checkboxes!</h4>
+                <p>Otherwise it will be saved all unchecked</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="update-subject-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button (click)="onUpdateSubject(editForm, editSubject?.id)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--&lt;!&ndash; Edit Modal &ndash;&gt;-->
+<!--<div class="modal fade" id="updateSubjectModal" tabindex="-1" role="dialog" aria-labelledby="SubjectEditModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog" role="document">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="updateModalLabel">Edit Subject {{editSubject?.first_name}} {{editSubject?.last_name}}</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--          <span aria-hidden="true">&times;</span>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <form #editForm="ngForm">-->
+<!--          <div class="form-group">-->
+<!--            <label for="first_name">First name</label>-->
+<!--            <input type="text" ngModel="{{editSubject?.first_name}}" name="first_name" class="form-control" id="update_first_name" aria-describedby="emailHelp" placeholder="First Name">-->
+<!--          </div>-->
+<!--          <input type="hidden" ngModel="{{editSubject?.subject_id}}" name="subject_id" class="form-control" id="subject_id" placeholder="id">-->
+<!--          <div class="form-group">-->
+<!--            <label for="email">Last name</label>-->
+<!--            <input type="email" ngModel="{{editSubject?.last_name}}" name="last_name" class="form-control" id="update_last_name" placeholder="Last name">-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label for="email">Email Address</label>-->
+<!--            <input type="email" ngModel="{{editSubject?.email}}" name="email" class="form-control" id="update_email" placeholder="Email">-->
+<!--          </div>-->
+<!--          <div class="form-group">-->
+<!--            <label for="password">Password</label>-->
+<!--            <input type="text" ngModel name="password" class="form-control" id="update_password" placeholder="new password">-->
+<!--          </div>-->
+<!--          <div class="modal-footer">-->
+<!--            <button type="button" id="update-subject-form" data-dismiss="modal" class="btn btn-secondary">Close</button>-->
+<!--            <button (click)="onUpdateSubject(editForm, editSubject?.subject_id)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>-->
+<!--          </div>-->
+<!--        </form>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteSubjectModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Delete Subject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete subject {{deleteSubject?.title}}?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button (click)="onDeleteSubject(deleteSubject?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Notification for no subjects -->
+<div *ngIf="subjects?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO SUBJECTS!</h4>
+    <p>No subjects were found.</p>
+  </div>
+</div>
+
