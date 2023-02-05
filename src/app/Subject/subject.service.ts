@@ -18,8 +18,8 @@ export class SubjectService {
     return this.http.get<Subject[]>(`${this.apiServerUrl}/subjects/schedule`);
   }
 
-  public addSubject(user:Subject):Observable<Subject>{
-    return this.http.post<Subject>(`${this.apiServerUrl}/subjects`, user);
+  public addSubject(subject:Subject):Observable<Subject>{
+    return this.http.post<Subject>(`${this.apiServerUrl}/subjects`, subject);
   }
   public updateSubject(subjectId:number|undefined,subject:Subject):Observable<Subject>{
     return this.http.put<Subject>(`${this.apiServerUrl}/subjects/${subjectId}`, subject);

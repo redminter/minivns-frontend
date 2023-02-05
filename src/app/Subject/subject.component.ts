@@ -9,7 +9,8 @@ import {SubjectService} from "./subject.service";
 })
 export class SubjectComponent implements OnInit{
   public subjects: Subject[] = [];
-  public subject: Subject | undefined;
+  // @ts-ignore
+  public subject: Subject | null;
   // @ts-ignore
   public editSubject: Subject | null;
   // @ts-ignore
@@ -99,6 +100,10 @@ export class SubjectComponent implements OnInit{
     if (mode === 'delete') {
       this.deleteSubject = subject;
       button.setAttribute('data-target', '#deleteSubjectModal');
+    }
+    if(mode === 'info'){
+      this.subject=subject;
+      button.setAttribute('data-target', '#infoSubjectModal');
     }
     // @ts-ignore
     container.appendChild(button);

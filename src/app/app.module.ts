@@ -11,6 +11,8 @@ import {SubjectComponent} from "./Subject";
 import {UserComponent} from "./User/user.component";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SubjectScheduledComponent } from './Subject/subject-scheduled/subject-scheduled.component';
+import { TaskComponent } from './task';
+import { AllTasksByUserComponent } from './task/all-tasks-by-user/all-tasks-by-user.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { SubjectScheduledComponent } from './Subject/subject-scheduled/subject-s
     SubjectComponent,
     UserComponent,
     PageNotFoundComponent,
-    SubjectScheduledComponent
+    SubjectScheduledComponent,
+    TaskComponent,
+    AllTasksByUserComponent
   ],
   imports: [
     BrowserModule,

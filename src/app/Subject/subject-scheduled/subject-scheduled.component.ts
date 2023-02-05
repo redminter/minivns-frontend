@@ -8,7 +8,8 @@ import {SubjectService} from "../subject.service";
 })
 export class SubjectScheduledComponent implements OnInit {
   public subjects: Subject[] = [];
-
+// @ts-ignore
+  public subject:Subject|null;
 
   constructor(private subjectService: SubjectService) {
   }
@@ -40,5 +41,30 @@ export class SubjectScheduledComponent implements OnInit {
     if (results.length === 0 || !keyWord) {
       this.getSubjects();
     }
+  }
+  public onOpenModal(subject: Subject|null, mode: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    // if (mode === 'add') {
+    //   button.setAttribute('data-target', '#addSubjectModal');
+    // }
+    // if (mode === 'edit') {
+    //   this.editSubject = subject;
+    //   button.setAttribute('data-target', '#updateSubjectModal');
+    // }
+    // if (mode === 'delete') {
+    //   this.deleteSubject = subject;
+    //   button.setAttribute('data-target', '#deleteSubjectModal');
+    // }
+    if(mode === 'info'){
+      this.subject=subject;
+      button.setAttribute('data-target', '#infoSubjectModal');
+    }
+    // @ts-ignore
+    container.appendChild(button);
+    button.click();
   }
 }

@@ -1,0 +1,140 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/users" style="color:white;">Minivns</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Task
+        </a></li>
+      <li class="nav-item active">
+        <a class="nav-item nav-link" routerLink="/users/5/tasks">All Tasks</a></li>>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input type="search" (ngModelChange)="searchTask(key.value)" #key="ngModel" ngModel
+             name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search tasks..." required>
+    </form>
+  </div>
+</nav>
+<div class="container" id="main-container">
+  <div class="row">
+    <div *ngFor="let task of tasks" class="col-md-6 col-xl-3">
+      <div class="card m-b-30">
+        <div class="card-body row">
+          <div class="col-6">
+            <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""
+                            class="img-fluid rounded-circle w-60"></a>
+          </div>
+          <div class="col-6 card-title align-self-center mb-0">
+            <h5>{{task.title}}</h5>
+          </div>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><i class="fa fa-time float-right"></i>Deadline: {{task.deadline}}</li>
+        </ul>
+        <div class="card-body">
+          <div class="float-right btn-group btn-group-sm">
+              <a (click)="onOpenModal(task, 'info')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Info"><i class="fa fa-info"></i></a>
+              <a (click)="onOpenModal(task, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+              <a (click)="onOpenModal(task, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Add Task Modal-->
+<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTaskModalLabel">Add Task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #addForm="ngForm" (ngSubmit)="onAddTask(addForm)">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" ngModel name="title" class="form-control" id="title" placeholder="Title" required>
+          </div>
+          <div class="form-group">
+            <label for="link">Url for vns</label>
+            <input type="text" ngModel name="link" class="form-control" id="link" placeholder="Vns link" required>
+          </div>
+          <div class="form-group">
+            <label for="deadline">Deadline</label>
+            <input type="datetime-local" ngModel name="deadline" class="form-control" id="deadline" placeholder="Deadline" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="add-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Edit Task Modal-->
+<div class="modal fade" id="updateTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateTasktModalLabel">Update Task {{editTask?.title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #editForm="ngForm">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" ngModel="{{editTask?.title}}" name="title" class="form-control" id="update_title" placeholder="Title" required>
+          </div>
+          <input type="hidden" ngModel="{{editTask?.id}}" name="task_id" class="form-control" id="task_id" placeholder="id">
+          <div class="form-group">
+            <label for="link">Url for vns</label>
+            <input type="text" ngModel="{{editTask?.link}}" name="vns_url" class="form-control" id="update_link" placeholder="Vns link" required>
+          </div>
+          <div class="form-group">
+            <label for="deadline">URL for practical lesson</label>
+            <input type="datetime-local" ngModel="{{editTask?.deadline}}" name="deadline" class="form-control" id="update_deadline" placeholder="Deadline" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="update-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button (click)="onUpdateTask(editForm, editTask?.id)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--DeleteTaskModal-->
+<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Delete Subject</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete task {{deleteTask?.title}}?</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button (click)="onDeleteTask(deleteTask?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Notification for no subjects -->
+<div *ngIf="tasks?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO TASKS!</h4>
+    <p>No tasks were found.</p>
+  </div>
+</div>
