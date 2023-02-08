@@ -1,164 +1,98 @@
 <!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="/users" style="color:white;">Minivns</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+<style>
+  .link-button {
+    cursor: pointer;
+    font-size: 10px;
+    border-radius: 15px;
+    margin-inline-start: -33px;
+    margin-block-start: 1.25em;
+  }
+
+  .toolbutton {
+    background: whitesmoke;
+    border: transparent;
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark " style="
+background-color: #ebe9e9;
+box-shadow:0px 5px 14px 0px #97979769;">
+  <a class="navbar-brand" routerLink="/subjects/scheduled"
+     style="
+     color:#666565;
+     font-family: monospace;
+"
+  >Minivns</a>
+  <button class="navbar-toggler" style="border-color:transparent; box-shadow:0px 0px 8px 0px rgb(0 0 0 / 41%)"
+          type="button" data-toggle="collapse" data-target="#navbarColor02"
           aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-item nav-link" routerLink="/subjects">All Subjects</a></li>
-      >
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input type="search" (ngModelChange)="searchSubjects(key.value)" #key="ngModel" ngModel
+      <input type="search" style="box-shadow: inset 1px 1px 4px 0px; background-color:#f5f5f5;"
+             (ngModelChange)="searchSubjects(key.value)" #key="ngModel" ngModel
              name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search subjects..." required>
     </form>
+    <button *ngIf="!authority" class="buttonLogin" style="background-color: blue;
+                border-color:transparent; cursor: pointer; font-family: monospace; border-radius:.25rem; color:antiquewhite; box-shadow: 0px 0px 8px 0px #0000ffc7"
+            routerLink="../../auth/login">Login
+    </button>
+    <button *ngIf="authority" class="btn btn-secondary" (click)="logout()">Logout</button>
   </div>
 </nav>
-<div class="container" id="main-container">
+<div class="container" id="main-container" style="margin-top:2%; ">
   <div class="row">
     <div *ngFor="let subject of subjects" class="col-md-6 col-xl-3">
-      <div class="card m-b-30">
+      <!--      <a routerLink="../users/{{user_id}}/subjects/{{subject?.id}}/tasks">-->
+      <div class="card m-b-30" style="box-shadow: 1px 1px 16px 7px #24242433;">
         <div class="card-body row">
-          <div class="col-6">
-            <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""
-                            class="img-fluid rounded-circle w-60"></a>
+          <div style="width:100%; margin-left: 10%; font-weight: 400;"
+               routerLink="../users/{{user_id}}/subjects/{{subject?.id}}/tasks"
+               class=" card-title align-self-center mb-0">
+            <h5 style="font-size: 25px; font-weight: 400">{{subject.title}}</h5>
           </div>
-          <div class="col-6 card-title align-self-center mb-0">
-            <h5>{{subject.title}}</h5>
-          </div>
-          <div class="card-body">
-            <div class="float-right btn-group btn-group-sm">
-              <a (click)="onOpenModal(subject, 'info')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Info"><i class="fa fa-info"></i></a>
-            </div>
+          <ul><a href='../{{subject.lection_url}}'>
+            <button class="link-button"
+                    style="background: #b1dafd;border-color: rgba(115,185,247,0.82); margin-inline-start: -15px; box-shadow: 7px 2px 20px -5px #008aff;">
+              Lection
+            </button>
+          </a></ul>
+          <ul><a href='../{{subject.pract_url}}'>
+            <button class="link-button" style="background-color: #f79999;border-color: #e76969;box-shadow: 7px 2px 20px -5px #ff0000;">Pract</button>
+          </a></ul>
+          <ul><a href='../{{subject.lab_url}}'>
+            <button class="link-button" style="background-color: #ffff76;border-color: #e9c37e;box-shadow: 7px 2px 20px -5px #f2ff00;">Lab</button>
+          </a></ul>
+          <ul><a href='../{{subject.vns_url}}'>
+            <button class="link-button" style="background-color: #97db97;border-color: #49cd49;box-shadow: 7px 2px 20px -5px #00ff40;">VNS</button>
+          </a></ul>
+
+          <div class="float-left">
+            <a routerLink="../../users/{{user_id}}/subjects/{{subject?.id}}/tasks" data-placement="top"
+               data-original-title="Go TO"><i class="fa-solid fa-arrow-right fa-2xl" style="margin-top: 80px;color: black; text-shadow: 5px 3px 20px #000000b5;"></i></a>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="modal fade" id="infoSubjectModal" tabindex="-1" role="dialog" aria-labelledby="infoModelLabel"
-       aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="infoModelLabel">{{subject?.title}}</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <a href="{{subject?.vns_url}}">URL to VNS</a><br>
-          <a href="{{subject?.lection_url}}">URL to lection</a><br>
-          <a href="{{subject?.pract_url}}">URL to practical lesson</a><br>
-          <a href="{{subject?.lab_url}}">URL to laboratory lesson</a><br>
-        </div>
+    </div><div routerLink="/subjects" class="card m-b-30" style="cursor: pointer; background: #b7f9b7;
+    border-color: #88bb83;
+    border-width: 0.25em;box-shadow: 1px 1px 16px 7px #24242433; margin-left: 1.35%; width:25%">
+    <div class="card-body row">
+      <div  style="width:100%; margin-left: 10%; text-shadow: 11px 5px 20px #88bb83;"
+            class=" card-title align-self-center mb-0">
+        <h5 class="nav-link"  style="font-size: 25px; font-weight: 600; color: rgba(21,77,34,0.82)">All Subjects</h5>
       </div>
     </div>
   </div>
-  <!--&lt;!&ndash; Add subject Modal &ndash;&gt;-->
-  <!--<div class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModalLabel" aria-hidden="true">-->
-  <!--  <div class="modal-dialog" role="document">-->
-  <!--    <div class="modal-content">-->
-  <!--      <div class="modal-header">-->
-  <!--        <h5 class="modal-title" id="addSubjectModalLabel">Add Subject</h5>-->
-  <!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-  <!--          <span aria-hidden="true">&times;</span>-->
-  <!--        </button>-->
-  <!--      </div>-->
-  <!--      <div class="modal-body">-->
-  <!--        <form #addForm="ngForm" (ngSubmit)="onAddSubject(addForm)">-->
-  <!--          <div class="form-group">-->
-  <!--            <label for="first_name">First name</label>-->
-  <!--            <input type="text" ngModel name="first_name" class="form-control" id="first_name" placeholder="First name" required>-->
-  <!--          </div>-->
-  <!--          <div class="form-group">-->
-  <!--            <label for="last_name">Last name</label>-->
-  <!--            <input type="text" ngModel name="last_name" class="form-control" id="last_name" placeholder="Last Name" required>-->
-  <!--          </div>-->
-  <!--          <div class="form-group">-->
-  <!--            <label for="email">Email Address</label>-->
-  <!--            <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>-->
-  <!--          </div>-->
-  <!--          <div class="form-group">-->
-  <!--            <label for="password">Password</label>-->
-  <!--            <input type="text" ngModel name="password" class="form-control" id="password" placeholder="Password" required>-->
-  <!--          </div>-->
-  <!--          <div class="modal-footer">-->
-  <!--            <button type="button" id="add-subject-form" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-  <!--            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>-->
-  <!--          </div>-->
-  <!--        </form>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
+  </div>
 
-  <!--&lt;!&ndash; Edit Modal &ndash;&gt;-->
-  <!--<div class="modal fade" id="updateSubjectModal" tabindex="-1" role="dialog" aria-labelledby="SubjectEditModalLabel" aria-hidden="true">-->
-  <!--  <div class="modal-dialog" role="document">-->
-  <!--    <div class="modal-content">-->
-  <!--      <div class="modal-header">-->
-  <!--        <h5 class="modal-title" id="updateModalLabel">Edit Subject {{editSubject?.first_name}} {{editSubject?.last_name}}</h5>-->
-  <!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-  <!--          <span aria-hidden="true">&times;</span>-->
-  <!--        </button>-->
-  <!--      </div>-->
-  <!--      <div class="modal-body">-->
-  <!--        <form #editForm="ngForm">-->
-  <!--          <div class="form-group">-->
-  <!--            <label for="first_name">First name</label>-->
-  <!--            <input type="text" ngModel="{{editSubject?.first_name}}" name="first_name" class="form-control" id="update_first_name" aria-describedby="emailHelp" placeholder="First Name">-->
-  <!--          </div>-->
-  <!--          <input type="hidden" ngModel="{{editSubject?.subject_id}}" name="subject_id" class="form-control" id="subject_id" placeholder="id">-->
-  <!--          <div class="form-group">-->
-  <!--            <label for="email">Last name</label>-->
-  <!--            <input type="email" ngModel="{{editSubject?.last_name}}" name="last_name" class="form-control" id="update_last_name" placeholder="Last name">-->
-  <!--          </div>-->
-  <!--          <div class="form-group">-->
-  <!--            <label for="email">Email Address</label>-->
-  <!--            <input type="email" ngModel="{{editSubject?.email}}" name="email" class="form-control" id="update_email" placeholder="Email">-->
-  <!--          </div>-->
-  <!--          <div class="form-group">-->
-  <!--            <label for="password">Password</label>-->
-  <!--            <input type="text" ngModel name="password" class="form-control" id="update_password" placeholder="new password">-->
-  <!--          </div>-->
-  <!--          <div class="modal-footer">-->
-  <!--            <button type="button" id="update-subject-form" data-dismiss="modal" class="btn btn-secondary">Close</button>-->
-  <!--            <button (click)="onUpdateSubject(editForm, editSubject?.subject_id)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>-->
-  <!--          </div>-->
-  <!--        </form>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>
-  </div>-->
-
-  <!--&lt;!&ndash; Delete Modal &ndash;&gt;-->
-  <!--<div class="modal fade" id="deleteSubjectModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">-->
-  <!--  <div class="modal-dialog" role="document">-->
-  <!--    <div class="modal-content">-->
-  <!--      <div class="modal-header">-->
-  <!--        <h5 class="modal-title" id="deleteModelLabel">Delete Subject</h5>-->
-  <!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-  <!--          <span aria-hidden="true">&times;</span>-->
-  <!--        </button>-->
-  <!--      </div>-->
-  <!--      <div class="modal-body">-->
-  <!--        <p>Are you sure you want to delete subject {{deleteSubject?.title}}?</p>-->
-  <!--        <div class="modal-footer">-->
-  <!--          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>-->
-  <!--          <button (click)="onDeleteSubject(deleteSubject?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--</div>-->
-  <!-- Notification for no employees -->
-  <div *ngIf="subjects?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
-    <div class="alert alert-info" role="alert">
-      <h4 class="alert-heading">NO SUBJECTS!</h4>
-      <p>No subjects were found.</p>
-    </div>
+</div>
+<!-- Notification for no subjects -->
+<div *ngIf="subjects?.length == 0 " class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO SUBJECTS!</h4>
+    <p>No subjects were found.</p>
   </div>
 </div>
+

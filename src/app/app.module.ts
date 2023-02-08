@@ -13,6 +13,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { SubjectScheduledComponent } from './Subject/subject-scheduled/subject-scheduled.component';
 import { TaskComponent } from './task';
 import { AllTasksByUserComponent } from './task/all-tasks-by-user/all-tasks-by-user.component';
+import { LoginComponent } from './login/login.component';
+import {httpInterceptorProviders} from "./auth/auth-interceptor";
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { AllTasksByUserComponent } from './task/all-tasks-by-user/all-tasks-by-u
     PageNotFoundComponent,
     SubjectScheduledComponent,
     TaskComponent,
-    AllTasksByUserComponent
+    AllTasksByUserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,7 @@ import { AllTasksByUserComponent } from './task/all-tasks-by-user/all-tasks-by-u
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserService, SubjectService],
+  providers: [UserService, SubjectService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

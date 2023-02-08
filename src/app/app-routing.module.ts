@@ -6,15 +6,18 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {SubjectScheduledComponent} from "./Subject/subject-scheduled/subject-scheduled.component";
 import {TaskComponent} from "./task";
 import {AllTasksByUserComponent} from "./task/all-tasks-by-user/all-tasks-by-user.component";
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
-  {path: '', component:UserComponent},
+  {path: '', redirectTo: 'subjects/scheduled', pathMatch: 'full'},
   {path: 'subjects/scheduled', component: SubjectScheduledComponent },
   {path: 'subjects', component: SubjectComponent },
   {path: "users", component:UserComponent},
   {path: "users/:user_id/subjects/:subject_id/tasks", component:TaskComponent},
   {path: "users/:user_id/tasks", component:AllTasksByUserComponent},
+  {path: 'auth/login', component: LoginComponent},
   // otherwise redirect to page not Found
+
   { path: '**', component: PageNotFoundComponent}
 ];
 @NgModule({
