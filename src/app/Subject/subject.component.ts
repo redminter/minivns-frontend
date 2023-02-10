@@ -64,9 +64,15 @@ export class SubjectComponent implements OnInit{
         console.log(this.subjects);
 
       },
-      (err: HttpErrorResponse) => {
-        alert(err.message);
-      });
+      (error: HttpErrorResponse) => {
+        //alert(error.message);
+        if (error.status === 403) {
+          window.location.assign("/forbidden");
+        } else {
+          window.location.assign("/error");
+        }
+      }
+    );
 
   }
   public onAddSubject(addForm: NgForm): void {
@@ -80,8 +86,12 @@ export class SubjectComponent implements OnInit{
         addForm.reset();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
-        addForm.reset();
+        //alert(error.message);
+        if (error.status === 403) {
+          window.location.assign("/forbidden");
+        } else {
+          window.location.assign("/error");
+        }
       }
     );
   }
@@ -94,7 +104,12 @@ export class SubjectComponent implements OnInit{
         this.getSubjects();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        //alert(error.message);
+        if (error.status === 403) {
+          window.location.assign("/forbidden");
+        } else {
+          window.location.assign("/error");
+        }
       }
     );
   }
@@ -105,7 +120,12 @@ export class SubjectComponent implements OnInit{
         this.getSubjects();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        //alert(error.message);
+        if (error.status === 403) {
+          window.location.assign("/forbidden");
+        } else {
+          window.location.assign("/error");
+        }
       }
     );
   }
@@ -149,6 +169,6 @@ export class SubjectComponent implements OnInit{
   }
   logout() {
     this.tokenStorage.signOut();
-    window.location.reload();
+    window.location.assign("/subjects/scheduled")
   }
 }

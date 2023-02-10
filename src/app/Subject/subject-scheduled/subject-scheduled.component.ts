@@ -19,6 +19,7 @@ export class SubjectScheduledComponent implements OnInit {
   info: any;
   user_id:any;
   user_firstname:any;
+  username:any;
   user_lastname:any;
   constructor(private subjectService: SubjectService, private tokenStorage:TokenStorageService) {
   }
@@ -27,6 +28,10 @@ export class SubjectScheduledComponent implements OnInit {
   ngOnInit() {
     this.getSubjects();
     this.user_id = this.tokenStorage.getId();
+    this.username= this.tokenStorage.getUsername();
+    this.authority=this.tokenStorage.getAuthority();
+    this.user_firstname=this.tokenStorage.getFirstname();
+    this.user_lastname= this.tokenStorage.getLastname();
     if (this.tokenStorage.getToken()) {
       this.role = this.tokenStorage.getAuthority();
       if (this.role === 'ROLE_ADMIN') {
@@ -52,9 +57,15 @@ export class SubjectScheduledComponent implements OnInit {
         console.log(this.subjects);
 
       },
-      (err: HttpErrorResponse) => {
-        alert(err.message);
-      });
+      (error: HttpErrorResponse) => {
+        //alert(error.message);
+        if (error.status === 403) {
+          window.location.assign("/forbidden");
+        } else {
+          window.location.assign("/error");
+        }
+      }
+    );
   }
   public searchSubjects(keyWord: string): void {
     console.log(keyWord);
@@ -96,6 +107,6 @@ export class SubjectScheduledComponent implements OnInit {
   }
   logout() {
     this.tokenStorage.signOut();
-    window.location.reload();
+    window.location.assign("/subjects/scheduled")
   }
 }

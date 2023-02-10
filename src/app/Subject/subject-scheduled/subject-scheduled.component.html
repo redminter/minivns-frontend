@@ -7,7 +7,17 @@
     margin-inline-start: -33px;
     margin-block-start: 1.25em;
   }
-
+  .userModal {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 1050;
+    display: none;
+    width: 15%;
+    height: 80%;
+    overflow: hidden;
+    outline: 0;
+  }
   .toolbutton {
     background: whitesmoke;
     border: transparent;
@@ -20,6 +30,7 @@ box-shadow:0px 5px 14px 0px #97979769;">
      style="
      color:#666565;
      font-family: monospace;
+     text-shadow: 0 0 20px #000000ba;
 "
   >Minivns</a>
   <button class="navbar-toggler" style="border-color:transparent; box-shadow:0px 0px 8px 0px rgb(0 0 0 / 41%)"
@@ -39,17 +50,19 @@ box-shadow:0px 5px 14px 0px #97979769;">
                 border-color:transparent; cursor: pointer; font-family: monospace; border-radius:.25rem; color:antiquewhite; box-shadow: 0px 0px 8px 0px #0000ffc7"
             routerLink="../../auth/login">Login
     </button>
-    <button *ngIf="authority" class="btn btn-secondary" (click)="logout()">Logout</button>
+    <i class="fa-solid fa-circle-user fa-2xl" style="color: RED; text-shadow: 3px 6px 20px #ff2c2c;"
+       *ngIf="(authority)&&(authority=='admin')" (click)="onOpenModal(null, 'user')"></i>
+    <i class="fa-solid fa-circle-user fa-2xl" style="color: #5c5cef; text-shadow: 3px 6px 20px #3838e1;"
+       *ngIf="(authority)&&(authority!=='admin')" (click)="onOpenModal(null, 'user')"></i>
   </div>
 </nav>
 <div class="container" id="main-container" style="margin-top:2%; ">
   <div class="row">
     <div *ngFor="let subject of subjects" class="col-md-6 col-xl-3">
-      <!--      <a routerLink="../users/{{user_id}}/subjects/{{subject?.id}}/tasks">-->
       <div class="card m-b-30" style="box-shadow: 1px 1px 16px 7px #24242433;">
         <div class="card-body row">
           <div style="width:100%; margin-left: 10%; font-weight: 400;"
-               routerLink="../users/{{user_id}}/subjects/{{subject?.id}}/tasks"
+               routerLink="../../users/{{user_id}}/subjects/{{subject?.id}}/tasks"
                class=" card-title align-self-center mb-0">
             <h5 style="font-size: 25px; font-weight: 400">{{subject.title}}</h5>
           </div>
@@ -69,30 +82,54 @@ box-shadow:0px 5px 14px 0px #97979769;">
             <button class="link-button" style="background-color: #97db97;border-color: #49cd49;box-shadow: 7px 2px 20px -5px #00ff40;">VNS</button>
           </a></ul>
 
-          <div class="float-left">
+          <div *ngIf="(!authority)" class="float-left">
+            <a  routerLink="../../auth/login" data-placement="top"
+               data-original-title="Go TO"><i class="fa-solid fa-arrow-right fa-2xl" style="margin-top: 80px;color: black; text-shadow: 5px 3px 20px #000000b5;"></i></a>
+          </div>
+          <div *ngIf="(authority)" class="float-left">
             <a routerLink="../../users/{{user_id}}/subjects/{{subject?.id}}/tasks" data-placement="top"
                data-original-title="Go TO"><i class="fa-solid fa-arrow-right fa-2xl" style="margin-top: 80px;color: black; text-shadow: 5px 3px 20px #000000b5;"></i></a>
           </div>
         </div>
       </div>
-    </div><div routerLink="/subjects" class="card m-b-30" style="cursor: pointer; background: #b7f9b7;
-    border-color: #88bb83;
-    border-width: 0.25em;box-shadow: 1px 1px 16px 7px #24242433; margin-left: 1.35%; width:25%">
+    </div><div routerLink="/subjects" class="card m-b-30" style="cursor: pointer; background: #b7e7f9;
+    border-color: #83b5bb;
+    border-width: 0.25em;box-shadow: 1px 1px 16px 7px #24242433; margin-left: 1.35%; width:20%">
     <div class="card-body row">
-      <div  style="width:100%; margin-left: 10%; text-shadow: 11px 5px 20px #88bb83;"
+      <div  style="width:100%; margin-left: 10%; text-shadow: 11px 5px 20px #3d5b74;"
             class=" card-title align-self-center mb-0">
-        <h5 class="nav-link"  style="font-size: 25px; font-weight: 600; color: rgba(21,77,34,0.82)">All Subjects</h5>
+        <h5 class="nav-link"  style="font-size: 25px; font-weight: 600; color:rgb(21 46 77 / 74%);">All Subjects</h5>
       </div>
     </div>
   </div>
   </div>
-
+  <div class="userModal fade" id="infoUserModal" tabindex="-1" role="dialog" aria-labelledby="infoModelLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 style="text-shadow:12px 8px 20px #000000db;" class="modal-title"
+              id="infoUserLabel">{{user_firstname}} {{user_lastname}}</h5>
+        </div>
+        <div class="modal-body">
+          <p>{{username}}</p>
+          <button style="width:100%; box-shadow: 0 0 20px 0px #838383;" class="btn btn-secondary" (click)="logout()">
+            Logout
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- Notification for no subjects -->
 <div *ngIf="subjects?.length == 0 " class="col-lg-12 col-md-12 col-xl-12">
-  <div class="alert alert-info" role="alert">
+  <div style="border-color: #0c5460;
+    width:120%;
+    border-width: 2px;
+    box-shadow: 0 0 20px 0 #0c5460;" class="alert alert-info" role="alert">
     <h4 class="alert-heading">NO SUBJECTS!</h4>
     <p>No subjects were found.</p>
   </div>
 </div>
+
 

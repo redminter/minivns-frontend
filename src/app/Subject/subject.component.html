@@ -7,30 +7,27 @@
     margin-inline-start: -33px;
     margin-block-start: 1.25em;
   }
-  .userModal{
-  position: absolute;
-  top: 30px;
-  right: 0;
-  z-index: 1050;
-  display: none;
-  width: 15%;
-  height: 80%;
-  overflow: hidden;
-  outline: 0;}
+
+  .userModal {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 1050;
+    display: none;
+    width: 15%;
+    height: 80%;
+    overflow: hidden;
+    outline: 0;
+  }
+
   .toolbutton {
     background: whitesmoke;
     border: transparent;
   }
 </style>
-<nav class="navbar navbar-expand-lg navbar-dark " style="
-background-color: #ebe9e9;
-box-shadow:0px 5px 14px 0px #97979769;">
+<nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #ebe9e9;box-shadow:0px 5px 14px 0px #97979769;">
   <a class="navbar-brand" routerLink="/subjects/scheduled"
-     style="
-     color:#666565;
-     font-family: monospace;
-"
-  >Minivns</a>
+     style="color:#666565;font-family: monospace;text-shadow: 0 0 20px #000000ba;">Minivns</a>
   <button class="navbar-toggler" style="border-color:transparent; box-shadow:0px 0px 8px 0px rgb(0 0 0 / 41%)"
           type="button" data-toggle="collapse" data-target="#navbarColor02"
           aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,8 +45,10 @@ box-shadow:0px 5px 14px 0px #97979769;">
                 border-color:transparent; cursor: pointer; font-family: monospace; border-radius:.25rem; color:antiquewhite; box-shadow: 0px 0px 8px 0px #0000ffc7"
             routerLink="../auth/login">Login
     </button>
-    <i class="fa-solid fa-circle-user fa-2xl" style="color: RED; text-shadow: 3px 6px 20px #ff2c2c;" *ngIf="(authority)&&(authority=='admin')" (click)="onOpenModal(null, 'user')"></i>
-    <i class="fa-solid fa-circle-user fa-2xl" style="color: #5c5cef; text-shadow: 3px 6px 20px #3838e1;" *ngIf="(authority)&&(authority!=='admin')"  (click)="onOpenModal(null, 'user')"></i>
+    <i class="fa-solid fa-circle-user fa-2xl" style="cursor:pointer; color: RED; text-shadow: 3px 6px 20px #ff2c2c;"
+       *ngIf="(authority)&&(authority=='admin')" (click)="onOpenModal(null, 'user')"></i>
+    <i class="fa-solid fa-circle-user fa-2xl" style="cursor:pointer; color: #5c5cef; text-shadow: 3px 6px 20px #3838e1;"
+       *ngIf="(authority)&&(authority!=='admin')" (click)="onOpenModal(null, 'user')"></i>
   </div>
 </nav>
 <div class="container" id="main-container" style="margin-top:2%; ">
@@ -70,43 +69,59 @@ box-shadow:0px 5px 14px 0px #97979769;">
             </button>
           </a></ul>
           <ul><a href='../{{subject.pract_url}}'>
-            <button class="link-button" style="background-color: #f79999;border-color: #e76969;box-shadow: 7px 2px 20px -5px #ff0000;">Pract</button>
+            <button class="link-button"
+                    style="background-color: #f79999;border-color: #e76969;box-shadow: 7px 2px 20px -5px #ff0000;">Pract
+            </button>
           </a></ul>
           <ul><a href='../{{subject.lab_url}}'>
-            <button class="link-button" style="background-color: #ffff76;border-color: #e9c37e;box-shadow: 7px 2px 20px -5px #f2ff00;">Lab</button>
+            <button class="link-button"
+                    style="background-color: #ffff76;border-color: #e9c37e;box-shadow: 7px 2px 20px -5px #f2ff00;">Lab
+            </button>
           </a></ul>
           <ul><a href='../{{subject.vns_url}}'>
-            <button class="link-button" style="background-color: #97db97;border-color: #49cd49;box-shadow: 7px 2px 20px -5px #00ff40;">VNS</button>
+            <button class="link-button"
+                    style="background-color: #97db97;border-color: #49cd49;box-shadow: 7px 2px 20px -5px #00ff40;">VNS
+            </button>
           </a></ul>
           <div class="card-body">
+            <a *ngIf="(!authority)" routerLink="../auth/login" data-placement="top"
+               data-original-title="Go TO"><i class="fa-solid fa-arrow-right fa-2xl"
+                                              style="color: black; margin-left: 165px; text-shadow: 5px 3px 20px #000000b5;"></i></a>
+            <a *ngIf="(authority)&&(authority!=='admin')"
+               routerLink="../users/{{user_id}}/subjects/{{subject?.id}}/tasks" data-placement="top"
+               data-original-title="Go TO"><i class="fa-solid fa-arrow-right fa-2xl"
+                                              style="color: black; margin-left: 165px; text-shadow: 5px 3px 20px #000000b5;"></i></a>
+            <a *ngIf="(authority)&&(authority=='admin')"
+               routerLink="../users/{{user_id}}/subjects/{{subject?.id}}/tasks" data-placement="top"
+               data-original-title="Go TO"><i class="fa-solid fa-arrow-right fa-2xl"
+                                              style="color: black; margin-left: 95px; text-shadow: 5px 3px 20px #000000b5;"></i></a>
             <div class="float-left btn-group btn-group-sm">
-              <a (click)="onOpenModal(subject, 'info')" class="btn btn-secondary tooltips toolbutton"
-                 data-placement="top" style="border-top-left-radius:5px; border-bottom-left-radius:5px; box-shadow: inset 7px 0 9px -7px rgb(0 0 0 / 40%), inset 0 7px 5px -7px rgb(0 0 0 / 40%), inset 0 -7px 4px -7px rgb(0 0 0 / 40%);"
-                 data-original-title="Info"><i class="fa fa-info"></i></a>
-              <a (click)="onOpenModal(subject, 'edit')" class="btn btn-primary tooltips toolbutton" style="box-shadow: inset 0 7px 5px -7px rgb(0 0 0 / 40%), inset 0 -7px 4px -7px rgb(0 0 0 / 40%);" data-placement="top"
+              <a *ngIf="(authority)&&(authority=='admin')" (click)="onOpenModal(subject, 'edit')"
+                 class="btn btn-primary tooltips toolbutton"
+                 style="border-top-left-radius:5px;border-bottom-left-radius:5px; box-shadow: inset 7px 0 9px -7px rgb(0 0 0 / 40%), inset 0 7px 5px -7px rgb(0 0 0 / 40%), inset 0 -7px 4px -7px rgb(0 0 0 / 40%);"
+                 data-placement="top"
                  data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-              <a (click)="onOpenModal(subject, 'delete')" class="btn btn-secondary tooltips toolbutton"
-                 data-placement="top" style="border-top-right-radius:5px; border-bottom-right-radius:5px; box-shadow: inset 0 7px 5px -7px rgb(0 0 0 / 40%), inset 0 -7px 4px -7px rgb(0 0 0 / 40%)"
+              <a *ngIf="(authority)&&(authority=='admin')" (click)="onOpenModal(subject, 'delete')"
+                 class="btn btn-secondary tooltips toolbutton"
+                 data-placement="top"
+                 style="border-top-right-radius:5px; border-bottom-right-radius:5px; box-shadow: inset 0 7px 5px -7px rgb(0 0 0 / 40%), inset 0 -7px 4px -7px rgb(0 0 0 / 40%)"
                  data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
-              <div class="float-left">
-                <a routerLink="../users/{{user_id}}/subjects/{{subject?.id}}/tasks" data-placement="top"
-                   data-original-title="Go TO"><i class="fa-solid fa-arrow-right fa-2xl" style="color: black; margin-left: 95px; text-shadow: 5px 3px 20px #000000b5;"></i></a>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div *ngIf="(authority)&&(authority=='admin')"(click)="onOpenModal(null, 'add')" class="card m-b-30" style="cursor: pointer; background: #b7f9b7;
+    <div *ngIf="(authority)&&(authority=='admin')" (click)="onOpenModal(null, 'add')" class="card m-b-30" style=" cursor: pointer; background: #b7f9b7;
     border-color: #88bb83;
     border-width: 0.25em;box-shadow: 1px 1px 16px 7px #24242433; margin-left: 1.35%">
-    <div  class="card-body row">
-      <div  style="width:100%; margin-left: 10%; text-shadow: 11px 5px 20px #88bb83;"
-           class=" card-title align-self-center mb-0">
-        <h5 class="nav-link"  style="font-size: 25px; font-weight: 600; color: rgba(21,77,34,0.82)">Add new Subject</h5>
+      <div class="card-body row">
+        <div style=" width:100%; margin-left: 10%; text-shadow: 11px 5px 20px #88bb83;"
+             class=" card-title align-self-center mb-0">
+          <h5 class="nav-link" style="font-size: 25px; font-weight: 600; color: rgba(21,77,34,0.82)">Add new
+            Subject</h5>
+        </div>
       </div>
     </div>
-  </div>
   </div>
 </div>
 <!-- User info Modal -->
@@ -115,22 +130,26 @@ box-shadow:0px 5px 14px 0px #97979769;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 style="text-shadow:12px 8px 20px #000000db;" class="modal-title" id="infoUserLabel">{{user_firstname}} {{user_lastname}}</h5>
+        <h5 style="text-shadow:12px 8px 20px #000000db;" class="modal-title"
+            id="infoUserLabel">{{user_firstname}} {{user_lastname}}</h5>
       </div>
       <div class="modal-body">
-          <p>{{username}}</p>
-        <button style="width:100%; box-shadow: 0 0 20px 0px #838383;" class="btn btn-secondary" (click)="logout()">Logout</button>
+        <p>{{username}}</p>
+        <button style="width:100%; box-shadow: 0 0 20px 0px #838383;" class="btn btn-secondary" (click)="logout()">
+          Logout
+        </button>
       </div>
     </div>
   </div>
 </div>
 <!-- Add subject Modal -->
-<div style="position:absolute; right:0px" class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModalLabel"
+<div style="position:absolute; right:0px" class="modal fade" id="addSubjectModal" tabindex="-1" role="dialog"
+     aria-labelledby="addSubjectModalLabel"
      aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 style="text-shadow: 12px 8px 20px #000000d1;"class="modal-title" id="addSubjectModalLabel">Add Subject</h5>
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;" class="modal-title" id="addSubjectModalLabel">Add Subject</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -139,27 +158,29 @@ box-shadow:0px 5px 14px 0px #97979769;">
         <form #addForm="ngForm" (ngSubmit)="onAddSubject(addForm)">
           <div class="form-group">
             <label for="title">Title</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="title" class="form-control" id="title" placeholder="Title" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="title"
+                   class="form-control" id="title" placeholder="Title" required>
           </div>
           <div class="form-group">
             <label for="vns_url">Url for vns</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="vns_url" class="form-control" id="vns_url" placeholder="Vns url"
-                   required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="vns_url"
+                   class="form-control" id="vns_url" placeholder="Vns url">
           </div>
           <div class="form-group">
             <label for="pract_url">URL for practical lesson</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="pract_url" class="form-control" id="pract_url" placeholder="Pract url"
-                   required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="pract_url"
+                   class="form-control" id="pract_url" placeholder="Pract url">
           </div>
           <div class="form-group">
             <label for="lab_url">URL for lesson in laboratory</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="lab_url" class="form-control" id="lab_url" placeholder="Lab url"
-                   required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="lab_url"
+                   class="form-control" id="lab_url" placeholder="Lab url">
           </div>
           <div class="form-group">
             <label for="lection_url">URL for lection</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="lection_url" class="form-control" id="lection_url"
-                   placeholder="Lection url" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="lection_url"
+                   class="form-control" id="lection_url"
+                   placeholder="Lection url" >
           </div>
           <div>
             <label for="at_monday">Monday:</label>
@@ -182,8 +203,9 @@ box-shadow:0px 5px 14px 0px #97979769;">
             <input type="checkbox" ngModel name="at_friday" class="form-control" id="at_friday"/>
           </div>
           <div class="modal-footer">
-            <button style="box-shadow: 0 0 20px 0px #6c757d;"type="button" id="add-subject-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button style="box-shadow: 0 0 20px 0px #2c48ff;"[disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save changes</button>
+            <button style="display:none" type="button" id="add-subject-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;" [disabled]="addForm.invalid" type="submit"
+                    class="btn btn-primary">Add</button>
           </div>
         </form>
       </div>
@@ -196,7 +218,7 @@ box-shadow:0px 5px 14px 0px #97979769;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateSubjectModalLabel">Update Subject {{editSubject?.title}}</h5>
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;" class="modal-title" id="updateSubjectModalLabel">Edit subject <b>{{editSubject?.title}}</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -205,29 +227,29 @@ box-shadow:0px 5px 14px 0px #97979769;">
         <form #editForm="ngForm">
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" ngModel="{{editSubject?.title}}" name="title" class="form-control" id="update_title"
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel="{{editSubject?.title}}" name="title" class="form-control" id="update_title"
                    placeholder="Title" required>
           </div>
           <input type="hidden" ngModel="{{editSubject?.id}}" name="subject_id" class="form-control" id="subject_id"
                  placeholder="id">
           <div class="form-group">
             <label for="vns_url">Url for vns</label>
-            <input type="text" ngModel="{{editSubject?.vns_url}}" name="vns_url" class="form-control"
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel="{{editSubject?.vns_url}}" name="vns_url" class="form-control"
                    id="update_vns_url" placeholder="Vns url" required>
           </div>
           <div class="form-group">
             <label for="pract_url">URL for practical lesson</label>
-            <input type="text" ngModel="{{editSubject?.pract_url}}" name="pract_url" class="form-control"
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel="{{editSubject?.pract_url}}" name="pract_url" class="form-control"
                    id="update_pract_url" placeholder="Pract url" required>
           </div>
           <div class="form-group">
             <label for="lab_url">URL for lesson in laboratory</label>
-            <input type="text" ngModel="{{editSubject?.lab_url}}" name="lab_url" class="form-control"
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel="{{editSubject?.lab_url}}" name="lab_url" class="form-control"
                    id="update_lab_url" placeholder="Lab url" required>
           </div>
           <div class="form-group">
             <label for="lection_url">URL for lection</label>
-            <input type="text" ngModel="{{editSubject?.lection_url}}" name="lection_url" class="form-control"
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel="{{editSubject?.lection_url}}" name="lection_url" class="form-control"
                    id="update_lection_url" placeholder="Lection url" required>
           </div>
           <div>
@@ -257,17 +279,17 @@ box-shadow:0px 5px 14px 0px #97979769;">
           </div>
           <br>
           <div class="col-lg-12 col-md-12 col-xl-12">
-            <div class="alert alert-info" role="alert">
+            <div style="border-color: #0c5460;
+    border-width: 2px;
+    box-shadow: 0 0 20px 0 #0c5460;" class="alert alert-info" role="alert">
               <h4 class="alert-heading">Check schedule checkboxes!</h4>
               <p>Otherwise it will be saved all unchecked</p>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" id="update-subject-form" class="btn btn-secondary" data-dismiss="modal">Close
-            </button>
-            <button (click)="onUpdateSubject(editForm, editSubject?.id)" data-dismiss="modal" class="btn btn-primary">
-              Save changes
-            </button>
+            <button style="display:none" type="button" id="update-subject-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button style="width:100%;box-shadow: 0 0 20px 0px #2c48ff;" (click)="onUpdateSubject(editForm, editSubject?.id)" data-dismiss="modal" class="btn btn-primary">
+              Save changes</button>
           </div>
         </form>
       </div>
@@ -280,16 +302,16 @@ box-shadow:0px 5px 14px 0px #97979769;">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModelLabel">Delete Subject</h5>
+        <h5 class="modal-title" style="text-shadow: 7px 5px 20px #0000008c;"id="deleteModelLabel">Delete subject</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete subject {{deleteSubject?.title}}?</p>
+        <p>Are you sure you want to delete subject <b>{{deleteSubject?.title}}</b>?</p>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button (click)="onDeleteSubject(deleteSubject?.id)" class="btn btn-danger" data-dismiss="modal">Yes
+          <button style="width:100%;box-shadow: 4px 6px 20px 0px #6c757d;" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button style="width:100%;box-shadow: 3px 4px 16px 0px #dc3545;" (click)="onDeleteSubject(deleteSubject?.id)" class="btn btn-danger" data-dismiss="modal">Yes
           </button>
         </div>
       </div>
@@ -298,7 +320,9 @@ box-shadow:0px 5px 14px 0px #97979769;">
 </div>
 <!-- Notification for no subjects -->
 <div *ngIf="subjects?.length == 0 " class="col-lg-12 col-md-12 col-xl-12">
-  <div class="alert alert-info" role="alert">
+  <div style="border-color: #0c5460;
+    border-width: 2px;
+    box-shadow: 0 0 20px 0 #0c5460;" class="alert alert-info" role="alert">
     <h4 class="alert-heading">NO SUBJECTS!</h4>
     <p>No subjects were found.</p>
   </div>
