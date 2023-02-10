@@ -15,6 +15,8 @@ import { TaskComponent } from './task';
 import { AllTasksByUserComponent } from './task/all-tasks-by-user/all-tasks-by-user.component';
 import { LoginComponent } from './login/login.component';
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
+import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { ErrorComponent } from './error/error.component';
 
 
 @NgModule({
@@ -26,7 +28,9 @@ import {httpInterceptorProviders} from "./auth/auth-interceptor";
     SubjectScheduledComponent,
     TaskComponent,
     AllTasksByUserComponent,
-    LoginComponent
+    LoginComponent,
+    ForbiddenComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
