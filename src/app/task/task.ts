@@ -4,4 +4,5 @@ export interface Task{
   link:string;
   deadline:Date;
   is_done:boolean;
+  subject_id:number;
 }

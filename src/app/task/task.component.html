@@ -1,55 +1,156 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="/subjects/scheduled" style="color:white;">Minivns</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+<!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">-->
+<style>
+  .link-button {
+    cursor: pointer;
+    font-size: 10px;
+    border-radius: 15px;
+    margin-inline-start: -33px;
+    margin-block-start: 1.25em;
+  }
+
+  .userModal {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 1050;
+    display: none;
+    width: 15%;
+    height: 80%;
+    overflow: hidden;
+    outline: 0;
+  }
+
+  .toolbutton {
+    background: whitesmoke;
+    border: transparent;
+  }
+</style>
+<!--navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark "
+     style="background-color: #ebe9e9;box-shadow:0px 5px 14px 0px #97979769;">
+  <a class="navbar-brand" routerLink="/subjects/scheduled"
+     style="color:#666565;font-family: monospace;text-shadow: 0 0 20px #000000ba;">Minivns</a>
+  <button class="navbar-toggler" style="border-color:transparent; box-shadow:0px 0px 8px 0px rgb(0 0 0 / 41%)"
+          type="button" data-toggle="collapse" data-target="#navbarColor02"
+          aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Task
-        </a></li>
-      <li class="nav-item active">
-        <a class="nav-item nav-link" routerLink="/users/{{user_id}}/tasks">All Tasks</a></li>>
     </ul>
     <form class="form-inline my-2 my-lg-0">
-      <input type="search" (ngModelChange)="searchTask(key.value)" #key="ngModel" ngModel
+      <input type="search" style="box-shadow: inset 1px 1px 4px 0px; background-color:#f5f5f5;"
+             (ngModelChange)="searchTask(key.value)" #key="ngModel" ngModel
              name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search tasks..." required>
     </form>
+    <button *ngIf="!authority" class="buttonLogin" style="background-color: blue;
+                border-color:transparent; cursor: pointer; font-family: monospace; border-radius:.25rem; color:antiquewhite; box-shadow: 0px 0px 8px 0px #0000ffc7"
+            routerLink="../auth/login">Login
+    </button>
+    <i class="fa-solid fa-circle-user fa-2xl" style="cursor:pointer; color: RED; text-shadow: 3px 6px 20px #ff2c2c;"
+       *ngIf="(authority)&&(authority=='admin')" (click)="onOpenModal(null, 'user')"></i>
+    <i class="fa-solid fa-circle-user fa-2xl" style="cursor:pointer; color: #5c5cef; text-shadow: 3px 6px 20px #3838e1;"
+       *ngIf="(authority)&&(authority!=='admin')" (click)="onOpenModal(null, 'user')"></i>
   </div>
 </nav>
-<div class="container" id="main-container">
+<!--main body-->
+<div class="container" style="margin-top:2%;" id="main-container">
   <div class="row">
     <div *ngFor="let task of tasks" class="col-md-6 col-xl-3">
-      <div class="card m-b-30">
+      <div class="card m-b-30" style="box-shadow: 1px 1px 16px 7px #24242433;">
         <div class="card-body row">
-          <div class="col-6">
-            <a href=""><img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""
-                            class="img-fluid rounded-circle w-60"></a>
+          <div style="width:100%; margin-left: 10%; font-weight: 400;" class="col-6">
           </div>
           <div class="col-6 card-title align-self-center mb-0">
-            <h5>{{task.title}}</h5>
+            <h5 style="font-size: 25px; font-weight: 400">{{task.title}}</h5>
           </div>
+          <ul><a href='../{{task.link}}'>
+            <button class="link-button"
+                    style="background-color: #97db97;border-color: #49cd49;box-shadow: 7px 2px 20px -5px #00ff40; margin-inline-start: -15px;">
+              Link
+            </button>
+          </a></ul>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item"><i class="fa fa-time float-right"></i>Deadline: {{task.deadline}}</li>
+          <li *ngIf="getDate(task)<currentDate" style="color: red" class="list-group-item"><i class="fa fa-time float-right"></i>Deadline: {{getDateString(task)}}</li>
+          <li *ngIf="getDate(task)>currentDate" class="list-group-item"><i class="fa fa-time float-right"></i>Deadline: {{getDateString(task)}}</li>
         </ul>
         <div class="card-body">
-          <div class="float-right btn-group btn-group-sm">
-              <a (click)="onOpenModal(task, 'info')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Info"><i class="fa fa-info"></i></a>
-              <a (click)="onOpenModal(task, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
-              <a (click)="onOpenModal(task, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
+          <div class="float-left btn-group btn-group-sm">
+            <a *ngIf="(authority)" (click)="onOpenModal(task, 'edit')"
+               class="btn btn-primary tooltips toolbutton"
+               style="border-top-left-radius:5px;border-bottom-left-radius:5px; box-shadow: inset 7px 0 9px -7px rgb(0 0 0 / 40%), inset 0 7px 5px -7px rgb(0 0 0 / 40%), inset 0 -7px 4px -7px rgb(0 0 0 / 40%);"
+               data-placement="top"
+               data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+            <a *ngIf="(authority)" (click)="onOpenModal(task, 'delete')"
+               class="btn btn-secondary tooltips toolbutton"
+               data-placement="top"
+               style="border-top-right-radius:5px; border-bottom-right-radius:5px; box-shadow: inset 0 7px 5px -7px rgb(0 0 0 / 40%), inset 0 -7px 4px -7px rgb(0 0 0 / 40%)"
+               data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
           </div>
+        </div>
+        <div *ngIf="task?.is_done===false" (click)="onOpenModal(task, 'done')" class="card-footer"
+             style="box-shadow: inset 11px 8px 20px 0px #c5c5c5;background: #ffffff;border-width: 5px;border-color: #d3d3d3;;">
+          <p
+            style="color: #5a5a5a;text-shadow: 4px 5px 20px #5a5a5a;text-align: center;font-size: 22px;font-weight: 600;">
+            Set Done</p>
+        </div>
+        <div *ngIf="task.is_done===true" (click)="onOpenModal(task, 'undone')" class="card-footer"
+             style="box-shadow: inset 11px 8px 20px 0px #4c684b69;background: #b0e1bf;border-width: 5px;border-color: #93b79e;">
+          <p
+            style="color: #4c684b;text-shadow: 4px 5px 20px #4c684b;text-align: center;font-size: 22px;font-weight: 600;">
+            Done</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="(authority)" (click)="onOpenModal(null, 'add')" class="card m-b-30" style="cursor: pointer; background: #b7f9b7;
+    border-color: #88bb83;
+    border-width: 0.25em;box-shadow: 1px 1px 16px 7px #24242433; margin-left: 1.35%">
+      <div class="card-body row">
+        <div style=" width:100%; margin-left: 10%; text-shadow: 11px 5px 20px #88bb83;"
+             class=" card-title align-self-center mb-0">
+          <h5 class="nav-link" style="font-size: 25px; font-weight: 600; color: rgba(21,77,34,0.82)">Add new task</h5>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="(authority)" routerLink="/users/{{user_id}}//tasks" class="card m-b-30" style="width:20%;cursor: pointer; background: #b7e7f9;
+    border-color: #83b5bb;
+    border-width: 0.25em;box-shadow: 1px 1px 16px 7px #24242433; margin-left: 1.35%">
+      <div class="card-body row">
+        <div style=" width:100%; margin-left: 10%; text-shadow: 11px 5px 20px #3d5b74;"
+             class=" card-title align-self-center mb-0">
+          <h5 class="nav-link" style="font-size: 25px; font-weight: 600; color:rgb(21 46 77 / 74%);">All tasks</h5>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!--Add Task Modal-->
-<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+
+<!-- User info Modal -->
+<div class="userModal fade" id="infoUserModal" tabindex="-1" role="dialog" aria-labelledby="infoModelLabel"
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addTaskModalLabel">Add Task</h5>
+        <h5 style="text-shadow:12px 8px 20px #000000db;" class="modal-title"
+            id="infoUserLabel">{{user_firstname}} {{user_lastname}}</h5>
+      </div>
+      <div class="modal-body">
+        <p>{{username}}</p>
+        <button style="width:100%; box-shadow: 0 0 20px 0px #838383;" class="btn btn-secondary" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Add Task Modal-->
+<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;" class="modal-title" id="addTaskModalLabel">Add Task</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -58,19 +159,20 @@
         <form #addForm="ngForm" (ngSubmit)="onAddTask(addForm)">
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" ngModel name="title" class="form-control" id="title" placeholder="Title" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="title" class="form-control" id="title" placeholder="Title" required>
           </div>
           <div class="form-group">
             <label for="link">Url for vns</label>
-            <input type="text" ngModel name="link" class="form-control" id="link" placeholder="Vns link" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="link" class="form-control" id="link" placeholder="Vns link" required>
           </div>
           <div class="form-group">
             <label for="deadline">Deadline</label>
-            <input type="datetime-local" ngModel name="deadline" class="form-control" id="deadline" placeholder="Deadline" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="datetime-local" ngModel name="deadline" class="form-control" id="deadline"
+                   placeholder="Deadline">
           </div>
           <div class="modal-footer">
-            <button type="button" id="add-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+            <button style="display:none" type="button" id="add-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;"[disabled]="addForm.invalid" type="submit" class="btn btn-primary">Add</button>
           </div>
         </form>
       </div>
@@ -78,11 +180,12 @@
   </div>
 </div>
 <!--Edit Task Modal-->
-<div class="modal fade" id="updateTaskModal" tabindex="-1" role="dialog" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+<div class="modal fade" id="updateTaskModal" tabindex="-1" role="dialog" aria-labelledby="updateTaskModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="updateTasktModalLabel">Update Task {{editTask?.title}}</h5>
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;"class="modal-title" id="updateTasktModalLabel">Update task <b>{{editTask?.title}}</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -91,50 +194,138 @@
         <form #editForm="ngForm">
           <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" ngModel="{{editTask?.title}}" name="title" class="form-control" id="update_title" placeholder="Title" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;"type="text" ngModel="{{editTask?.title}}" name="title" class="form-control" id="update_title"
+                   placeholder="Title">
           </div>
-          <input type="hidden" ngModel="{{editTask?.id}}" name="task_id" class="form-control" id="task_id" placeholder="id">
+          <input type="hidden" ngModel="{{editTask?.id}}" name="task_id" class="form-control" id="task_id"
+                 placeholder="id">
           <div class="form-group">
             <label for="link">Url for vns</label>
-            <input type="text" ngModel="{{editTask?.link}}" name="vns_url" class="form-control" id="update_link" placeholder="Vns link" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;"type="text" ngModel="{{editTask?.link}}" name="vns_url" class="form-control" id="update_link"
+                   placeholder="Vns link">
           </div>
           <div class="form-group">
             <label for="deadline">URL for practical lesson</label>
-            <input type="datetime-local" ngModel="{{editTask?.deadline}}" name="deadline" class="form-control" id="update_deadline" placeholder="Deadline" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;"type="datetime-local" ngModel="{{editTask?.deadline}}" name="deadline" class="form-control"
+                   id="update_deadline" placeholder="Deadline">
           </div>
           <div class="modal-footer">
-            <button type="button" id="update-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button (click)="onUpdateTask(editForm, editTask?.id)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+            <button style="display:none" type="button" id="update-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;" (click)="onUpdateTask(editForm, editTask?.id)" data-dismiss="modal" class="btn btn-primary">Save changes</button>
           </div>
         </form>
       </div>
     </div>
   </div>
 </div>
-<!--DeleteTaskModal-->
-<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+<!--Undone Task Modal-->
+<div class="modal fade" id="undoneTaskModal" tabindex="-1" role="dialog" aria-labelledby="undoneTaskModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="deleteModelLabel">Delete Subject</h5>
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;"class="modal-title" id="undoneTaskModalLabel"><b>{{doneTask?.title}}</b> is done</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete task {{deleteTask?.title}}?</p>
+        <p>Set it to undone?</p>
+        <form #undoneForm="ngForm">
+          <div class="form-group">
+            <input type="hidden" ngModel="{{doneTask?.title}}" name="title" class="form-control" id="undone_update_title"
+                   placeholder="Title" required>
+          </div>
+          <input type="hidden" ngModel="{{doneTask?.id}}" name="task_id" class="form-control" id="undone_task_id"
+                 placeholder="id">
+          <div class="form-group">
+            <input type="hidden" ngModel="{{doneTask?.link}}" name="vns_url" class="form-control" id="undone_update_link"
+                   placeholder="Vns link" required>
+          </div>
+          <div class="form-group">
+            <input type="hidden" ngModel="{{doneTask?.deadline}}" name="deadline" class="form-control"
+                   id="undone_update_deadline" placeholder="Deadline" required>
+          </div>
+          <!--          <div>-->
+          <!--            <label for="is_done">Monday:</label>-->
+          <!--            <input type="checkbox" ngModel="{{doneTask?.is_done}}" name="is_done" class="form-control" id="is_done"/>-->
+          <!--          </div>-->
+          <div class="modal-footer">
+            <button style="display:none" type="button" id="undone-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;" (click)="onUndoneTask(undoneForm, doneTask?.id)" data-dismiss="modal" class="btn btn-primary">Set to undone</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Done Task Modal-->
+<div class="modal fade" id="doneTaskModal" tabindex="-1" role="dialog" aria-labelledby="doneTaskModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;" class="modal-title" id="doneTaskModalLabel">Set <b>{{doneTask?.title}}</b> as done?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #doneForm="ngForm">
+          <div class="form-group">
+            <input type="hidden" ngModel="{{doneTask?.title}}" name="title" class="form-control" id="done_update_title"
+                   placeholder="Title" required>
+          </div>
+          <input type="hidden" ngModel="{{doneTask?.id}}" name="task_id" class="form-control" id="done_task_id"
+                 placeholder="id">
+          <div class="form-group">
+            <input type="hidden" ngModel="{{doneTask?.link}}" name="vns_url" class="form-control" id="done_update_link"
+                   placeholder="Vns link" required>
+          </div>
+          <div class="form-group">
+            <input type="hidden" ngModel="{{doneTask?.deadline}}" name="deadline" class="form-control"
+                   id="done_update_deadline" placeholder="Deadline" required>
+          </div>
+<!--          <div>-->
+<!--            <label for="is_done">Monday:</label>-->
+<!--            <input type="checkbox" ngModel="{{doneTask?.is_done}}" name="is_done" class="form-control" id="is_done"/>-->
+<!--          </div>-->
+            <div class="modal-footer">
+              <button style="display:none" type="button" id="done-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;"(click)="onDoneTask(doneForm, doneTask?.id)" data-dismiss="modal" class="btn btn-primary">Set as done</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--DeleteTaskModal-->
+<div class="modal fade" id="deleteTaskModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;"class="modal-title" id="deleteModelLabel">Delete task</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete task <b>{{deleteTask?.title}}</b>?</p>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button (click)="onDeleteTask(deleteTask?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          <button style="width:100%;box-shadow: 4px 6px 20px 0px #6c757d;" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+          <button style="width:100%;box-shadow: 3px 4px 16px 0px #dc3545;" (click)="onDeleteTask(deleteTask?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
         </div>
       </div>
     </div>
   </div>
 </div>
 <!-- Notification for no subjects -->
-<div *ngIf="tasks?.length == 0 || tasks==null" class="col-lg-12 col-md-12 col-xl-12">
-  <div class="alert alert-info" role="alert">
-    <h4 class="alert-heading">NO TASKS!</h4>
+<div *ngIf="tasks?.length == 0 " class="col-lg-12 col-md-12 col-xl-12">
+  <div style="border-color: #0c5460;
+    border-width: 2px;
+    box-shadow: 0 0 20px 0 #0c5460;" class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO TASK!</h4>
     <p>No tasks were found.</p>
   </div>
 </div>
