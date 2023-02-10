@@ -25,9 +25,18 @@ export class UserComponent implements OnInit{
         console.log(this.users);
 
       },
-      (err: HttpErrorResponse) => {
-        alert(err.message);
-      });
+      (error: HttpErrorResponse) => {
+        // alert(error.message);
+        if (error.status === 403) {
+          window.location.assign("/forbidden");
+        }else {
+          window.location.assign("/error");
+        }
+        if (error.status === 401) {
+          window.location.assign("/forbidden");
+        }
+      }
+    );
   }
   public onAddUser(addForm: NgForm): void {
     // @ts-ignore
@@ -39,8 +48,15 @@ export class UserComponent implements OnInit{
         addForm.reset();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
-        addForm.reset();
+        // alert(error.message);
+        if (error.status === 403) {
+          window.location.assign("/forbidden");
+        }else {
+          window.location.assign("/error");
+        }
+        if (error.status === 401) {
+          window.location.assign("/forbidden");
+        }
       }
     );
   }
@@ -53,7 +69,15 @@ export class UserComponent implements OnInit{
         this.getUsers();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        // alert(error.message);
+        if (error.status === 403) {
+          window.location.assign("/forbidden");
+        }else {
+          window.location.assign("/error");
+        }
+        if (error.status === 401) {
+          window.location.assign("/forbidden");
+        }
       }
     );
   }
@@ -64,7 +88,15 @@ export class UserComponent implements OnInit{
         this.getUsers();
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        // alert(error.message);
+        if (error.status === 403) {
+          window.location.assign("/forbidden");
+        }else {
+          window.location.assign("/error");
+        }
+        if (error.status === 401) {
+          window.location.assign("/forbidden");
+        }
       }
     );
   }

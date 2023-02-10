@@ -63,11 +63,14 @@ export class AllTasksByUserComponent {
 
       },
       (error: HttpErrorResponse) => {
-        //alert(error.message);
+        // alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
-        } else {
+        }else {
           window.location.assign("/error");
+        }
+        if (error.status === 401) {
+          window.location.assign("/forbidden");
         }
       }
     );
@@ -100,11 +103,14 @@ export class AllTasksByUserComponent {
         this.getTasksByUser();
       },
       (error: HttpErrorResponse) => {
-        //alert(error.message);
+        // alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
-        } else {
+        }else {
           window.location.assign("/error");
+        }
+        if (error.status === 401) {
+          window.location.assign("/forbidden");
         }
       }
     );
@@ -123,11 +129,14 @@ export class AllTasksByUserComponent {
         this.getTasksByUser();
       },
       (error: HttpErrorResponse) => {
-        //alert(error.message);
+        // alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
-        } else {
+        }else {
           window.location.assign("/error");
+        }
+        if (error.status === 401) {
+          window.location.assign("/forbidden");
         }
       }
     );
