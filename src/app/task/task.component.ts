@@ -31,6 +31,7 @@ export class TaskComponent {
   user_firstname: any;
   user_lastname: any;
   role: any;
+  course_mark:number=0;
   // @ts-ignore
   currentDate:Date;
   constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService) {
@@ -42,6 +43,7 @@ export class TaskComponent {
   // @ts-ignore
   ngOnInit() {
     this.getTasksBySubject();
+
     this.username = this.tokenStorage.getUsername();
     this.authority = this.tokenStorage.getAuthority();
     this.user_firstname = this.tokenStorage.getFirstname();
@@ -63,6 +65,18 @@ export class TaskComponent {
     return String(date.getDate()) + " " + monthNames[date.getMonth()];
 
   }
+  public getDoneDate(task: Task): Date {
+    let date = new Date(task.done_date);
+    return date;
+
+  }
+  public getDoneDateString(task: Task|null): String {
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let another_task = <Task>task;
+    let date = new Date(another_task?.done_date);
+    return String(date.getDate()) + " " + monthNames[date.getMonth()]+" "+String(date.getHours()+2)+":"+date.getMinutes();
+
+  }
   public getDate(task: Task): Date {
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let date = new Date(task.deadline);
@@ -75,6 +89,8 @@ export class TaskComponent {
     this.taskService.getTasksBySubject(this.user_id, this.subject_id).subscribe(
       (response: Task[]) => {
         this.tasks = response;
+          this.course_mark=this.tasks.flatMap(x=>x.mark).reduce((sum, current)=>sum+current);
+
         console.log(this.tasks);
 
       },
@@ -146,6 +162,7 @@ export class TaskComponent {
     let task:Task;
     task=doneForm.value;
     task.is_done=true;
+    task.done_date=new Date();
     this.taskService.updateTask(this.user_id, this.subject_id, task_id, task).subscribe(
       (response: Subject) => {
         console.log(response);
@@ -245,11 +262,11 @@ export class TaskComponent {
       button.setAttribute('data-target', '#infoUserModal');
     }
     if (mode === 'done') {
-      this.doneTask = task;
+      this.doneTask = <Task>task;
       button.setAttribute('data-target', '#doneTaskModal');
     }
     if (mode === 'undone') {
-      this.doneTask = task;
+      this.doneTask = <Task>task;
       button.setAttribute('data-target', '#undoneTaskModal');
     }
     // @ts-ignore

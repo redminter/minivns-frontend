@@ -8,6 +8,64 @@
     margin-block-start: 1.25em;
   }
 
+  .yellowDoneText {
+    color: #68684b;
+    text-shadow: 4px 5px 20px #66684b;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .yellowDone {
+    box-shadow: inset 11px 8px 20px 0px #5a5c4369;
+    background: #dee1b0;
+    border-width: 5px;
+    border-color: #b7b593;
+  }
+
+  .greenDoneText {
+    color: #4c684b;
+    text-shadow: 4px 5px 20px #4c684b;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .greenDone {
+    box-shadow: inset 11px 8px 20px 0px #4c684b69;
+    background: #b0e1bf;
+    border-width: 5px;
+    border-color: #93b79e;
+  }
+  .blueDoneText {
+    color: #4b5168;
+    text-shadow: 4px 5px 20px #4b4b68;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .blueDone {
+    box-shadow: inset 11px 8px 20px 0px rgba(75, 76, 104, 0.41);
+    background: #b0c0e1;
+    border-width: 5px;
+    border-color: #889dad;
+  }
+  .redDoneText {
+    color: #684b4b;
+    text-shadow: 4px 5px 20px #684b4b;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .redDone {
+    box-shadow: inset 11px 8px 20px 0px rgba(99, 75, 104, 0.41);
+    background: #e1b0b0;
+    border-width: 5px;
+    border-color: #ad8888;
+  }
+
   .userModal {
     position: absolute;
     top: 30px;
@@ -69,11 +127,15 @@
                     style="background-color: #97db97;border-color: #49cd49;box-shadow: 7px 2px 20px -5px #00ff40; margin-inline-start: -15px;">
               Link
             </button>
-          </a></ul>
+          </a>
+          </ul>
+<!--<p style="margin-left:20px; margin-top:10px">{{task.mark}}/{{task.max_mark}}</p>-->
         </div>
         <ul class="list-group list-group-flush">
-          <li *ngIf="getDate(task)<currentDate" style="color: red" class="list-group-item"><i class="fa fa-time float-right"></i>Deadline: {{getDateString(task)}}</li>
-          <li *ngIf="getDate(task)>currentDate" class="list-group-item"><i class="fa fa-time float-right"></i>Deadline: {{getDateString(task)}}</li>
+          <li *ngIf="getDate(task)<currentDate && getDoneDate(task)>getDate(task)" style="color: red" class="list-group-item"><i
+            class="fa fa-time float-right"></i>Deadline: {{getDateString(task)}}</li>
+          <li *ngIf="getDate(task)>currentDate || !(getDoneDate(task)>getDate(task))" class="list-group-item"><i
+            class="fa fa-time float-right"></i>Deadline: {{getDateString(task)}}</li>
         </ul>
         <div class="card-body">
           <div class="float-left btn-group btn-group-sm">
@@ -91,15 +153,11 @@
         </div>
         <div *ngIf="task?.is_done===false" (click)="onOpenModal(task, 'done')" class="card-footer"
              style="box-shadow: inset 11px 8px 20px 0px #c5c5c5;background: #ffffff;border-width: 5px;border-color: #d3d3d3;;">
-          <p
-            style="color: #5a5a5a;text-shadow: 4px 5px 20px #5a5a5a;text-align: center;font-size: 22px;font-weight: 600;">
-            Set Done</p>
+          <p style="color: #5a5a5a;text-shadow: 4px 5px 20px #5a5a5a;text-align: center;font-size: 22px;font-weight: 600;">Set Done</p>
         </div>
-        <div *ngIf="task.is_done===true" (click)="onOpenModal(task, 'undone')" class="card-footer"
-             style="box-shadow: inset 11px 8px 20px 0px #4c684b69;background: #b0e1bf;border-width: 5px;border-color: #93b79e;">
-          <p
-            style="color: #4c684b;text-shadow: 4px 5px 20px #4c684b;text-align: center;font-size: 22px;font-weight: 600;">
-            Done</p>
+        <div *ngIf="task.is_done===true"
+             [ngClass]="{'blueDone':task.mark>=task.max_mark/2&&task.mark<=task.max_mark*3/4, 'greenDone':task.mark>=task.max_mark*3/4, 'yellowDone':task.mark<=task.max_mark/2,'redDone':task.mark===task.max_mark-task.max_mark}" (click)="onOpenModal(task, 'undone')" class="card-footer">
+          <p [ngClass]="{'blueDoneText':task.mark>=task.max_mark/2&&task.mark<=task.max_mark*3/4, 'greenDoneText':task.mark>=task.max_mark*3/4, 'yellowDoneText':task.mark<=task.max_mark/2, 'redDoneText':task.mark===task.max_mark-task.max_mark}">Done {{task.mark}}/{{task.max_mark}}</p>
         </div>
       </div>
     </div>
@@ -113,13 +171,22 @@
         </div>
       </div>
     </div>
-    <div *ngIf="(authority)" routerLink="/users/{{user_id}}//tasks" class="card m-b-30" style="width:20%;cursor: pointer; background: #b7e7f9;
+    <div *ngIf="(authority)" routerLink="/users/{{user_id}}//tasks" class="card m-b-30" style="width:180px;cursor: pointer; background: #b7e7f9;
     border-color: #83b5bb;
     border-width: 0.25em;box-shadow: 1px 1px 16px 7px #24242433; margin-left: 1.35%">
       <div class="card-body row">
-        <div style=" width:100%; margin-left: 10%; text-shadow: 11px 5px 20px #3d5b74;"
+        <div style=" width:180px; margin-left: 10%; text-shadow: 11px 5px 20px #3d5b74;"
              class=" card-title align-self-center mb-0">
           <h5 class="nav-link" style="font-size: 25px; font-weight: 600; color:rgb(21 46 77 / 74%);">All tasks</h5>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="(authority)" class="card m-b-30" style="margin-left:20px; text-align:center" [ngClass]="{'greenDone':this.course_mark>50, 'yellowDone':this.course_mark<=50,'redDone':this.course_mark<26}">
+      <div class="card-body row">
+        <div style=" width:180px; text-shadow: 11px 5px 20px #3d5b74;"
+             class=" card-title align-self-center mb-0">
+          <h5 class="nav-link" style="font-size: 60px; font-weight: 600; color:rgb(21 46 77 / 74%);">{{this.course_mark}}</h5>
+            <p class="nav-link" style="font-size: 10px; font-weight: 600; margin-top: -25px; color:rgb(21 46 77 / 74%);">Course mark</p>
         </div>
       </div>
     </div>
@@ -159,20 +226,27 @@
         <form #addForm="ngForm" (ngSubmit)="onAddTask(addForm)">
           <div class="form-group">
             <label for="title">Title</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="title" class="form-control" id="title" placeholder="Title" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="title"
+                   class="form-control" id="title" placeholder="Title" required>
           </div>
           <div class="form-group">
             <label for="link">Url for vns</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="link" class="form-control" id="link" placeholder="Vns link" required>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel name="link" class="form-control"
+                   id="link" placeholder="Vns link" required>
           </div>
           <div class="form-group">
             <label for="deadline">Deadline</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="datetime-local" ngModel name="deadline" class="form-control" id="deadline"
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="datetime-local" ngModel name="deadline"
+                   class="form-control" id="deadline"
                    placeholder="Deadline">
           </div>
           <div class="modal-footer">
-            <button style="display:none" type="button" id="add-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;"[disabled]="addForm.invalid" type="submit" class="btn btn-primary">Add</button>
+            <button style="display:none" type="button" id="add-task-form" class="btn btn-secondary"
+                    data-dismiss="modal">Close
+            </button>
+            <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;" [disabled]="addForm.invalid" type="submit"
+                    class="btn btn-primary">Add
+            </button>
           </div>
         </form>
       </div>
@@ -185,7 +259,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 style="text-shadow: 12px 8px 20px #000000d1;"class="modal-title" id="updateTasktModalLabel">Update task <b>{{editTask?.title}}</b></h5>
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;" class="modal-title" id="updateTasktModalLabel">Update task
+          <b>{{editTask?.title}}</b></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -194,24 +269,31 @@
         <form #editForm="ngForm">
           <div class="form-group">
             <label for="title">Title</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;"type="text" ngModel="{{editTask?.title}}" name="title" class="form-control" id="update_title"
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel="{{editTask?.title}}"
+                   name="title" class="form-control" id="update_title"
                    placeholder="Title">
           </div>
           <input type="hidden" ngModel="{{editTask?.id}}" name="task_id" class="form-control" id="task_id"
                  placeholder="id">
           <div class="form-group">
             <label for="link">Url for vns</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;"type="text" ngModel="{{editTask?.link}}" name="vns_url" class="form-control" id="update_link"
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel="{{editTask?.link}}"
+                   name="vns_url" class="form-control" id="update_link"
                    placeholder="Vns link">
           </div>
           <div class="form-group">
             <label for="deadline">URL for practical lesson</label>
-            <input style="box-shadow: inset 0 0 7px 0px #0000004d;"type="datetime-local" ngModel="{{editTask?.deadline}}" name="deadline" class="form-control"
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="datetime-local"
+                   ngModel="{{editTask?.deadline}}" name="deadline" class="form-control"
                    id="update_deadline" placeholder="Deadline">
           </div>
           <div class="modal-footer">
-            <button style="display:none" type="button" id="update-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;" (click)="onUpdateTask(editForm, editTask?.id)" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+            <button style="display:none" type="button" id="update-task-form" class="btn btn-secondary"
+                    data-dismiss="modal">Close
+            </button>
+            <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;" (click)="onUpdateTask(editForm, editTask?.id)"
+                    data-dismiss="modal" class="btn btn-primary">Save changes
+            </button>
           </div>
         </form>
       </div>
@@ -224,27 +306,34 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 style="text-shadow: 12px 8px 20px #000000d1;"class="modal-title" id="undoneTaskModalLabel"><b>{{doneTask?.title}}</b> is done</h5>
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;" class="modal-title" id="undoneTaskModalLabel">
+          <b>{{doneTask?.title}}</b> is done</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Set it to undone?</p>
+        <p>Task was done {{getDoneDateString(doneTask)}}</p>
         <form #undoneForm="ngForm">
           <div class="form-group">
-            <input type="hidden" ngModel="{{doneTask?.title}}" name="title" class="form-control" id="undone_update_title"
+            <input type="hidden" ngModel="{{doneTask?.title}}" name="title" class="form-control"
+                   id="undone_update_title"
                    placeholder="Title" required>
           </div>
           <input type="hidden" ngModel="{{doneTask?.id}}" name="task_id" class="form-control" id="undone_task_id"
                  placeholder="id">
           <div class="form-group">
-            <input type="hidden" ngModel="{{doneTask?.link}}" name="vns_url" class="form-control" id="undone_update_link"
+            <input type="hidden" ngModel="{{doneTask?.link}}" name="vns_url" class="form-control"
+                   id="undone_update_link"
                    placeholder="Vns link" required>
           </div>
           <div class="form-group">
             <input type="hidden" ngModel="{{doneTask?.deadline}}" name="deadline" class="form-control"
                    id="undone_update_deadline" placeholder="Deadline" required>
+          </div>
+          <div class="form-group">
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="hidden" ngModel="0" name="mark" class="form-control"
+                   id="undone_mark" placeholder="0" required>
           </div>
           <!--          <div>-->
           <!--            <label for="is_done">Monday:</label>-->
@@ -265,7 +354,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 style="text-shadow: 12px 8px 20px #000000d1;" class="modal-title" id="doneTaskModalLabel">Set <b>{{doneTask?.title}}</b> as done?</h5>
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;" class="modal-title" id="doneTaskModalLabel">Set
+          <b>{{doneTask?.title}}</b> as done?</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -286,14 +376,28 @@
             <input type="hidden" ngModel="{{doneTask?.deadline}}" name="deadline" class="form-control"
                    id="done_update_deadline" placeholder="Deadline" required>
           </div>
-<!--          <div>-->
-<!--            <label for="is_done">Monday:</label>-->
-<!--            <input type="checkbox" ngModel="{{doneTask?.is_done}}" name="is_done" class="form-control" id="is_done"/>-->
-<!--          </div>-->
-            <div class="modal-footer">
-              <button style="display:none" type="button" id="done-task-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;"(click)="onDoneTask(doneForm, doneTask?.id)" data-dismiss="modal" class="btn btn-primary">Set as done</button>
-            </div>
+          <div class="form-group">
+            <label for="max_mark">Mark</label>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel="{{doneTask?.mark}}" name="mark" class="form-control"
+                   id="mark" placeholder="Mark" required>
+          </div>
+          <div class="form-group">
+            <label for="max_mark">Max mark</label>
+            <input style="box-shadow: inset 0 0 7px 0px #0000004d;" type="text" ngModel="{{doneTask?.max_mark}}" name="max_mark" class="form-control"
+                   id="max_mark" placeholder="Max mark" required>
+          </div>
+          <!--          <div>-->
+          <!--            <label for="is_done">Monday:</label>-->
+          <!--            <input type="checkbox" ngModel="{{doneTask?.is_done}}" name="is_done" class="form-control" id="is_done"/>-->
+          <!--          </div>-->
+          <div class="modal-footer">
+            <button style="display:none" type="button" id="done-task-form" class="btn btn-secondary"
+                    data-dismiss="modal">Close
+            </button>
+            <button style="width:100%; box-shadow: 0 0 20px 0px #2c48ff;" (click)="onDoneTask(doneForm, doneTask?.id)"
+                    data-dismiss="modal" class="btn btn-primary">Set as done
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -305,7 +409,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 style="text-shadow: 12px 8px 20px #000000d1;"class="modal-title" id="deleteModelLabel">Delete task</h5>
+        <h5 style="text-shadow: 12px 8px 20px #000000d1;" class="modal-title" id="deleteModelLabel">Delete task</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -313,8 +417,12 @@
       <div class="modal-body">
         <p>Are you sure you want to delete task <b>{{deleteTask?.title}}</b>?</p>
         <div class="modal-footer">
-          <button style="width:100%;box-shadow: 4px 6px 20px 0px #6c757d;" type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-          <button style="width:100%;box-shadow: 3px 4px 16px 0px #dc3545;" (click)="onDeleteTask(deleteTask?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          <button style="width:100%;box-shadow: 4px 6px 20px 0px #6c757d;" type="button" class="btn btn-secondary"
+                  data-dismiss="modal">No
+          </button>
+          <button style="width:100%;box-shadow: 3px 4px 16px 0px #dc3545;" (click)="onDeleteTask(deleteTask?.id)"
+                  class="btn btn-danger" data-dismiss="modal">Yes
+          </button>
         </div>
       </div>
     </div>

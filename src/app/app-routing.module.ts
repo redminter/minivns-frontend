@@ -9,6 +9,7 @@ import {AllTasksByUserComponent} from "./task/all-tasks-by-user/all-tasks-by-use
 import {LoginComponent} from "./login/login.component";
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import {ErrorComponent} from "./error/error.component";
+import {SubjectSummaryComponent} from "./Subject/subject-summary/subject-summary.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'subjects/scheduled', pathMatch: 'full'},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: "users/:user_id/tasks", component:AllTasksByUserComponent},
   {path: 'auth/login', component: LoginComponent},
   {path: 'forbidden', component: ForbiddenComponent},
+  // {path: 'subjects-summary', component: SubjectSummaryComponent},
   {path: 'error', component: ErrorComponent},
   // otherwise redirect to page not Found
 

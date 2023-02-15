@@ -65,7 +65,7 @@ export class SubjectComponent implements OnInit{
 
       },
       (error: HttpErrorResponse) => {
-        // alert(error.message);
+        alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
         }else {
@@ -89,7 +89,7 @@ export class SubjectComponent implements OnInit{
         addForm.reset();
       },
       (error: HttpErrorResponse) => {
-        // alert(error.message);
+        alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
         }else {
@@ -110,7 +110,7 @@ export class SubjectComponent implements OnInit{
         this.getSubjects();
       },
       (error: HttpErrorResponse) => {
-        // alert(error.message);
+        alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
         }else {
@@ -129,7 +129,7 @@ export class SubjectComponent implements OnInit{
         this.getSubjects();
       },
       (error: HttpErrorResponse) => {
-        // alert(error.message);
+        alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
         }else {

@@ -5,6 +5,8 @@ export interface Subject {
   pract_url: string;
   lab_url: string;
   lection_url: string;
+
+  credit:number;
   atMonday: boolean;
   atTuesday: boolean;
   atWednesday: boolean;

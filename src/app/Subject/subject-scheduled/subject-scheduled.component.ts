@@ -58,7 +58,7 @@ export class SubjectScheduledComponent implements OnInit {
 
       },
       (error: HttpErrorResponse) => {
-        // alert(error.message);
+        alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
         }else {
