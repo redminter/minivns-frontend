@@ -17,6 +17,9 @@ export class SubjectService {
   public getSubjectsSchedule():Observable<Subject[]>{
     return this.http.get<Subject[]>(`${this.apiServerUrl}/subjects/schedule`);
   }
+  public getOneSubject(subject_id:any):Observable<Subject>{
+    return this.http.get<Subject>(`${this.apiServerUrl}/subjects/${subject_id}`);
+  }
 
   public addSubject(subject:Subject):Observable<Subject>{
     return this.http.post<Subject>(`${this.apiServerUrl}/subjects`, subject);

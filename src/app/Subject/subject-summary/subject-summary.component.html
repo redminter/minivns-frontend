@@ -1,0 +1,78 @@
+<style>
+  .link-button {
+    cursor: pointer;
+    font-size: 10px;
+    border-radius: 15px;
+    margin-inline-start: -33px;
+    margin-block-start: 1.25em;
+  }
+
+  .userModal {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 1050;
+    display: none;
+    width: 15%;
+    height: 80%;
+    overflow: hidden;
+    outline: 0;
+  }
+
+  .toolbutton {
+    background: whitesmoke;
+    border: transparent;
+  }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark "
+     style="background-color: #ebe9e9;box-shadow:0px 5px 14px 0px #97979769;">
+  <a class="navbar-brand" routerLink="/subjects/scheduled"
+     style="color:#666565;font-family: monospace;text-shadow: 0 0 20px #000000ba;">Minivns</a>
+  <button class="navbar-toggler" style="border-color:transparent; box-shadow:0px 0px 8px 0px rgb(0 0 0 / 41%)"
+          type="button" data-toggle="collapse" data-target="#navbarColor02"
+          aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" style="filter: invert(1)"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor02">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input type="search" style="box-shadow: inset 1px 1px 4px 0px; background-color:#f5f5f5;"
+             (ngModelChange)="searchSubjects(key.value)" #key="ngModel" ngModel
+             name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search subjects..." required>
+    </form>
+    <button *ngIf="!authority" class="buttonLogin" style="background-color: blue;
+                border-color:transparent; cursor: pointer; font-family: monospace; border-radius:.25rem; color:antiquewhite; box-shadow: 0px 0px 8px 0px #0000ffc7"
+            routerLink="../auth/login">Login
+    </button>
+    <i class="fa-solid fa-circle-user fa-2xl" style="cursor:pointer; color: RED; text-shadow: 3px 6px 20px #ff2c2c;"
+       *ngIf="(authority)&&(authority=='admin')" (click)="onOpenModal('user')"></i>
+    <i class="fa-solid fa-circle-user fa-2xl" style="cursor:pointer; color: #5c5cef; text-shadow: 3px 6px 20px #3838e1;"
+       *ngIf="(authority)&&(authority!=='admin')" (click)="onOpenModal('user')"></i>
+  </div>
+</nav>
+
+<div class="container" id="main-container" style="margin-top:2%; ">
+    <div *ngFor="let subject of subjects; let i=index" class="row">
+      <p>{{subject.title}} {{subject.credit}} {{getCourseMark(getMarkTasksBySubject(subject.id))}}</p>
+    </div>
+  </div>
+
+<!-- User info Modal -->
+<div class="userModal fade" id="infoUserModal" tabindex="-1" role="dialog" aria-labelledby="infoModelLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 style="text-shadow:12px 8px 20px #000000db;" class="modal-title"
+            id="infoUserLabel">{{user_firstname}} {{user_lastname}}</h5>
+      </div>
+      <div class="modal-body">
+        <p>{{username}}</p>
+        <button style="width:100%; box-shadow: 0 0 20px 0px #838383;" class="btn btn-secondary" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

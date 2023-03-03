@@ -7,6 +7,7 @@ import {ActivatedRoute} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
+import {SubjectService} from "../Subject/subject.service";
 
 @Component({
   selector: 'app-task',
@@ -31,11 +32,13 @@ export class TaskComponent {
   user_firstname: any;
   user_lastname: any;
   role: any;
+  subject_name:any;
   course_mark:number=0;
   // @ts-ignore
   currentDate:Date;
-  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService) {
+  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, subjectService:SubjectService) {
     this.subject_id = this.activatedRoute.snapshot.paramMap.get('subject_id');
+    this.subject_name= subjectService.getOneSubject(this.subject_id);
     this.user_id = this.activatedRoute.snapshot.paramMap.get('user_id');
     this.currentDate = new Date();
   }

@@ -1,3 +1,5 @@
+import {Subject} from "../Subject/subject";
+
 export interface Task{
   id : number;
   title:string;
@@ -5,7 +7,7 @@ export interface Task{
   deadline:Date;
   done_date:Date;
   is_done:boolean;
-  subject_id:number;
+  subject_id:Subject;
   mark:number;
   max_mark:number;
 
