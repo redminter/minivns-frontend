@@ -38,7 +38,10 @@ export class TaskComponent {
   currentDate:Date;
   constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, subjectService:SubjectService) {
     this.subject_id = this.activatedRoute.snapshot.paramMap.get('subject_id');
-    this.subject_name= subjectService.getOneSubject(this.subject_id);
+    subjectService.getOneSubject(this.subject_id).subscribe(res =>{
+      console.log(res);
+      this.subject_name=res;
+    });
     this.user_id = this.activatedRoute.snapshot.paramMap.get('user_id');
     this.currentDate = new Date();
   }

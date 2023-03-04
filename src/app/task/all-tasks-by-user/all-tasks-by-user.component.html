@@ -58,13 +58,11 @@
     <div *ngFor="let task of tasks" class="col-md-6 col-xl-3">
       <div class="card m-b-30" style="box-shadow: 1px 1px 16px 7px #24242433;">
         <div class="card-body row">
-          <div style="width:100%; margin-left: 10%; font-weight: 400;" class="col-6">
+          <div class=" card-title align-self-center mb-0">
+            <h5 style="font-size: 25px; font-weight: 400; margin-left: 18px;">{{task.title}}</h5>
+            <h6 style="font-size: 10px; margin-left: 18px;">{{task.subject_id.title}}</h6>
           </div>
-          <div class="col-6 card-title align-self-center mb-0">
-            <h5 style="font-size: 25px; font-weight: 400">{{task.title}}</h5>
-            <h6 style="font-size: 10px;">{{task.subject_id.title}}</h6>
-          </div>
-          <ul><a href='../{{task.link}}'>
+          <ul><a href='{{task.link}}'>
             <button class="link-button"
                     style="background-color: #97db97;border-color: #49cd49;box-shadow: 7px 2px 20px -5px #00ff40; margin-inline-start: -15px;">
               Link

@@ -79,10 +79,9 @@ export class SubjectComponent implements OnInit{
 
   }
   public onAddSubject(addForm: NgForm): void {
-    let subject = addForm.value;
     // @ts-ignore
     document.getElementById('add-subject-form').click();
-    this.subjectService.addSubject(subject).subscribe(
+    this.subjectService.addSubject(addForm.value).subscribe(
       (response: Subject) => {
         console.log(response);
         this.getSubjects();

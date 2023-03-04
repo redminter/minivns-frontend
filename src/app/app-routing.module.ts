@@ -9,7 +9,6 @@ import {AllTasksByUserComponent} from "./task/all-tasks-by-user/all-tasks-by-use
 import {LoginComponent} from "./login/login.component";
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import {ErrorComponent} from "./error/error.component";
-import {SubjectSummaryComponent} from "./Subject/subject-summary/subject-summary.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'subjects/scheduled', pathMatch: 'full'},

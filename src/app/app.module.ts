@@ -17,7 +17,6 @@ import { LoginComponent } from './login/login.component';
 import {httpInterceptorProviders} from "./auth/auth-interceptor";
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { ErrorComponent } from './error/error.component';
-import { SubjectSummaryComponent } from './Subject/subject-summary/subject-summary.component';
 
 
 @NgModule({
@@ -32,7 +31,6 @@ import { SubjectSummaryComponent } from './Subject/subject-summary/subject-summa
     LoginComponent,
     ForbiddenComponent,
     ErrorComponent,
-    SubjectSummaryComponent
   ],
   imports: [
     BrowserModule,
