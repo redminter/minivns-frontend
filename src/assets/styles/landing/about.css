@@ -1,0 +1,43 @@
+.about-container
+{
+    margin-top:411px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+}
+
+.cards-container{
+    display: flex;
+    flex-direction: row;
+    gap:21px;
+    flex: 1;
+}
+
+.card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 46px 0px 76px 0px;
+    width: 573px;
+    flex: 1;
+}
+.cards-container h5{
+    font-family: e-Ukraine;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--white);
+    margin:18px 0 18px 0;
+    white-space: nowrap;
+    
+}
+.card p{
+    font-family: Mariupol;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--white);
+    text-align: center;
+    width:348px;
+}

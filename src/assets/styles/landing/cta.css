@@ -1,0 +1,28 @@
+.cta-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 341px;
+}
+
+.cta-container {
+    color: var(--white);
+    padding: 85px 112px 85px 112px;
+}
+
+.cta-container p{
+    font-family: Mariupol;
+    font-size: 36px;
+    font-weight: 400;
+    margin-top: 50px;
+}
+
+.cta-container h2{
+    width: 1528px;
+    text-align: center;
+}
+
+.cta-container .button{
+    margin-top: 74px;
+}

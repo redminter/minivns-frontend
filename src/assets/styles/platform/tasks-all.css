@@ -1,0 +1,86 @@
+.main-container{
+    margin-right: 80px;
+    color: var(--white);
+}
+.search-bar{
+    display: flex;
+    gap:9px;
+}
+.search-container{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.subject-name-container{
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between ;
+
+}
+.line{
+height: 2px;
+}
+
+.subjects-container{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    margin-bottom: 30px;
+
+}
+.tasks-card-container{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-right: 100px;
+}
+.task-card{
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-direction: column;
+    width: fit-content;
+    border-width: 1px;
+    max-width: 300px;
+
+}
+.task-buttons{
+    display: flex;
+    gap:12px;
+}
+
+.name-plus-buttons{
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+
+}
+line{
+    height: 2px;
+}
+
+.task-button{
+    color: var(--white);
+    padding: 5px 10px 5px 10px;  
+    border-width: 1px;
+    box-shadow: none;
+    
+}
+
+.arrow-up{
+    padding: 21px;
+    display: flex;
+    justify-content: center;
+}
+.task-status{
+    padding: 12px 62px 12px 62px;
+    color: var(--white);
+}
+
+.line-plus-status{
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+}

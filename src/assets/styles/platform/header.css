@@ -1,0 +1,32 @@
+.profile-container{
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+
+    color: var(--white);
+}
+
+.profile-icon{
+    padding: 8px 10px 8px 10px;
+}
+
+.header_glass{
+    align-self: stretch;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 46px 59px 46px 46px;
+
+    background: linear-gradient(180.00deg, rgba(224, 221, 255, 0.2),rgba(249, 249, 249, 0.05) 100%);
+    backdrop-filter: blur(80px);
+    border-radius: 30px;
+    border:4px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 4px 4px 50px 0px rgba(0, 0, 0, 0.11);
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+

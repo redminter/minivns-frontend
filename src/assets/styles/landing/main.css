@@ -1,0 +1,43 @@
+.main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 91px 278px 91px 278px;
+    margin: 85px 236px 0 236px;
+}
+
+.main-logo{
+    font-family: e-Ukraine;
+    font-weight: 700;
+    font-size: 150px;
+    color: var(--white);
+    letter-spacing: 30px;
+}
+
+.main-description{
+    font-family: Mariupol;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--white);
+    text-align: center;
+    width:782px;
+    margin-top: 73px;
+    margin-bottom: 144px;
+}
+ 
+.button{
+    font-family: e-Ukraine;
+    font-weight: 700;
+    font-size: 26px;
+    color: var(--white);
+    letter-spacing: 4px;
+
+    padding: 20px 209px 20px 209px;
+    
+    background: var(--purple);
+    border-radius: 30px;
+    border: 4px solid var(--purple_stroke);
+    box-shadow: 4px 4px 50px 0px rgba(0, 0, 0, 0.11);
+}
+

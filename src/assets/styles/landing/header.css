@@ -1,0 +1,47 @@
+.header{
+    font-family: e-Ukraine;
+    font-size: 16px;
+    font-weight: 300;
+    color:var(--white);
+
+    margin-top:30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.logo{
+    width: 170px;
+    font-family: e-Ukraine;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 6px;  
+    width: 176px;
+}
+
+.nav-bar{
+
+    flex: 1;
+    display: flex;
+    margin: 0 395px 0 308px;
+    justify-content: space-between;
+}
+
+.nav-bar div{
+    flex:1;
+}
+
+.profile-container{
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    height: 100px;
+}
+
+.profile-icon{
+    padding: 8px 10px 8px 10px;
+}

@@ -1,0 +1,57 @@
+.footer-container{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: row;
+justify-content: space-between;
+color:var(--white);
+margin-top: 161px;
+margin-bottom: 30px;
+}
+
+.left-footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap:94px;
+    padding: 25px 54px 25px 54px;
+}
+
+.contact-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 33px;
+}
+
+.contact-button img{
+    width:56px;
+}
+.contact-button p{
+    font-family: Mariupol;
+    font-size: 36px;
+    font-weight: 400;
+    color:var(--white);
+}
+
+.logo-title{
+    font-family: e-Ukraine;
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    
+}
+
+.footer-right{
+    font-family: Mariupol;
+    font-size: 36px;
+    font-weight: 400;
+    text-align: end;
+}
+
+.footer-right span{
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+}

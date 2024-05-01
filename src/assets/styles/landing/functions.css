@@ -1,0 +1,34 @@
+.function-container{
+    margin-top: 348px;
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.function-cards-container{
+    align-self:stretch;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    row-gap: 64px;
+    column-gap: 78px;
+    color: var(--white);
+}
+
+.function-card p{
+    font-family: Mariupol;
+    font-size: 32px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.function-card{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap:18px;
+    padding: 49px 91px 49px 61px;
+}

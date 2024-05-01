@@ -1,0 +1,54 @@
+.logo{
+    font-family: e-Ukraine;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.left-menu-container{
+    color: var(--white);
+    padding: 78px 69px 78px 84px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    width: fit-content;;
+    background: linear-gradient(180.00deg, rgba(224, 221, 255, 0.2),rgba(249, 249, 249, 0.05) 100%);
+    backdrop-filter: blur(80px);
+    border-radius: 30px;
+    border:4px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 4px 4px 50px 0px rgba(0, 0, 0, 0.11);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    min-height: 794px;
+}
+
+.logo-menu-items-container{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.menu-item-container{
+    display: flex;
+    gap: 23px;
+    flex-direction: column;
+}
+
+.menu-item{
+    padding: 9px 19px 9px 19px;
+    border-radius: 30px;
+    border:1px solid rgba(255, 255, 255, 0.18);
+    text-align: center;
+    transition: 0.15s;
+    cursor: pointer;
+}
+
+.menu-item:hover{
+    background: linear-gradient(180.00deg, rgba(224, 221, 255, 0.2),rgba(249, 249, 249, 0.05) 100%);
+    backdrop-filter: blur(80px);
+    border-radius: 30px;
+    border:4px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 4px 4px 50px 0px rgba(0, 0, 0, 0.11);
+}
+

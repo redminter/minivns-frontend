@@ -1,0 +1,46 @@
+.success-container{
+    margin-top:406px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0;
+}
+
+.success-body-container{
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+}
+
+.success-body-container img{
+    width: 870px;
+}
+
+.success-body-container h5{
+    font-family: e-Ukraine;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--white);
+    margin-top: 0;
+    margin-bottom: 56px;
+}
+
+.success-body-container p{
+    font-family: Mariupol;
+    font-size: 32px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 165%;
+    margin-top: 0;
+    width: 561px;
+}
+
+.success-card{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 91px 206px 0px 61px;
+    margin: 0;
+    height: 504px;
+    width: fit-content;
+}

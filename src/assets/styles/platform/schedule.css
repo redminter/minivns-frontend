@@ -1,0 +1,157 @@
+
+.name-button {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.main-container {
+    margin-right: 150px;
+    margin-top: 82px;
+}
+
+.schedule-card {
+    padding: 21px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-shadow: none;
+    width: 284px;
+
+}
+
+.line {
+    width: auto;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    ;
+
+}
+
+.name-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+
+.name-time {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.teacher-time {
+    display: flex;
+    justify-content: space-between;
+}
+
+.para-number-time {
+    display: flex;
+    gap: 8px;
+}
+
+.schedule-card-button-container {
+    display: flex;
+    gap: 11px;
+
+}
+
+.schedule-card-button {
+    padding: 5px 10px 5px 10px;
+    border-width: 1px;
+    box-shadow: none;
+
+}
+
+.schedule-button {
+    display: flex;
+    padding: 0px 21px 0px 21px;
+    box-shadow: none;
+    justify-items: center;
+}
+
+.schedule-card-container {
+    display: flex;
+    gap: 13px;
+}
+
+.schedule-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 33px;
+}
+
+.main-container {
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+}
+
+.left-menu-plus-body {
+    display: flex;
+    gap: 40px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    color: var(--white);
+    margin-top: 30px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 30px;
+}
+
+.left-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 94px;
+    padding: 14px 54px 14px 54px;
+}
+
+.contact-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 33px;
+}
+
+.contact-button img {
+    width: 30px;
+}
+
+.contact-button p {
+    font-family: Mariupol;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--white);
+}
+
+.logo-title {
+    font-family: e-Ukraine;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 8px;
+
+}
+
+.footer-right {
+    font-family: Mariupol;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: end;
+}
+
+.footer-right span {
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+}

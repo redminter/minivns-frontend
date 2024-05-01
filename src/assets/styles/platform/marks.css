@@ -1,0 +1,31 @@
+.line{
+    width:auto;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.18);
+}
+.name-mark{
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+}
+.mark-item{
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+.marks-container{
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    margin-right: 80px;
+    margin-top: 32px;
+}
+
+.marks-details-container {
+    margin-left:20px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
