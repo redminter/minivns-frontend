@@ -17,7 +17,7 @@
     margin-right: 80px;
 }
 
-.main{
+.main-container{
     display: flex;
     gap: 150px;
 }
@@ -35,16 +35,20 @@
     font-family: Mariupol;
     font-size: 24px;
     font-weight: 400;
-    padding: 19px 41px 19px 19px;
+    padding: 19px 41px 20px 19px;
     background: rgba(224, 221, 255, 0.3);
     border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
+input::placeholder{
+  overflow: visible;
+}
+
+input, textarea{
+  line-height: 1.2em!important;
+}
 .input-text::placeholder{
     color:rgba(255, 255, 255, 0.5);
-    padding: 0;
-    margin: 0;
-    padding: 19px 41px 19px 19px;
 }
 .lg-button{
     padding: 13px 0px 13px 0px;
