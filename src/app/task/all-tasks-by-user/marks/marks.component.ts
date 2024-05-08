@@ -1,22 +1,21 @@
-import {Component} from '@angular/core';
-import {TaskService} from "../task.service";
+import { Component } from '@angular/core';
+import {Task} from "../../task";
+import {TaskService} from "../../task.service";
 import {ActivatedRoute} from "@angular/router";
+import {TokenStorageService} from "../../../auth/token-storage.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {Task} from '../task';
-import {TokenStorageService} from "../../auth/token-storage.service";
 import {NgForm} from "@angular/forms";
-import {Subject} from "../../Subject/subject";
+import {Subject} from "../../../Subject/subject";
 
 @Component({
-  selector: 'app-all-tasks-by-user',
-  templateUrl: './all-tasks-by-user.component.html',
-  styleUrls: ['./all-tasks-by-user.component.css']
+  selector: 'app-marks',
+  templateUrl: './marks.component.html',
+  styleUrls: ['./marks.component.css']
 })
-export class AllTasksByUserComponent {
+export class MarksComponent {
   public tasks: Task[] = [];
   public arrayOfArrays: Task[][] = [];
   public totalMarksPerArray: number[] = [];
-  public sortedTasks: Task[] = [];
   // @ts-ignore
   user_id: string | null;
   // @ts-ignore
@@ -63,19 +62,6 @@ export class AllTasksByUserComponent {
       (response: Task[]) => {
         this.tasks = response;
 
-        let doneTasksCount = 0;
-        for (let task of this.tasks) {
-          if (task.is_done) {
-            doneTasksCount++;
-          }
-        }
-        let doneTasksPercentage = (doneTasksCount / this.tasks.length) * 100;
-
-        console.log(`Percentage of tasks that are done: ${doneTasksPercentage}%`);
-
-
-        this.sortedTasks = this.tasks.sort((a, b) => new Date(a.deadline).getTime() - new Date(b.deadline).getTime());
-        this.sortedTasks = this.sortedTasks.slice(0, 2);
         const groupedTasks = this.tasks.reduce((acc, task) => {
           // Check if the array for this 'subject_id' already exists
           // @ts-ignore
@@ -102,7 +88,6 @@ export class AllTasksByUserComponent {
         });
 
         console.log(this.arrayOfArrays);
-        console.log(this.sortedTasks);
         console.log(this.totalMarksPerArray);
       },
       (error: HttpErrorResponse) => {
