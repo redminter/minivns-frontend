@@ -7,53 +7,57 @@
 
 </head>
 
-<body>
+<body class="body-container">
 <div *ngIf="isLoggedIn; else loggedOut">
   <meta http-equiv="Refresh" content="0 subjects/scheduled">
 </div>
 <ng-template #loggedOut>
-<div class="logo-body">
-  <div class="logo">MINIVNS</div>
-  <div class="main-container">
-    <img src="./assets/resources/img/login.svg">
-    <form class="form-container glass" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-      <div class="title h5">Увійти</div>
-      <div class="input-forgot-password">
-        <input class="input-text" type="text" placeholder="Пошта" name="username" id="username" [(ngModel)]="form.username" #username="ngModel" required>
-        <div *ngIf="f.submitted && username.invalid">
-          <div *ngIf="username.errors?.['required']" class="body7">Відсутній логін</div>
-        </div>
-        <input class="input-text" type="password" placeholder="Логін" name="password" id="password" [(ngModel)]="form.password" #password="ngModel" required minlength="4">
-        <div *ngIf="f.submitted && password.invalid">
-                    <div *ngIf="password.errors?.['required']" class="body7">Відсутній пароль</div>
-                    <div *ngIf="password.errors?.['minlength']" class="body7">Пароль має бути >=4 літери</div>
-        </div>
-        <span class="password-forgot body7">Забув/ла пароль?</span>
+  <div class="logo-body">
+    <div class="logo">MINIVNS</div>
+    <div class="illustration-form-container">
+      <div>
+        <img class="illustration" src="./assets/resources/img/login.svg" alt="illustration">
       </div>
-      <div class="buttons">
-        <button class="lg-button hbtn" type="submit">УВІЙТИ</button>
-        <div  *ngIf="f.submitted && isLoginFailed" class="body7">Помилка: {{errorMessage}}</div>
-        <span class="body7">або</span>
-        <button class="google-login hbtn" type="button">ВХІД З GOOGLE</button>
+      <div>
+        <form class="form-container glass" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <div class="title h5">Увійти</div>
+          <div class="input-forgot-password">
+            <input class="input-text" type="text" placeholder="Пошта" name="username" id="username" [(ngModel)]="form.username" #username="ngModel" required>
+            <div *ngIf="f.submitted && username.invalid">
+              <div *ngIf="username.errors?.['required']" class="body7">Відсутній логін</div>
+            </div>
+            <input class="input-text" type="password" placeholder="Логін" name="password" id="password" [(ngModel)]="form.password" #password="ngModel" required minlength="4">
+            <div *ngIf="f.submitted && password.invalid">
+              <div *ngIf="password.errors?.['required']" class="body7">Відсутній пароль</div>
+              <div *ngIf="password.errors?.['minlength']" class="body7">Пароль має бути >=4 літери</div>
+            </div>
+            <span class="password-forgot body7">Забув/ла пароль?</span>
+          </div>
+          <div class="buttons">
+            <button class="lg-button hbtn" type="submit">УВІЙТИ</button>
+            <div  *ngIf="f.submitted && isLoginFailed" class="body7">Помилка: {{errorMessage}}</div>
+            <span class="body7">або</span>
+            <button class="google-login hbtn" type="button">ВХІД З GOOGLE</button>
+          </div>
+          <span class="message body4">Якщо не знаєш даних для входу, звернися до адміністрації!</span>
+        </form>
       </div>
-      <span class="message body4">Якщо не знаєш даних для входу, звернися до адміністрації!</span>
-    </form>
-  </div>
-</div>
-
-<footer class="footer-container">
-  <div class="left-footer glass">
-    <div class="logo-title">MINIVNS</div>
-    <div class="contact-button">
-      <img class="footer-logo" src="./assets/resources/icons/contact.png" alt="Footer contact">
-      <p>
-        Написати нам
-      </p>
     </div>
   </div>
-  <div class="footer-right">Усі використані матеріали доступні за цим
-    <br>посиланням — <span>ресурси</span></div>
-</footer>
+
+  <footer class="footer-container">
+    <div class="left-footer glass">
+      <div class="logo-title">MINIVNS</div>
+      <div class="contact-button">
+        <img class="footer-logo" src="./assets/resources/icons/contact.png" alt="Footer contact">
+        <p>
+          Написати нам
+        </p>
+      </div>
+    </div>
+    <div class="footer-right">Усі використані матеріали доступні за цим
+      <br>посиланням — <span>ресурси</span></div>
+  </footer>
 </ng-template>
 </body>
 

@@ -3,8 +3,11 @@
 }
 
 .main-container{
-    margin-right: 80px;
-    color: var(--white);
+  display: flex;
+  flex-direction: column;
+  margin-right: 80px;
+  color: var(--white);
+  gap: 20px;
 }
 .search-bar{
     display: flex;
@@ -27,11 +30,7 @@
 height: 2px;
 }
 
-.subjects-container{
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-}
+
 .tasks-card-container{
     display: flex;
     gap: 20px;
@@ -63,10 +62,10 @@ line{
 
 .task-button{
     color: var(--white);
-    padding: 5px 10px 5px 10px;  
+    padding: 5px 10px 5px 10px;
     border-width: 1px;
     box-shadow: none;
-    
+
 }
 
 .arrow-up{
@@ -85,12 +84,10 @@ line{
     flex-direction: column;
 }
 
-.subjects-plus-button{
+.tasks-plus-button{
     display: flex;
     gap: 35px;
     justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 30px;
 }
 
 .add-task{
