@@ -11,6 +11,8 @@ import {TokenStorageService} from "../auth/token-storage.service";
 export class SubjectComponent implements OnInit{
 
   public subjects: Subject[] = [];
+  public weekSubjects: Subject[][] = [];
+  public weekDays: string[] = [];
   // @ts-ignore
   public subject: Subject | null;
   // @ts-ignore
@@ -63,6 +65,15 @@ export class SubjectComponent implements OnInit{
         this.subjects = response;
         console.log(this.subjects);
 
+        let mondaySubjects = this.subjects.filter(subject => subject.at_monday);
+        let tuesdaySubjects = this.subjects.filter(subject => subject.at_tuesday);
+        let wednesdaySubjects = this.subjects.filter(subject => subject.at_wednesday);
+        let thursdaySubjects = this.subjects.filter(subject => subject.at_thursday);
+        let fridaySubjects = this.subjects.filter(subject => subject.at_friday);
+
+        this.weekDays= ['Понеділок', 'Вівторок', 'Середа', 'Четвер', "П'ятниця"];
+        this.weekSubjects = [mondaySubjects, tuesdaySubjects, wednesdaySubjects, thursdaySubjects, fridaySubjects];
+        console.log(this.weekSubjects);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
