@@ -10,7 +10,6 @@ import {SubjectService} from "./Subject/subject.service";
 import {SubjectComponent} from "./Subject";
 import {UserComponent} from "./User/user.component";
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { SubjectScheduledComponent } from './Subject/subject-scheduled/subject-scheduled.component';
 import { TaskComponent } from './task';
 import { AllTasksByUserComponent } from './task/all-tasks-by-user/all-tasks-by-user.component';
 import { LoginComponent } from './login/login.component';
@@ -26,7 +25,6 @@ import { MarksComponent } from './task/all-tasks-by-user/marks/marks.component';
     SubjectComponent,
     UserComponent,
     PageNotFoundComponent,
-    SubjectScheduledComponent,
     TaskComponent,
     AllTasksByUserComponent,
     LoginComponent,
