@@ -7,9 +7,9 @@ export interface Subject {
   lection_url: string;
 
   credit:number;
-  atMonday: boolean;
-  atTuesday: boolean;
-  atWednesday: boolean;
-  atThursday: boolean;
-  atFriday: boolean;
+  at_monday: boolean;
+  at_tuesday: boolean;
+  at_wednesday: boolean;
+  at_thursday: boolean;
+  at_friday: boolean;
 }
