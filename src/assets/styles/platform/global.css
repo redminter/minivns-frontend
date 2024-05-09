@@ -60,7 +60,10 @@
   box-shadow: 4px 4px 50px 0px rgba(0, 0, 0, 0.11);
 }
 
-
+a{
+  text-decoration: none;
+  color: var(--white);
+}
 body {
   background: linear-gradient(90.00deg, rgb(146, 133, 255), rgb(158, 192, 252) 100%);
   overflow-x: hidden;
