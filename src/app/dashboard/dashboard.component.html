@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+
+</head>
+
+<body>
+<div class="left-menu-plus-body">
+  <nav class="left-menu-container">
+    <div class="logo-menu-items-container">
+      <span class="logo">MINIVNS</span>
+      <div class="menu-item-container">
+        <div routerLink="/users/{{user_id}}//dashboard" class="menu-item hbtn">
+          <p>Дешборд</p>
+        </div>
+        <div class="menu-item hbtn">
+          <p>Розклад</p>
+        </div>
+        <div class="menu-item hbtn">
+          <p>Оцінки</p>
+        </div>
+        <div class="menu-item hbtn">
+          <p>Завдання</p>
+        </div>
+      </div>
+    </div>
+    <div class="menu-item hbtn">
+      <p>Вийти</p>
+    </div>
+  </nav>
+  <div class="header-plus-body">
+
+    <header class="header_glass">
+      <span class="h3">Вітаємо, Олег!</span>
+      <div class="profile-container hbtn">
+        <div class="profile-icon glass">
+          <img src="../assets/resources/icons/user-male.svg" alt="Profile Icon">
+        </div>
+        <p>Профіль</p>
+      </div>
+    </header>
+
+    <div class="body-container_new">
+      <div class="left-part">
+        <div class="statistics-plus-expired">
+          <div class="group-statistics">
+            <div class="group-number h3 glass">КІ-47</div>
+            <div class="statistics glass">
+              <div class="h3">{{doneTasksPercentage}}%</div>
+              <div class="h5">Виконано!</div>
+              <div class="back-color"></div>
+            </div>
+          </div>
+          <div class="expire-container">
+            <span class="h5">Скоро спливає</span>
+            <div class="tasks-container">
+              <div *ngFor="let task of sortedTasks" class="task-card-container">
+                <div class="task-card glass">
+                  <div class="name-time">
+                    <span class="task-name h6">{{task.title}}</span>
+                    <div class="subject-time body5">
+                      <span class="subject ">{{task.subject_id.title}}</span>
+                      <span class="deadline">{{getDate(task)}}</span>
+                    </div>
+                  </div>
+                  <div class="schedule-card-button-container">
+                    <div class="schedule-card-button card-button glass">ВНС</div>
+                    <div class="schedule-card-button card-button glass">МЕТОДИЧКА</div>
+                  </div>
+                </div>
+                <div class="task-button glass">
+                  <span class="days-amount h4">{{diffindays(task)}}</span>
+                  <span class="days body5">дні</span>
+                </div>
+              </div>
+              <div class="task-all-button glass body4">
+                <div>Усі завдання</div>
+                <img src="../assets/resources/icons/arrow-right.svg" alt="Arrow Right">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="success">
+          <span class="h5">Успішність</span>
+          <div *ngFor="let subject of arrayOfArrays; let i=index" class="success-item body4">
+            <div class="name-mark">
+              <div class="name">{{subject[0].subject_id.title}}</div>
+              <div class="mark">{{totalMarksPerArray[i]}}</div>
+            </div>
+            <div class="line"></div>
+          </div>
+          <div class="all-marks body4">Усі оцінки</div>
+        </div>
+      </div>
+      <div class="today-schedule">
+        <span class="h5">{{getDateNow()}}</span>
+        <div class="schedule-cards-container-plus-button">
+          <div class="schedule-cards-container">
+            <div *ngFor="let subject of subjects" class="schedule-item">
+              <div class="schedule-card glass">
+                <div class="name-time">
+                  <span class="discipline-name h6">{{subject.title}}</span>
+                  <div class="teacher-time">
+                    <span class="teacher body5">Кочан Р.В</span>
+                    <div class="para-number-time body5">
+                      <span class="para-number">1 пара</span>
+                      <span class="time">8:30-10:00</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="schedule-card-button-container">
+                  <a href="{{subject.vns_url}}"><div class="schedule-card-button card-button glass">ВНС</div></a>
+                  <a href="{{subject.lection_url}}"><div class="schedule-card-button card-button glass lection-active">ЛЕКЦІЯ</div></a>
+                  <a href="{{subject.lab_url}}"><div class="schedule-card-button card-button glass">ЛАБ</div></a>
+                  <a href="{{subject.pract_url}}"><div class="schedule-card-button card-button glass">ПРАКТИКА</div></a>
+                </div>
+              </div>
+              <div class="schedule-button glass">
+                <img src="../assets/resources/icons/arrow-right.svg" alt="Arrow Right">
+              </div>
+            </div>
+          </div>
+          <div class="schedule-all-button glass h6">
+            <span>Усі предмети</span>
+            <img src="../assets/resources/icons/arrow-right.svg" alt="Arrow Right">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="footer-container">
+  <div class="left-footer glass">
+    <div class="logo-title">MINIVNS</div>
+    <div class="contact-button">
+      <img class="footer-logo" src="../assets/resources/icons/contact.png" alt="Footer contact">
+      <p>
+        Написати нам
+      </p>
+    </div>
+  </div>
+  <div class="footer-right">Усі використані матеріали доступні за цим
+    <br>посиланням — <span>ресурси</span></div>
+</footer>
+</body>
+
+</html>

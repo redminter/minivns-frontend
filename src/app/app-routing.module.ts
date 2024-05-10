@@ -9,9 +9,11 @@ import {LoginComponent} from "./login/login.component";
 import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import {ErrorComponent} from "./error/error.component";
 import {MarksComponent} from "./task/all-tasks-by-user/marks/marks.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: 'subjects/scheduled', pathMatch: 'full'},
+  {path: '', redirectTo: "users/:user_id/dashboard", pathMatch: 'full'},
+  {path: 'users/:user_id/dashboard', component: DashboardComponent},
   {path: 'subjects', component: SubjectComponent },
   {path: "users", component:UserComponent},
   {path: "users/:user_id/subjects/:subject_id/tasks", component:TaskComponent},

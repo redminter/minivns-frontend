@@ -13,11 +13,10 @@
     flex: 1;
 }
 
-.body-container{
+.body-container_new{
     display: flex;
     justify-content: space-between;
     gap: 54px;
-
 }
 
 .statistics-plus-expired{
@@ -81,7 +80,7 @@
     gap: 15px;
 }
 .task-card{
-    padding:25px; 
+    padding:25px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -104,7 +103,7 @@
     gap: 187px;
     justify-content: space-between;
     padding: 6px 16px 6px 16px;
-    align-items: center;  
+    align-items: center;
     width: fit-content;
 }
 .task-all-button img{
@@ -130,7 +129,7 @@
     flex-direction: column;
     flex:1;
     gap:40px;
-} 
+}
 
 .line{
     width:auto;
@@ -174,11 +173,11 @@
     gap: 11px;
 }
 
-.schedule-card-button{ 
-    padding: 5px 10px 5px 10px;  
+.schedule-card-button{
+    padding: 5px 10px 5px 10px;
     border-width: 1px;
     box-shadow: none;
-    
+
 }
 .schedule-item{
     display: flex;
@@ -235,7 +234,7 @@
     margin-left: 80px;
     margin-right: 80px;
     }
-    
+
     .left-footer{
         display: flex;
         justify-content: center;
@@ -244,7 +243,7 @@
         gap:94px;
         padding: 14px 54px 14px 54px;
     }
-    
+
     .contact-button{
         display: flex;
         justify-content: center;
@@ -252,7 +251,7 @@
         flex-direction: row;
         gap: 33px;
     }
-    
+
     .contact-button img{
         width:30px;
     }
@@ -262,22 +261,22 @@
         font-weight: 400;
         color:var(--white);
     }
-    
+
     .logo-title{
         font-family: e-Ukraine;
         font-size: 30px;
         font-weight: 700;
         letter-spacing: 8px;
-        
+
     }
-    
+
     .footer-right{
         font-family: Mariupol;
         font-size: 20px;
         font-weight: 400;
         text-align: end;
     }
-    
+
     .footer-right span{
         text-decoration: underline;
         text-decoration-skip-ink: none;

@@ -17,6 +17,7 @@ import {httpInterceptorProviders} from "./auth/auth-interceptor";
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { ErrorComponent } from './error/error.component';
 import { MarksComponent } from './task/all-tasks-by-user/marks/marks.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { MarksComponent } from './task/all-tasks-by-user/marks/marks.component';
     ForbiddenComponent,
     ErrorComponent,
     MarksComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
