@@ -1,0 +1,22 @@
+<nav class="left-menu-container">
+  <div class="logo-menu-items-container">
+    <span routerLink="../users/{{user_id}}/dashboard" class="logo">MINIVNS</span>
+    <div class="menu-item-container">
+      <div routerLink="../users/{{user_id}}/dashboard" class="menu-item hbtn">
+        <p>Дешборд</p>
+      </div>
+      <div routerLink="/subjects" class="menu-item hbtn">
+        <p>Розклад</p>
+      </div>
+      <div routerLink="users/{{user_id}}/marks" class="menu-item hbtn">
+        <p>Оцінки</p>
+      </div>
+      <div routerLink="users/{{user_id}}/tasks" class="menu-item hbtn">
+        <p>Завдання</p>
+      </div>
+    </div>
+  </div>
+  <div (click)="logout()" class="menu-item hbtn">
+    <p>Вийти</p>
+  </div>
+</nav>
