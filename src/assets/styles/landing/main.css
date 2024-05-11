@@ -1,4 +1,4 @@
-.main-container{
+.main-container-main{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -25,7 +25,7 @@
     margin-top: 73px;
     margin-bottom: 144px;
 }
- 
+
 .button{
     font-family: e-Ukraine;
     font-weight: 700;
@@ -34,7 +34,7 @@
     letter-spacing: 4px;
 
     padding: 20px 209px 20px 209px;
-    
+
     background: var(--purple);
     border-radius: 30px;
     border: 4px solid var(--purple_stroke);

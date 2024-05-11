@@ -18,6 +18,9 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { ErrorComponent } from './error/error.component';
 import { MarksComponent } from './task/all-tasks-by-user/marks/marks.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 
 @NgModule({
@@ -33,6 +36,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ErrorComponent,
     MarksComponent,
     DashboardComponent,
+    FooterComponent,
+    HeaderComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,4 @@
-.main-container{
-    margin-right: 80px;
-    color: var(--white);
-}
+
 .search-bar{
     display: flex;
     gap:9px;
@@ -63,10 +60,10 @@ line{
 
 .task-button{
     color: var(--white);
-    padding: 5px 10px 5px 10px;  
+    padding: 5px 10px 5px 10px;
     border-width: 1px;
     box-shadow: none;
-    
+
 }
 
 .arrow-up{

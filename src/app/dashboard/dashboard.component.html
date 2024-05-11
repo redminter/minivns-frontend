@@ -8,41 +8,6 @@
 </head>
 
 <body>
-<div class="left-menu-plus-body">
-  <nav class="left-menu-container">
-    <div class="logo-menu-items-container">
-      <span class="logo">MINIVNS</span>
-      <div class="menu-item-container">
-        <div routerLink="/users/{{user_id}}//dashboard" class="menu-item hbtn">
-          <p>Дешборд</p>
-        </div>
-        <div class="menu-item hbtn">
-          <p>Розклад</p>
-        </div>
-        <div class="menu-item hbtn">
-          <p>Оцінки</p>
-        </div>
-        <div class="menu-item hbtn">
-          <p>Завдання</p>
-        </div>
-      </div>
-    </div>
-    <div class="menu-item hbtn">
-      <p>Вийти</p>
-    </div>
-  </nav>
-  <div class="header-plus-body">
-
-    <header class="header_glass">
-      <span class="h3">Вітаємо, Олег!</span>
-      <div class="profile-container hbtn">
-        <div class="profile-icon glass">
-          <img src="../assets/resources/icons/user-male.svg" alt="Profile Icon">
-        </div>
-        <p>Профіль</p>
-      </div>
-    </header>
-
     <div class="body-container_new">
       <div class="left-part">
         <div class="statistics-plus-expired">
@@ -76,7 +41,7 @@
                   <span class="days body5">дні</span>
                 </div>
               </div>
-              <div class="task-all-button glass body4">
+              <div routerLink="../../../users/{{user_id}}/tasks"class="task-all-button glass body4">
                 <div>Усі завдання</div>
                 <img src="../assets/resources/icons/arrow-right.svg" alt="Arrow Right">
               </div>
@@ -92,7 +57,7 @@
             </div>
             <div class="line"></div>
           </div>
-          <div class="all-marks body4">Усі оцінки</div>
+          <div routerLink="../../../users/{{user_id}}/marks" class="all-marks body4">Усі оцінки</div>
         </div>
       </div>
       <div class="today-schedule">
@@ -118,33 +83,18 @@
                   <a href="{{subject.pract_url}}"><div class="schedule-card-button card-button glass">ПРАКТИКА</div></a>
                 </div>
               </div>
-              <div class="schedule-button glass">
+              <div routerLink="../../../users/{{user_id}}/subjects/{{subject.id}}/tasks" class="schedule-button glass">
                 <img src="../assets/resources/icons/arrow-right.svg" alt="Arrow Right">
               </div>
             </div>
           </div>
-          <div class="schedule-all-button glass h6">
+          <div routerLink="../../../subjects" class="schedule-all-button glass h6">
             <span>Усі предмети</span>
             <img src="../assets/resources/icons/arrow-right.svg" alt="Arrow Right">
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<footer class="footer-container">
-  <div class="left-footer glass">
-    <div class="logo-title">MINIVNS</div>
-    <div class="contact-button">
-      <img class="footer-logo" src="../assets/resources/icons/contact.png" alt="Footer contact">
-      <p>
-        Написати нам
-      </p>
-    </div>
-  </div>
-  <div class="footer-right">Усі використані матеріали доступні за цим
-    <br>посиланням — <span>ресурси</span></div>
-</footer>
 </body>
 
 </html>

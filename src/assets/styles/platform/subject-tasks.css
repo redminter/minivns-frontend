@@ -2,12 +2,10 @@
     flex:1;
 }
 
-.main-container{
+.main-container-tasks{
   display: flex;
   flex-direction: column;
-  margin-right: 80px;
   color: var(--white);
-  gap: 20px;
 }
 .search-bar{
     display: flex;

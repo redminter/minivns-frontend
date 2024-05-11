@@ -9,7 +9,7 @@
 
 <body class="body-container">
 <div *ngIf="isLoggedIn; else loggedOut">
-  <meta http-equiv="Refresh" content="0 subjects/scheduled">
+  <meta http-equiv="Refresh" content="0 /users/{{user_id}}/dashboard">
 </div>
 <ng-template #loggedOut>
   <div class="logo-body">
@@ -44,20 +44,6 @@
       </div>
     </div>
   </div>
-
-  <footer class="footer-container">
-    <div class="left-footer glass">
-      <div class="logo-title">MINIVNS</div>
-      <div class="contact-button">
-        <img class="footer-logo" src="./assets/resources/icons/contact.png" alt="Footer contact">
-        <p>
-          Написати нам
-        </p>
-      </div>
-    </div>
-    <div class="footer-right">Усі використані матеріали доступні за цим
-      <br>посиланням — <span>ресурси</span></div>
-  </footer>
 </ng-template>
 </body>
 
