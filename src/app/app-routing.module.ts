@@ -10,6 +10,7 @@ import {ForbiddenComponent} from "./forbidden/forbidden.component";
 import {ErrorComponent} from "./error/error.component";
 import {MarksComponent} from "./task/all-tasks-by-user/marks/marks.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
+import {SettingsComponent} from "./settings/settings.component";
 
 const routes: Routes = [
   {path: '', redirectTo: "users/:user_id/dashboard", pathMatch: 'full'},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'auth/login', component: LoginComponent},
   {path: 'forbidden', component: ForbiddenComponent},
   {path: 'error', component: ErrorComponent},
+  {path: 'settings', component: SettingsComponent},
   // otherwise redirect to page not Found
 
   { path: '**', component: PageNotFoundComponent}

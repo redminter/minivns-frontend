@@ -13,6 +13,7 @@ import {Subject} from "../../../Subject/subject";
   styleUrls: ['./marks.component.css']
 })
 export class MarksComponent {
+  isExpanded: boolean[] = [];
   public tasks: Task[] = [];
   public arrayOfArrays: Task[][] = [];
   public totalMarksPerArray: number[] = [];

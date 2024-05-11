@@ -68,6 +68,3 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: center ;
 }
 
-body{
-    background-image: linear-gradient(90deg, #DFDCFF, #E47EAA);
-}

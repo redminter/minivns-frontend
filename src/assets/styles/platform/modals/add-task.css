@@ -4,7 +4,6 @@
     flex-direction: column;
     margin-left: 610px;
     margin-right: 610px;
-    margin-top: 150px;
 }
 
 .input-text{
@@ -67,6 +66,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     text-align: center ;
 }
 
-body{
-    background-image: linear-gradient(90deg, #DFDCFF, #E47EAA);
+.modal{
+  position: relative;
+  margin-top: -50%;
+}
+.close-button{
+  width:fit-content;
+  padding: 8px 10px 8px 10px;
+  border-radius: 15px;
+  height: fit-content;
+}
+
+.title-close-button {
+  display: flex;
+  justify-content: space-between;
 }

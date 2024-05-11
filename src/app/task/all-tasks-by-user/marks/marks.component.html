@@ -1,29 +1,28 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Marks</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <title>Marks</title>
+</head>
 
-  <body>
-  <div class="marks-container">
-          <div
-            *ngFor="let taskGroup of arrayOfArrays; let i = index"
-            class="mark-item body4"
-          >
-            <div class="name-mark">
-              <div class="name">{{ taskGroup[0].subject_id.title }}</div>
-              <div class="mark">{{ totalMarksPerArray[i] }}</div>
-            </div>
-            <div class="line"></div>
-            <div *ngFor="let task of taskGroup" class="marks-details-container">
-              <div class="name-mark">
-                <div class="name">{{ task.title }}</div>
-                <div class="mark">{{ task.mark }}/{{ task.max_mark }}</div>
-              </div>
-              <div class="line"></div>
-            </div>
-          </div>
+<div class="marks-container  accordion">
+  <div
+    *ngFor="let taskGroup of arrayOfArrays; let i = index"
+    class="mark-item body4" >
+    <div class="name-mark" (click)="isExpanded[i] = !isExpanded[i]">
+      <div class="name">{{ taskGroup[0].subject_id.title }}</div>
+      <div class="mark">{{ totalMarksPerArray[i] }}</div>
+    </div>
+    <div class="line"></div>
+    <div *ngIf="isExpanded[i]">
+    <div *ngFor="let task of taskGroup" class="marks-details-container">
+        <div class="name-mark">
+          <div class="name">{{ task.title }}</div>
+          <div class="mark">{{ task.mark }}/{{ task.max_mark }}</div>
         </div>
-  </body>
+        <div class="line"></div>
+      </div>
+    </div>
+  </div>
+</div>
 </html>

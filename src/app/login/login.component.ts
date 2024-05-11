@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { TokenStorageService } from '../auth/token-storage.service';
 import { AuthLoginInfo } from '../auth/login-info';
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   // @ts-ignore
   private loginInfo: AuthLoginInfo;
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private router: Router,private authService: AuthService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.role = this.tokenStorage.getAuthority();
         this.reloadPage();
+        this.router.navigate(['users/'+this.user_id+'/dashboard']);
       },
       error => {
         console.log(error);

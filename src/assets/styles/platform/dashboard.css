@@ -1,9 +1,3 @@
-.left-menu-plus-body{
-    display: flex;
-    gap: 22px;
-}
-
-
 .header-plus-body{
     display: flex;
     flex-direction: column;
@@ -79,11 +73,11 @@
     display: flex;
     gap: 15px;
 }
-.task-card{
+.task-card-dashboard{
     padding:25px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    justify-content: space-between;
 }
 
 .subject-time{
@@ -91,7 +85,7 @@
     justify-content: space-between;
     width: 231px;
 }
-.task-button{
+.task-deadline-dashboard{
     display: flex;
     gap: 8px;
     flex-direction: column;
@@ -141,7 +135,6 @@
     flex-direction: column;
     align-items: start;
     gap: 20px;
-    margin-right: 80px
 }
 
 .schedule-card{
@@ -179,7 +172,7 @@
     box-shadow: none;
 
 }
-.schedule-item{
+.schedule-item-dashboard{
     display: flex;
     justify-content: space-between;
     gap: 12px;
@@ -190,7 +183,7 @@
     box-shadow: none;
 }
 
-.schedule-cards-container{
+.schedule-cards-container-dashboard{
     display: flex;
     gap: 17px;
     flex-direction: column;

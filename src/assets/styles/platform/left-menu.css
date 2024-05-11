@@ -11,8 +11,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
-    width: fit-content;;
+    width: fit-content;
     background: linear-gradient(180.00deg, rgba(224, 221, 255, 0.2),rgba(249, 249, 249, 0.05) 100%);
     backdrop-filter: blur(80px);
     border-radius: 30px;

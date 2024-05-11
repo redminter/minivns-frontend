@@ -17,8 +17,6 @@
     display: flex;
     gap: 30px;
     flex-direction: column;
-    margin-right: 80px;
-    margin-top: 32px;
 }
 
 .marks-details-container {

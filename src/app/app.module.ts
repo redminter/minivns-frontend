@@ -21,6 +21,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { AddTaskModalComponent } from './add-task-modal/add-task-modal.component';
+import { EditTaskModalComponent } from './edit-task-modal/./edit-task-modal.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { DoneTaskModalComponent } from './done-task-modal/done-task-modal.component';
+import { SettingsComponent } from './settings/settings.component';
+import { AddSubjectComponent } from './add-subject/add-subject.component';
+import { EditSubjectComponent } from './edit-subject/edit-subject.component';
+
 
 
 @NgModule({
@@ -39,6 +47,13 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     FooterComponent,
     HeaderComponent,
     SidebarComponent,
+    AddTaskModalComponent,
+    EditTaskModalComponent,
+    DeleteModalComponent,
+    DoneTaskModalComponent,
+    SettingsComponent,
+    AddSubjectComponent,
+    EditSubjectComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import {NgForm} from "@angular/forms";
 import {Subject} from "./subject";
 import {SubjectService} from "./subject.service";
 import {TokenStorageService} from "../auth/token-storage.service";
+import {ModalService} from "../add-task-modal/modal.service";
 
 @Component({
   templateUrl: './subject.component.html'
@@ -29,7 +30,7 @@ export class SubjectComponent implements OnInit{
   user_firstname:any;
   user_lastname:any;
   username:any;
-  constructor(private subjectService: SubjectService, private tokenStorage: TokenStorageService) {
+  constructor(private modalService: ModalService, private subjectService: SubjectService, private tokenStorage: TokenStorageService) {
   }
   // @ts-ignore
   ngOnInit() {
@@ -188,6 +189,9 @@ export class SubjectComponent implements OnInit{
     // @ts-ignore
     container.appendChild(button);
     button.click();
+  }
+  openModule() {
+    this.modalService.openEditSubjectModule();
   }
   logout() {
     this.tokenStorage.signOut();

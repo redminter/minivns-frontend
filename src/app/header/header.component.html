@@ -1,9 +1,16 @@
 <header class="header_glass">
   <span class="h3">Вітаємо, {{user_firstname}}!</span>
-  <div class="profile-container hbtn">
+  <button *ngIf="!authority" class="glass hbtn"routerLink="../../auth/login" style="text-transform: none; color:var(--white); padding: 15px">Увійти</button>
+  <div *ngIf="(authority)&&(authority=='admin')" class="profile-container hbtn" style="text-transform: none; letter-spacing: 0px;">
+    <div routerLink="../../auth/login" class="profile-icon glass" style="border-color: rgba(255,0,0,0.47)">
+      <img src="../assets/resources/icons/user-male.svg" alt="Profile Icon">
+    </div>
+    <p>{{user_firstname}}</p>
+  </div>
+  <div *ngIf="(authority)&&(authority!=='admin')" class="profile-container hbtn" style="text-transform: none; letter-spacing: 0px;">
     <div routerLink="../../auth/login" class="profile-icon glass">
       <img src="../assets/resources/icons/user-male.svg" alt="Profile Icon">
     </div>
-    <p>Профіль</p>
+    <p>{{user_firstname}}</p>
   </div>
 </header>

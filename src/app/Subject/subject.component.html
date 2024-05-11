@@ -6,9 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Schedule</title>
 </head>
-
-<body>
-    <div class="main-container">
+    <div class="main-container-schedule">
       <div *ngFor="let subjectOnDays of weekSubjects; let i=index" class="schedule-item">
         <div class="name-container">
           <div class="name-button">
@@ -34,15 +32,15 @@
                 <a href="{{subject.vns_url}}" class="card-button"><div class="schedule-card-button glass">ВНС</div></a>
                 <a href ="{{subject.lection_url}}" class="card-button"><div class="schedule-card-button glass lection-active">ЛЕКЦІЯ</div></a>
                 <div class="schedule-card-button card-button glass">405, XXVII</div>
+                <button *ngIf="(authority)&&(authority=='admin')" (click)="openModule()" class="task-button glass card-button"> <img
+                  src="../assets/resources/icons/edit.svg" alt="edit button"> </button>
               </div>
             </div>
-            <div class="schedule-button glass">
+            <div routerLink="../users/{{user_id}}/subjects/{{subject.id}}/tasks" class="schedule-button glass">
               <img src="../assets/resources/icons/arrow-right.svg" alt="Arrow Right">
             </div>
           </div>
         </div>
       </div>
     </div>
-</body>
-
 </html>

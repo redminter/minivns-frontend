@@ -5,8 +5,6 @@
   <meta charset="UTF-8">
   <title>Subject tasks</title>
 </head>
-
-<body>
     <div class="main-container">
       <div class="search-container">
         <div class="search-bar">
@@ -25,7 +23,7 @@
               <div class="task-buttons">
                 <a href='{{task.link}}'><button class="task-button glass card-button">ВНС</button></a>
                 <button class="task-button glass card-button">МЕТОДИЧКА</button>
-                <button *ngIf="(authority)" class="task-button glass card-button"> <img
+                <button (click)="openModal('edit')" *ngIf="(authority)" class="task-button glass card-button"> <img
                   src="../assets/resources/icons/edit.svg" alt="edit button"> </button>
               </div>
             </div>
@@ -34,12 +32,11 @@
               <div *ngIf="getDate(task)<currentDate && getDoneDate(task)>getDate(task)" class="task-deadline body5">Кінець здачі: {{getDateString(task)}} </div>
               <div *ngIf="getDate(task)>currentDate || !(getDoneDate(task)>getDate(task))" class="task-deadline body5">Кінець здачі: {{getDateString(task)}} {{'&#128293;'}}{{'&#128293;'}} {{'&#128293;'}}</div>
             </div>
-            <button class="task-status glass body5">Виконано</button>
+            <button (click)="openModal('done')" class="task-status glass body5">Виконано</button>
           </div>
         </div>
-        <button class="add-task glass h3">+</button>
+        <button (click)="openModal('add')" class="add-task glass h3">+</button>
       </div>
     </div>
-</body>
-
 </html>
+

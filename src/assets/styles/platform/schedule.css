@@ -2,13 +2,8 @@
 .name-button {
     display: flex;
     justify-content: space-between;
-
 }
 
-.main-container-schedule {
-    margin-right: 150px;
-    margin-top: 82px;
-}
 
 .schedule-card {
     padding: 21px;
@@ -90,10 +85,6 @@
     flex-direction: column;
 }
 
-.left-menu-plus-body {
-    display: flex;
-    gap: 40px;
-}
 
 .footer-container {
     display: flex;

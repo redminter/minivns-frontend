@@ -8,6 +8,7 @@ import {NgForm} from "@angular/forms";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
 import {SubjectService} from "../Subject/subject.service";
+import {ModalService} from "../add-task-modal/modal.service";
 
 @Component({
   selector: 'app-task',
@@ -36,7 +37,7 @@ export class TaskComponent {
   course_mark:number=0;
   // @ts-ignore
   currentDate:Date;
-  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, subjectService:SubjectService) {
+  constructor(private modalService: ModalService, private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, subjectService:SubjectService) {
     this.subject_id = this.activatedRoute.snapshot.paramMap.get('subject_id');
     subjectService.getOneSubject(this.subject_id).subscribe(res =>{
       console.log(res);
@@ -64,7 +65,19 @@ export class TaskComponent {
       return true;
     }
   }
-
+  openModal(mode: string) {
+    switch (mode) {
+      case 'add':
+        this.modalService.openAddModule();
+        break;
+      case 'edit':
+        this.modalService.openEditModule();
+        break;
+      case 'done':
+        this.modalService.openDoneModule();
+        break;
+    }
+  }
   public getDateString(task: Task): String {
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let date = new Date(task.deadline);

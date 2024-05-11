@@ -14,6 +14,9 @@
       <div routerLink="users/{{user_id}}/tasks" class="menu-item hbtn">
         <p>Завдання</p>
       </div>
+      <div *ngIf="(authority)&&(authority=='admin')" routerLink="/settings" class="menu-item hbtn">
+        <p>Налаштування</p>
+      </div>
     </div>
   </div>
   <div (click)="logout()" class="menu-item hbtn">

@@ -6,8 +6,6 @@
   <title>Dashboard</title>
 
 </head>
-
-<body>
     <div class="body-container_new">
       <div class="left-part">
         <div class="statistics-plus-expired">
@@ -23,7 +21,7 @@
             <span class="h5">Скоро спливає</span>
             <div class="tasks-container">
               <div *ngFor="let task of sortedTasks" class="task-card-container">
-                <div class="task-card glass">
+                <div class="task-card-dashboard glass">
                   <div class="name-time">
                     <span class="task-name h6">{{task.title}}</span>
                     <div class="subject-time body5">
@@ -36,7 +34,7 @@
                     <div class="schedule-card-button card-button glass">МЕТОДИЧКА</div>
                   </div>
                 </div>
-                <div class="task-button glass">
+                <div class="task-deadline-dashboard glass">
                   <span class="days-amount h4">{{diffindays(task)}}</span>
                   <span class="days body5">дні</span>
                 </div>
@@ -63,8 +61,8 @@
       <div class="today-schedule">
         <span class="h5">{{getDateNow()}}</span>
         <div class="schedule-cards-container-plus-button">
-          <div class="schedule-cards-container">
-            <div *ngFor="let subject of subjects" class="schedule-item">
+          <div class="schedule-cards-container-dashboard">
+            <div *ngFor="let subject of subjects" class="schedule-item-dashboard">
               <div class="schedule-card glass">
                 <div class="name-time">
                   <span class="discipline-name h6">{{subject.title}}</span>
@@ -95,6 +93,4 @@
         </div>
       </div>
     </div>
-</body>
-
 </html>
