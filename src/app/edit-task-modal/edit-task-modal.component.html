@@ -1,0 +1,18 @@
+<div class="modal">
+<form class="form-container glass" action="login-page.html" method="post">
+  <div class="title-close-button">
+  <div class="title h5">Редагувати завдання<br>Лабораторна 1</div>
+  <i (click)="close()" class="close-button fa fa-times glass" aria-hidden="true"></i>
+  </div>
+  <div class="input-forgot-password">
+    <input class="input-text" type="text" name="username" id="username" placeholder="Лабораторна" required>
+    <input class="input-text" type="text" name="vns-link" id="vns-link" placeholder="https://">
+    <input class="input-text" type="text" name="metoda" id="metoda" placeholder="https://">
+    <input class="input-text" type="date" name="deadline" id="deadline" value="2024-04-12">
+  </div>
+  <div class="buttons">
+    <button class="submit-button hbtn" type="submit">Додати</button>
+    <button (click)="openDelete()" class="delete-button hbtn" type="submit">Видалити завдання</button>
+  </div>
+</form>
+</div>

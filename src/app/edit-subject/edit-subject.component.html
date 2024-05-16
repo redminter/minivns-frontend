@@ -1,0 +1,302 @@
+<div style="margin-top: -130%">
+  <form class="form-container glass" action="login-page.html" method="post">
+    <div class="title-close-button">
+      <div class="title h5">Редагувати завдання<br>Лабораторна 1</div>
+      <i (click)="close()" class="close-button fa fa-times glass" aria-hidden="true"></i>
+    </div>
+    <div class="input-forgot-password">
+      <input class="input-text" type="text" name="name" id="name" placeholder="Назва" required>
+      <input class="input-text" type="text" name="acronym" id="acronym" placeholder="Абревіатура">
+      <input class="input-text" type="text" name="metoda" id="metoda" placeholder="Викладач">
+      <input class="input-text" type="text" name="vns-link" id="vns-link" placeholder="Посилання на предмет у внс">
+      <input class="input-text" type="text" name="lection-link" id="lection-link" placeholder="Посилання на лекційні заняття">
+      <div class="checkbox-wrapper">
+        <input class="checkbox-style" type="checkbox" name="lection-checkbox" id="lection-checkbox">
+        <label for="monday-checkbox">Лекції очно</label>
+      </div>
+      <input class="input-text" type="text" name="pract-link" id="pract-link" placeholder="Аудиторія для практичних занять">
+      <div class="pract-checkbox-wrapper">
+        <div class="checkbox-wrapper">
+          <input class="checkbox-style" type="checkbox" name="pract-checkbox" id="pract-checkbox">
+          <label for="monday-checkbox">Практичні очно</label>
+        </div>
+        <div class="checkbox-wrapper">
+          <input class="checkbox-style" type="checkbox" name="no-pract-checkbox" id="no-pract-checkbox">
+          <label for="monday-checkbox">Практичні відсутні</label>
+        </div>
+      </div>
+      <input class="input-text" type="text" name="lab-link" id="lab-link" placeholder="Посилання на лабораторні заняття">
+      <div class="checkbox-wrapper">
+        <input class="checkbox-style" type="checkbox" name="lab-checkbox" id="lab-checkbox">
+        <label for="monday-checkbox">Лабораторні очно</label>
+      </div>
+      <div class="schedule-manager">
+        <div class="schedule-manager-title">
+          <span>У які дні проходить цей предмет?</span>
+          <img src="../../assets/resources/icons/arrow-up.svg" alt="plus-icon" class="plus-icon">
+        </div>
+        <div class="schedule-manager-container">
+          <div class="schedule-manager-item">
+            <div class="day">
+              <div class="checkbox-wrapper">
+                <input class="checkbox-style" type="checkbox" name="monday-checkbox" id="monday-checkbox">
+                <label for="monday-checkbox">ПН</label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="z-ch-container">
+                <label class="custom-radio-btn">
+                  <span class="label">З</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Ч</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="subgroup-container">
+                <label class="custom-radio-btn">
+                  <span class="label">І</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">ІІ</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Усі</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <select class="para-select">
+                <option selected>Пара</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="3">4</option>
+                <option value="3">5</option>
+                <option value="3">6</option>
+                <option value="3">7</option>
+                <option value="3">8</option>
+              </select>
+            </div>
+            <div class="line"></div>
+          </div>
+          <div class="schedule-manager-item">
+            <div class="day">
+              <div class="checkbox-wrapper">
+                <input class="checkbox-style" type="checkbox" name="monday-checkbox" id="monday-checkbox">
+                <label for="monday-checkbox">ВТ</label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="z-ch-container">
+                <label class="custom-radio-btn">
+                  <span class="label">З</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Ч</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="subgroup-container">
+                <label class="custom-radio-btn">
+                  <span class="label">І</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">ІІ</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Усі</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <select class="para-select">
+                <option selected>Пара</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="3">4</option>
+                <option value="3">5</option>
+                <option value="3">6</option>
+                <option value="3">7</option>
+                <option value="3">8</option>
+              </select>
+            </div>
+            <div class="line"></div>
+          </div>
+          <div class="schedule-manager-item">
+            <div class="day">
+              <div class="checkbox-wrapper">
+                <input class="checkbox-style" type="checkbox" name="monday-checkbox" id="monday-checkbox">
+                <label for="monday-checkbox">СР</label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="z-ch-container">
+                <label class="custom-radio-btn">
+                  <span class="label">З</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Ч</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="subgroup-container">
+                <label class="custom-radio-btn">
+                  <span class="label">І</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">ІІ</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Усі</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <select class="para-select">
+                <option selected>Пара</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="3">4</option>
+                <option value="3">5</option>
+                <option value="3">6</option>
+                <option value="3">7</option>
+                <option value="3">8</option>
+              </select>
+            </div>
+            <div class="line"></div>
+          </div>
+          <div class="schedule-manager-item">
+            <div class="day">
+              <div class="checkbox-wrapper">
+                <input class="checkbox-style" type="checkbox" name="monday-checkbox" id="monday-checkbox">
+                <label for="monday-checkbox">ЧТ</label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="z-ch-container">
+                <label class="custom-radio-btn">
+                  <span class="label">З</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Ч</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="subgroup-container">
+                <label class="custom-radio-btn">
+                  <span class="label">І</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">ІІ</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Усі</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <select class="para-select">
+                <option selected>Пара</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="3">4</option>
+                <option value="3">5</option>
+                <option value="3">6</option>
+                <option value="3">7</option>
+                <option value="3">8</option>
+              </select>
+            </div>
+            <div class="line"></div>
+          </div>
+          <div class="schedule-manager-item">
+            <div class="day">
+              <div class="checkbox-wrapper">
+                <input class="checkbox-style" type="checkbox" name="monday-checkbox" id="monday-checkbox">
+                <label for="monday-checkbox">ПТ</label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="z-ch-container">
+                <label class="custom-radio-btn">
+                  <span class="label">З</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Ч</span>
+                  <input type="radio" type="radio" name="z-ch-radio" id="z-ch-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="mid-line"></div>
+              <div class="subgroup-container">
+                <label class="custom-radio-btn">
+                  <span class="label">І</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">ІІ</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="custom-radio-btn">
+                  <span class="label">Усі</span>
+                  <input type="radio" type="radio" name="subgroup-radio" id="lection-radio">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <select class="para-select">
+                <option selected>Пара</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="3">4</option>
+                <option value="3">5</option>
+                <option value="3">6</option>
+                <option value="3">7</option>
+                <option value="3">8</option>
+              </select>
+            </div>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="submit-button hbtn" type="submit">Додати</button>
+      <button (click)="openDelete()" class="delete-button hbtn" type="submit">Видалити завдання</button>
+    </div>
+  </form>
+</div>

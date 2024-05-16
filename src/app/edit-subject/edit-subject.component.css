@@ -1,0 +1,267 @@
+.form-container{
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 610px;
+  margin-right: 610px;
+  margin-top: 150px;
+  min-width: 600px;
+}
+
+.input-text{
+  font-family: Mariupol;
+  font-size: 20px;
+  font-weight: 400;
+  padding: 19px 40px 19px 40px;
+  background: rgba(224, 221, 255, 0.3);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #DFDCFF;
+}
+.input-text::placeholder{
+  color:rgba(255, 255, 255, 0.5);
+  padding: 0;
+  margin: 0;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter:invert(1) brightness(58%) sepia(100%) hue-rotate(200deg);
+}
+.submit-button{
+  padding: 13px 0px 13px 0px;
+  background: var(--purple);
+  border: 4px solid rgba(255, 255, 255, 0.18);
+  border-radius: 30px;
+  color: var(--white);
+  align-self: stretch;
+}
+.delete-button{
+  padding: 13px 0px 13px 0px;
+  background: rgb(92, 151, 255);
+  border: 4px solid rgba(255, 255, 255, 0.18);
+  border-radius: 30px;
+  color: var(--white);
+  align-self: stretch;
+  white-space: nowrap ;
+}
+
+.body7{
+  font-family: Mariupol;
+  font-size: 20px;
+  font-weight: 400;
+}
+.input-forgot-password{
+  display: flex;
+  flex-direction: column;
+  gap:24px;
+  margin-top: 36px;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  margin-top: 36px;
+}
+
+.message{
+  text-align: center ;
+}
+
+
+label{
+  font-family: Mariupol;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.subgroup-container,
+.z-ch-container{
+  gap:12px;
+  display: flex;
+}
+.day{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.schedule-manager-item{
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+}
+.mid-line{
+  height: 10px;
+  width: 4px;
+  background: rgba(255, 255, 255, 0.18);
+  margin-left:16px;
+  margin-right: 16px;
+}
+input[type="radio" i] {
+  margin:0px;
+}
+
+.checkbox-label-container{
+  display: flex;
+  gap: 12px;
+}
+
+select {
+  font-size: 12px;
+  padding: 7px 16px 7px 16px;
+  background: rgba(224, 221, 255, 0.3);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(74, 74, 74, 0.46);
+  margin-left: 12px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+}
+
+.schedule-manager-container{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Video Explanation - https://youtu.be/MZq5zFSpUlo */
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+.custom-radio-btn {
+  --size: 26px;
+  min-width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* changes from the video   */
+
+  position: relative;
+  padding-left: var(--size);
+}
+
+.custom-radio-btn input {
+  display: none;
+}
+
+/* handle if you want label on the left of the checkmark instead */
+
+.custom-radio-btn.left {
+  padding-left: 0;
+  padding-right: var(--size);
+}
+
+/* label  */
+
+.custom-radio-btn .label {
+  margin-left: 5px;
+}
+
+.custom-radio-btn.left .label {
+  margin: 0 5px;
+}
+
+.custom-radio-btn[aria-label]::after {
+  content: attr(aria-label);
+  display: inline-block;
+  margin-left: 5px;
+}
+
+/* checkmark */
+
+.custom-radio-btn .checkmark {
+  --gap: 4px;
+  --border: 4px;
+  --check-color: #FFFFFF;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: inline-block;
+  transition: opacity 0.3s ease;
+  /* changes from the video  */
+  background:rgba(224, 221, 255, 0.3);
+  border: 4px solid rgba(255, 255, 255, 0.18);
+  padding: var(--gap);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.custom-radio-btn.left .checkmark {
+  left: auto;
+  right: 0;
+}
+
+.custom-radio-btn input:checked ~ .checkmark {
+  /* changes from the video  */
+
+  /*  content box origin will make sure the bg-image only stays inside content area in between padding  */
+  background-origin: content-box;
+  background-repeat: no-repeat;
+  background-image: radial-gradient(
+    circle at center,
+    var(--check-color)
+      /* the size of the check mark is determined by subtracting from the size of the circle
+      the border(both sides) and the gap(both sides) than dividing it by 2 to get the radius of the circle        */
+    calc((var(--size) - (var(--border) * 2) - (var(--gap) * 2)) / 2),
+    rgba(255, 255, 255, 0) 0);
+}
+.pract-checkbox-wrapper,
+.checkbox-wrapper{
+  display: flex;
+  align-items: center;
+  gap:12px;
+}
+input[type="checkbox"]{
+  appearance: none;
+  -webkit-appearance: none;
+  height: 26px;
+  width: 26px;
+  background: linear-gradient(180.00deg, rgba(224, 221, 255, 0.2), rgba(249, 249, 249, 0.05) 100%);
+  border-radius: 8px;
+  cursor: pointer;
+  border: 4px solid rgba(255, 255, 255, 0.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+input[type="checkbox"]:after{
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0c8";
+  font-size: 12px;
+  margin:0;
+  padding:0;
+  color: var(--white);
+  border-radius: 8px;
+  display:none;
+}
+input[type="checkbox"]:checked:after{
+  display:block;
+}
+.schedule-manager-container{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.schedule-manager-title{
+  font-family: Mariupol;
+  font-size: 20px;
+  font-weight: 400;
+  display: flex;
+  gap:12px;
+}
+.schedule-manager-title img{
+  width: 15px;
+}
+.schedule-manager{
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+}
+
