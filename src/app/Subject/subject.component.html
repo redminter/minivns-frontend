@@ -8,14 +8,14 @@
 </head>
     <div class="main-container-schedule">
       <div *ngFor="let subjectOnDays of weekSubjects; let i=index" class="schedule-item">
-        <div class="name-container">
+        <div class="name-container" (click)="isExpanded[i] = !isExpanded[i]">
           <div class="name-button">
             <div class="name h4">{{this.weekDays[i]}}</div>
-            <div class="icon"><img src="../assets/resources/icons/arrow-up.svg" alt="arrow-up"></div>
+            <div class="icon" ><img [style.transform]="'rotate(' + getRotation(i) + ')'" src="../assets/resources/icons/arrow-up.svg" alt="arrow-up"></div>
           </div>
           <div class="line"></div>
         </div>
-        <div class="schedule-cards-container">
+        <div class="schedule-cards-container" *ngIf="isExpanded[i]">
           <div *ngFor="let subject of subjectOnDays" class="schedule-card-container">
             <div class="schedule-card glass">
               <div class="name-time">

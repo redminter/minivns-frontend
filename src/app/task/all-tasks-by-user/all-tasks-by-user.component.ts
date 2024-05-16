@@ -13,6 +13,7 @@ import {Subject} from "../../Subject/subject";
   styleUrls: ['./all-tasks-by-user.component.css']
 })
 export class AllTasksByUserComponent {
+  isExpanded: boolean[] = [];
   public tasks: Task[] = [];
   public arrayOfArrays: Task[][] = [];
   public totalMarksPerArray: number[] = [];
@@ -218,7 +219,9 @@ export class AllTasksByUserComponent {
     button.click();
   }
 
-
+  getRotation(i: number) {
+    return this.isExpanded[i] ? '180deg' : '0deg';
+  }
   logout() {
     this.tokenStorage.signOut();
     window.location.assign("/subjects/scheduled")

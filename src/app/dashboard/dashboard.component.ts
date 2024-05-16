@@ -36,6 +36,8 @@ export class DashboardComponent {
   info: any;
   user_firstname:any;
   user_lastname:any;
+  group:any;
+  gender:any;
   username:any;
   constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, private subjectService: SubjectService,) {
     this.user_id = this.activatedRoute.snapshot.paramMap.get('user_id');
@@ -48,6 +50,8 @@ export class DashboardComponent {
     this.authority = this.tokenStorage.getAuthority();
     this.user_firstname = this.tokenStorage.getFirstname();
     this.user_lastname = this.tokenStorage.getLastname();
+    this.group = this.tokenStorage.getGroup();
+    this.gender = this.tokenStorage.getGender();
     if (this.tokenStorage.getToken()) {
       this.role = this.tokenStorage.getAuthority();
       if (this.role === 'ROLE_ADMIN') {

@@ -14,13 +14,13 @@
         </div>
         <div class="line"></div>
       </div>
-      <div class="subjects-container">
-        <div *ngFor="let taskGroup of arrayOfArrays;" class="subject">
-          <div class="subject-name-container">
+      <div class="subjects-container" >
+        <div *ngFor="let taskGroup of arrayOfArrays; let i = index" class="subject">
+          <div class="subject-name-container" (click)="isExpanded[i] = !isExpanded[i]">
             <div class="subject-name h4">{{taskGroup[0].subject_id.title}}</div>
-            <div class="arrow-up glass"> <img src="../assets/resources/icons/arrow-up.svg" alt="arrow-up"></div>
+            <div class="arrow-up"> <img [style.transform]="'rotate(' + getRotation(i) + ')'" src="../assets/resources/icons/arrow-up.svg" alt="arrow-up"></div>
           </div>
-          <div class="tasks-card-container">
+          <div class="tasks-card-container" *ngIf="isExpanded[i]">
             <div *ngFor="let task of taskGroup;" class="task-card glass">
               <div class="name-plus-buttons">
                 <div class="task-name h7">{{task.title}}</div>

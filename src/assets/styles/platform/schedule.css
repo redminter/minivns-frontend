@@ -76,7 +76,7 @@
 .schedule-cards-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 33px;
+    gap: 28px;
 }
 
 .main-container-schedule{

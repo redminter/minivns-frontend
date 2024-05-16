@@ -10,7 +10,7 @@ import {ModalService} from "../add-task-modal/modal.service";
   templateUrl: './subject.component.html'
 })
 export class SubjectComponent implements OnInit{
-
+  isExpanded: boolean[] = [];
   public subjects: Subject[] = [];
   public weekSubjects: Subject[][] = [];
   public weekDays: string[] = [];
@@ -192,6 +192,9 @@ export class SubjectComponent implements OnInit{
   }
   openModule() {
     this.modalService.openEditSubjectModule();
+  }
+  getRotation(i: number) {
+    return this.isExpanded[i] ? '180deg' : '0deg';
   }
   logout() {
     this.tokenStorage.signOut();
