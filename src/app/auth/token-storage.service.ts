@@ -4,6 +4,8 @@ const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUsername';
 const FIRSTNAME_KEY = 'AuthFirstname';
 const LASTNAME_KEY = 'AuthLastname';
+const GENDER_KEY= 'AuthGender';
+const GROUP_KEY = 'AuthGroup';
 const ID_KEY = 'AuthId';
 const AUTHORITY_KEY = 'AuthAuthority';
 
@@ -41,6 +43,26 @@ export class TokenStorageService {
   public saveLastname(lastname: string) {
     window.sessionStorage.removeItem(LASTNAME_KEY);
     window.sessionStorage.setItem(LASTNAME_KEY, lastname);
+  }
+
+  public getGroup(): string {
+    // @ts-ignore
+    return sessionStorage.getItem(GROUP_KEY);
+  }
+
+  public saveGroup(group: string) {
+    window.sessionStorage.removeItem(GROUP_KEY);
+    window.sessionStorage.setItem(GROUP_KEY, group);
+  }
+
+  public getGender(): string {
+    // @ts-ignore
+    return sessionStorage.getItem(GENDER_KEY);
+  }
+
+  public saveGender(gender:boolean){
+    window.sessionStorage.removeItem(GENDER_KEY);
+   window.sessionStorage.setItem(GENDER_KEY, String(gender));
   }
 
   public getLastname(): string {

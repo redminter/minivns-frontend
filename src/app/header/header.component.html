@@ -8,8 +8,9 @@
     <p>{{user_firstname}}</p>
   </div>
   <div *ngIf="(authority)&&(authority!=='admin')" class="profile-container hbtn" style="text-transform: none; letter-spacing: 0px;">
-    <div routerLink="../../auth/login" class="profile-icon glass">
-      <img src="../assets/resources/icons/user-male.svg" alt="Profile Icon">
+    <div class="profile-icon glass">
+      <img *ngIf="(authority)&&(gender=='true')" src="../assets/resources/icons/user-male.svg" alt="Profile Icon">
+      <img *ngIf="(authority)&&(gender=='false')" style="width:42px;" src="../assets/resources/icons/female-user.svg" alt="Profile Icon">
     </div>
     <p>{{user_firstname}}</p>
   </div>

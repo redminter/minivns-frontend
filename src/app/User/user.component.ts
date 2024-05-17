@@ -17,6 +17,7 @@ export class UserComponent implements OnInit{
   }
   ngOnInit() {
     this.getUsers();
+    console.log(this.getUsers());
   }
   public getUsers(): void {
     this.userService.getUsers().subscribe(

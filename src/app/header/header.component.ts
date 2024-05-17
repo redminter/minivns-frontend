@@ -17,6 +17,7 @@ export class HeaderComponent {
   user_firstname:any;
   user_lastname:any;
   username:any;
+  gender:any;
   constructor(private tokenStorage: TokenStorageService) {
   }
   // @ts-ignore
@@ -26,6 +27,8 @@ export class HeaderComponent {
     this.authority=this.tokenStorage.getAuthority();
     this.user_firstname=this.tokenStorage.getFirstname();
     this.user_lastname= this.tokenStorage.getLastname();
+    this.gender=this.tokenStorage.getGender();
+    console.log(this.gender);
     if (this.tokenStorage.getToken()) {
       this.role = this.tokenStorage.getAuthority();
       if (this.role === 'ROLE_ADMIN') {

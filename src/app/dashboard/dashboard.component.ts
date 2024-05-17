@@ -46,12 +46,14 @@ export class DashboardComponent {
   ngOnInit() {
     this.getTasksByUser();
     this.getSubjects();
+    console.log(this.tokenStorage.getGroup());
     this.username = this.tokenStorage.getUsername();
     this.authority = this.tokenStorage.getAuthority();
     this.user_firstname = this.tokenStorage.getFirstname();
     this.user_lastname = this.tokenStorage.getLastname();
     this.group = this.tokenStorage.getGroup();
     this.gender = this.tokenStorage.getGender();
+    console.log(this.group);
     if (this.tokenStorage.getToken()) {
       this.role = this.tokenStorage.getAuthority();
       if (this.role === 'ROLE_ADMIN') {

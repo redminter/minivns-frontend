@@ -5,4 +5,6 @@ export interface JwtResponse{
   last_name:string;
   first_name:string;
   token:string;
+  group:string;
+  gender:boolean;
 }
