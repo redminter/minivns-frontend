@@ -4,6 +4,7 @@ export interface Task{
   id : number;
   title:string;
   link:string;
+  metoda_link:string;
   deadline:Date;
   done_date:Date;
   is_done:boolean;
