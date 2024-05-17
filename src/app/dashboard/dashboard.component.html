@@ -30,8 +30,8 @@
                     </div>
                   </div>
                   <div class="schedule-card-button-container">
-                    <div class="schedule-card-button card-button glass">ВНС</div>
-                    <div class="schedule-card-button card-button glass">МЕТОДИЧКА</div>
+                    <a href="{{task.link}}" class="card-button"><div class="schedule-card-button glass">ВНС</div></a>
+                    <a href ="{{task.metoda_link}}" class="card-button"><div class="schedule-card-button glass lection-active">ЛЕКЦІЯ</div></a>
                   </div>
                 </div>
                 <div class="task-deadline-dashboard glass">
@@ -67,7 +67,7 @@
                 <div class="name-time">
                   <span class="discipline-name h6">{{subject.title}}</span>
                   <div class="teacher-time">
-                    <span class="teacher body5">Кочан Р.В</span>
+                    <span class="teacher body5">{{subject.teacher}}</span>
                     <div class="para-number-time body5">
                       <span class="para-number">1 пара</span>
                       <span class="time">8:30-10:00</span>

@@ -1,6 +1,7 @@
 export interface Subject {
   id: number;
   title: string;
+  teacher: string;
   vns_url: string;
   pract_url: string;
   lab_url: string;
