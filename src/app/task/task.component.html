@@ -23,7 +23,7 @@
               <div class="task-buttons">
                 <a href='{{task.link}}'><button class="task-button glass card-button">ВНС</button></a>
                 <a href='{{task.metoda_link}}'><button class="task-button glass card-button">МЕТОДИЧКА</button></a>
-                <button (click)="openModal('edit')" *ngIf="(authority)" class="task-button glass card-button"> <img
+                <button (click)="onOpenModal(task,'edit')" *ngIf="(authority)" class="task-button glass card-button"> <img
                   src="../assets/resources/icons/edit.svg" alt="edit button"> </button>
               </div>
             </div>

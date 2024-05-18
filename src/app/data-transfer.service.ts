@@ -1,25 +1,36 @@
 import { Injectable } from '@angular/core';
+import { Task } from './task/task';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataTransferService {
-  private userId: string | null = null;
-  private subjectId: string | null = null;
+
+  private _userId: string | null = null;
+  private _subjectId: string | null = null;
+  private _editTask: Task|null = null;
 
   setUserId(userId: string | null) {
-    this.userId = userId;
+    this._userId = userId;
   }
 
   getUserId() {
-    return this.userId;
+    return this._userId;
   }
 
   setSubjectId(subjectId: string | null) {
-    this.subjectId = subjectId;
+    this._subjectId = subjectId;
   }
 
   getSubjectId() {
-    return this.subjectId;
+    return this._subjectId;
+  }
+
+  getEditTask(): Task | null {
+    return this._editTask;
+  }
+
+  setEditTask(value: Task | null) {
+    this._editTask = value;
   }
 }

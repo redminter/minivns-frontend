@@ -273,8 +273,10 @@ export class TaskComponent {
       button.setAttribute('data-target', '#addTaskModal');
     }
     if (mode === 'edit') {
-      this.editTask = task;
+      this.dataTransferService.setEditTask(task);
+      this.modalService.openEditModule();
       button.setAttribute('data-target', '#updateTaskModal');
+
     }
     if (mode === 'delete') {
       this.deleteTask = task;
