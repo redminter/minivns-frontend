@@ -1,16 +1,16 @@
 <div class="modal">
-  <form class="form-container glass" action="login-page.html" method="post">
+  <form #addForm="ngForm" (ngSubmit)="onAddTask(addForm)" class="form-container glass" action="login-page.html" method="post">
   <div class="title-close-button">
     <div class="title h5">Додати завдання до<br>СМПС</div>
     <i (click)="close()" class="close-button fa fa-times glass" aria-hidden="true"></i>
   </div>
     <div class="input-forgot-password">
-    <input class="input-text" type="text" name="username" id="username" placeholder="Логін" required>
-    <input class="input-text" type="text" name="vns-link" id="vns-link" placeholder="Посилання на завдання у внс">
-    <input class="input-text" type="text" name="metoda" id="metoda" placeholder="Посилання на методичні вказівки">
-    <input class="input-text" type="date" name="deadline" id="deadline" placeholder="Пароль">
+    <input class="input-text" type="text" name="title" id="title" ngModel name="title" placeholder="Логін" required>
+    <input class="input-text" type="text" name="link" id="link" ngModel name="link" placeholder="Посилання на завдання у внс" required>
+    <input class="input-text" type="text" name="metoda_link" id="metoda_link" ngModel name="metoda_link" placeholder="Посилання на методичні вказівки">
+    <input class="input-text" type="date" name="deadline" id="deadline" ngModel name="deadline" placeholder="Дедлайн">
   </div>
   <div class="buttons">
-    <button class="lg-button hbtn" type="submit">Додати</button></div>
+    <button id="add-task-form" class="lg-button hbtn" type="submit" [disabled]="addForm.invalid">Додати</button></div>
 </form>
 </div>

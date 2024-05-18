@@ -10,7 +10,7 @@
     *ngFor="let taskGroup of arrayOfArrays; let i = index"
     class="mark-item body4" >
     <div class="name-mark" (click)="isExpanded[i] = !isExpanded[i]">
-      <div class="name">{{ taskGroup[0].subject_id.title }}</div>
+      <div routerLink="../../../users/{{user_id}}/subjects/{{taskGroup[0].subject_id.id}}/tasks"class="name">{{ taskGroup[0].subject_id.title }}</div>
       <div class="mark">{{ totalMarksPerArray[i] }}</div>
     </div>
     <div class="line"></div>

@@ -12,6 +12,13 @@ import {DeleteModalComponent} from "../delete-modal/delete-modal.component";
 import {DoneTaskModalComponent} from "../done-task-modal/done-task-modal.component";
 import {AddSubjectComponent} from "../add-subject/add-subject.component";
 import {EditSubjectComponent} from "../edit-subject/edit-subject.component";
+import {HttpErrorResponse} from "@angular/common/http";
+import {NgForm} from "@angular/forms";
+import { Task } from '../task/task';
+import {TaskService} from "../task/task.service";
+import {ActivatedRoute} from "@angular/router";
+import {TokenStorageService} from "../auth/token-storage.service";
+import {SubjectService} from "../Subject/subject.service";
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +38,9 @@ export class ModalService {
   // @ts-ignore
   private componentRefEditSubject: ComponentRef<EditSubjectComponent>;
 
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) {
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private appRef: ApplicationRef, private injector: Injector) { }
+  }
 
   openAddModule() {
     if (this.componentRefDelete || this.componentRefEdit || this.componentRefAdd)
@@ -183,4 +191,6 @@ openEditSubjectModule() {
       this.componentRefEditSubject = null;
     }
   }
+
+
 }
