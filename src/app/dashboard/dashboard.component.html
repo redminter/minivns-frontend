@@ -50,7 +50,7 @@
           <span class="h5">Успішність</span>
           <div *ngFor="let subject of arrayOfArrays; let i=index" class="success-item body4">
             <div class="name-mark">
-              <div class="name">{{subject[0].subject_id.title}}</div>
+              <div routerLink="../../../users/{{user_id}}/subjects/{{subject[0].subject_id.id}}/tasks" class="name">{{subject[0].subject_id.title}}</div>
               <div class="mark">{{totalMarksPerArray[i]}}</div>
             </div>
             <div class="line"></div>
