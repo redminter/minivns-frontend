@@ -27,6 +27,7 @@ import { DoneTaskModalComponent } from './done-task-modal/done-task-modal.compon
 import { SettingsComponent } from './settings/settings.component';
 import { AddSubjectComponent } from './add-subject/add-subject.component';
 import { EditSubjectComponent } from './edit-subject/edit-subject.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 
 
@@ -53,6 +54,7 @@ import { EditSubjectComponent } from './edit-subject/edit-subject.component';
     SettingsComponent,
     AddSubjectComponent,
     EditSubjectComponent,
+    ScheduleComponent,
   ],
   imports: [
     BrowserModule,

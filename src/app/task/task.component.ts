@@ -274,12 +274,13 @@ export class TaskComponent {
     }
     if (mode === 'edit') {
       this.dataTransferService.setEditTask(task);
+      this.dataTransferService.setDeleteTask(task);
       this.modalService.openEditModule();
       button.setAttribute('data-target', '#updateTaskModal');
 
     }
     if (mode === 'delete') {
-      this.deleteTask = task;
+      this.modalService.openDeleteModule();
       button.setAttribute('data-target', '#deleteTaskModal');
     }
     if (mode === 'user') {

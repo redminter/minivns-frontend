@@ -9,6 +9,7 @@ export class DataTransferService {
   private _userId: string | null = null;
   private _subjectId: string | null = null;
   private _editTask: Task|null = null;
+  private _deleteTask: Task|null = null;
 
   setUserId(userId: string | null) {
     this._userId = userId;
@@ -32,5 +33,13 @@ export class DataTransferService {
 
   setEditTask(value: Task | null) {
     this._editTask = value;
+  }
+
+  getDeleteTask(): Task | null {
+    return this._deleteTask;
+  }
+
+  setDeleteTask(value: Task | null) {
+    this._deleteTask = value;
   }
 }
