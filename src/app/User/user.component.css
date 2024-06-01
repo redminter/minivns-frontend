@@ -1,0 +1,30 @@
+.user-card{
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  min-width: 240px;
+}
+.user-cards-container{
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.user-desc{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 240px;
+}
+
+::placeholder {
+  color: var(--white);
+}
+/*HOW TO disable border while clicking*/
+input:focus {
+  outline: none;
+  border: none;
+}

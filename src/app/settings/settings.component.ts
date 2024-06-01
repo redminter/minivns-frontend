@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ModalService} from "../add-task-modal/modal.service";
+import {ModalService} from "../task/add-task-modal/modal.service";
 
 @Component({
   selector: 'app-settings',

@@ -1,0 +1,20 @@
+<div class="modal">
+  <form #doneForm="ngForm" (ngSubmit)="onDoneTask(doneForm)" class="form-container glass" action="login-page.html" method="post">
+    <div class="title-close-button">
+      <div class="title h5">Позначити виконаним<br>{{doneTask?.title}}</div>
+      <i (click)="close()" class="close-button fa fa-times glass" aria-hidden="true"></i>
+    </div>
+    <div class="input-forgot-password">
+      <input class="input-text" type="text" ngModel="{{doneTask?.mark}}" name="mark" id="max" placeholder="Бал">
+      <input class="input-text" type="text" ngModel="{{doneTask?.max_mark}}" name="max_mark" id="max_mark" placeholder="Максимальний бал">
+      <input class="input-text" type="hidden" name="title" id="title" ngModel="{{doneTask?.title}}" placeholder="Лабораторна" required>
+      <input class="input-text" type="hidden" name="link" id="link" ngModel="{{doneTask?.link}}" placeholder="https://">
+      <input class="input-text" type="hidden" name="metoda_link" ngModel="{{doneTask?.metoda_link}}" id="metoda_link" placeholder="https://">
+      <input class="input-text" type="hidden" name="deadline" ngModel="{{doneTask?.deadline}}" id="deadline" value="2024-04-12">
+      <input type="hidden" ngModel="{{doneTask?.id}}" name="task_id" class="form-control" id="task_id"
+             placeholder="id">
+    </div>
+    <div class="buttons">
+      <button id="done-task-form" class="lg-button hbtn" type="submit">Виконати</button></div>
+  </form>
+</div>
