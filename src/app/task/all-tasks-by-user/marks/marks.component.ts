@@ -5,7 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 import {TokenStorageService} from "../../../auth/token-storage.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
-import {Subject} from "../../../Subject/subject";
+import {Subject} from "../../../subject/subject";
 
 @Component({
   selector: 'app-marks',
@@ -117,58 +117,6 @@ export class MarksComponent {
     if (results.length === 0 || !keyWord) {
       this.getTasksByUser();
     }
-  }
-
-  public onDoneTask(doneForm: NgForm, task_id: number | undefined): void {
-    // @ts-ignore
-    document.getElementById('done-task-form').click();
-    let task: Task;
-    task = doneForm.value;
-    task.is_done = true;
-    let subject_id = task.subject_id;
-    this.taskService.updateTask(this.user_id, String(subject_id), task_id, task).subscribe(
-      (response: Subject) => {
-        console.log(response);
-        this.getTasksByUser();
-      },
-      (error: HttpErrorResponse) => {
-        // alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        } else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
-  }
-
-  public onUndoneTask(doneForm: NgForm, task_id: number | undefined): void {
-    // @ts-ignore
-    document.getElementById('done-task-form').click();
-    let task: Task;
-    task = doneForm.value;
-    let subject_id = task.subject_id;
-    task.is_done = false;
-    this.taskService.updateTask(this.user_id, String(subject_id), task_id, task).subscribe(
-      (response: Subject) => {
-        console.log(response);
-        this.getTasksByUser();
-      },
-      (error: HttpErrorResponse) => {
-        // alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        } else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
   }
 
   public onOpenModal(task: Task | null, mode: string): void {

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Subject} from "../Subject/subject";
+import {Subject} from "../subject/subject";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TaskService} from "./task.service";
 import {Task} from './task';
@@ -7,8 +7,8 @@ import {ActivatedRoute} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
-import {SubjectService} from "../Subject/subject.service";
-import {ModalService} from "../add-task-modal/modal.service";
+import {SubjectService} from "../subject/subject.service";
+import {ModalService} from "./add-task-modal/modal.service";
 import {DataTransferService} from "../data-transfer.service";
 
 @Component({
@@ -130,105 +130,6 @@ export class TaskComponent {
       }
     );
   }
-
-  public onAddTask(addForm: NgForm): void {
-    let task = addForm.value;
-    // @ts-ignore
-    document.getElementById('add-task-form').click();
-    this.taskService.addTask(this.user_id, this.subject_id, task).subscribe(
-      (response: Task) => {
-        console.log(response);
-        this.getTasksBySubject();
-        addForm.reset();
-      },
-      (error: HttpErrorResponse) => {
-        // alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        }else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
-  }
-
-  public onUpdateTask(updateForm: NgForm, task_id: number | undefined): void {
-    // @ts-ignore
-    document.getElementById('update-task-form').click();
-    let task=updateForm.value;
-    task.is_done=this.editTask?.is_done;
-    this.taskService.updateTask(this.user_id, this.subject_id, task_id, updateForm.value).subscribe(
-      (response: Subject) => {
-        console.log(response);
-        this.getTasksBySubject();
-      },
-      (error: HttpErrorResponse) => {
-        // alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        }else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
-  }
-
-  public onDoneTask(doneForm: NgForm, task_id: number | undefined): void {
-    // @ts-ignore
-    document.getElementById('done-task-form').click();
-    let task:Task;
-    task=doneForm.value;
-    task.is_done=true;
-    task.done_date=new Date();
-    this.taskService.updateTask(this.user_id, this.subject_id, task_id, task).subscribe(
-      (response: Subject) => {
-        console.log(response);
-        this.getTasksBySubject();
-      },
-      (error: HttpErrorResponse) => {
-        // alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        }else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
-  }
-  public onUndoneTask(doneForm: NgForm, task_id: number | undefined): void {
-    // @ts-ignore
-    document.getElementById('done-task-form').click();
-    let task:Task;
-    task=doneForm.value;
-    task.is_done=false;
-    this.taskService.updateTask(this.user_id, this.subject_id, task_id, task).subscribe(
-      (response: Subject) => {
-        console.log(response);
-        this.getTasksBySubject();
-      },
-      (error: HttpErrorResponse) => {
-        // alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        }else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
-  }
-
   public onDeleteTask(task_id: number | undefined): void {
     this.taskService.deleteTask(this.user_id, this.subject_id, task_id).subscribe(
       (response: void) => {
@@ -289,9 +190,14 @@ export class TaskComponent {
     }
     if (mode === 'done') {
       this.doneTask = <Task>task;
+      this.dataTransferService.setDoneTask(task);
+      this.dataTransferService.setUserId(this.user_id);
+      this.modalService.openDoneModule();
       button.setAttribute('data-target', '#doneTaskModal');
     }
     if (mode === 'undone') {
+      this.dataTransferService.setUnDoneTask(task);
+      this.modalService.openUnDoneModule();
       this.doneTask = <Task>task;
       button.setAttribute('data-target', '#undoneTaskModal');
     }

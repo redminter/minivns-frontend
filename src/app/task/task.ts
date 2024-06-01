@@ -1,4 +1,4 @@
-import {Subject} from "../Subject/subject";
+import {Subject} from "../subject/subject";
 
 export interface Task{
   id : number;

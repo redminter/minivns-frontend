@@ -1,13 +1,13 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import { ModalService } from "./modal.service";
 import {NgForm} from "@angular/forms";
-import {Task} from "../task/task";
+import {Task} from "../task";
 import {HttpErrorResponse} from "@angular/common/http";
-import {TaskService} from "../task/task.service";
+import {TaskService} from "../task.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {TokenStorageService} from "../auth/token-storage.service";
-import {SubjectService} from "../Subject/subject.service";
-import {DataTransferService} from "../data-transfer.service";
+import {TokenStorageService} from "../../auth/token-storage.service";
+import {SubjectService} from "../../subject/subject.service";
+import {DataTransferService} from "../../data-transfer.service";
 
 @Component({
   selector: 'app-add-task-modal',
@@ -19,7 +19,8 @@ export class AddTaskModalComponent {
   // @ts-ignore
   subject_id: string | null;
 
-  constructor(private router: Router, private dataTransferService: DataTransferService, private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, subjectService:SubjectService, private modalService: ModalService) {
+
+  constructor(private router: Router, private dataTransferService: DataTransferService, private taskService: TaskService, private modalService: ModalService) {
     this.user_id = this.dataTransferService.getUserId();
     this.subject_id = this.dataTransferService.getSubjectId();
     console.log(this.user_id, this.subject_id);
@@ -50,7 +51,7 @@ export class AddTaskModalComponent {
 
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        //alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
         }else {
@@ -62,4 +63,5 @@ export class AddTaskModalComponent {
       }
     );
   }
+
 }

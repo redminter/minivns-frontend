@@ -1,0 +1,9 @@
+
+::placeholder {
+  color: var(--white);
+}
+/*HOW TO disable border while clicking*/
+input:focus {
+  outline: none;
+  border: none;
+}

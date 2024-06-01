@@ -11,18 +11,28 @@
           <div class="search-icon">
             <img src="../assets/resources/icons/search.svg" alt="Search Icon">
           </div>
-          <div class="placeholder body4">Пошук...</div>
-        </div>
+          <form class="form-inline my-2 my-lg-0">
+            <input type="search" class="body4" style="font-family: Mariupol; font-size: 20px; font-weight: 400; color:var(--white); border:none; background-color: transparent;"
+                   (ngModelChange)="searchTask(key.value)" #key="ngModel" ngModel
+                   name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search subjects..." required>
+          </form>
         <div class="line"></div>
       </div>
+        </div>
       <div class="tasks-plus-button">
         <div class="tasks-card-container">
           <div *ngFor="let task of tasks" class="task-card glass">
             <div class="name-plus-buttons">
               <div class="task-name h7">{{task.title}}</div>
               <div class="task-buttons">
-                <a href='{{task.link}}'><button class="task-button glass card-button">ВНС</button></a>
-                <a href='{{task.metoda_link}}'><button class="task-button glass card-button">МЕТОДИЧКА</button></a>
+                <a *ngIf="task.link!=null&&task.link!=''; else elseBlock" href="{{task.link}}"><div class="task-button card-button glass">ВНС</div></a>
+                <ng-template #elseBlock>
+                  <div class="task-button card-button glass">ВНС</div>
+                </ng-template>
+                <a *ngIf="task.metoda_link!=null; else elseBlock" href="{{task.metoda_link}}"><div class="task-button card-button glass">МЕТОДИЧКА</div></a>
+                <ng-template #elseBlock>
+                  <div class="task-button card-button glass">МЕТОДИЧКА</div>
+                </ng-template>
                 <button (click)="onOpenModal(task,'edit')" *ngIf="(authority)" class="task-button glass card-button"> <img
                   src="../assets/resources/icons/edit.svg" alt="edit button"> </button>
               </div>
@@ -30,9 +40,10 @@
             <div class="line-plus-status">
               <div class="line"></div>
               <div *ngIf="getDate(task)<currentDate && getDoneDate(task)>getDate(task)" class="task-deadline body5">Кінець здачі: {{getDateString(task)}} </div>
-              <div *ngIf="getDate(task)>currentDate || !(getDoneDate(task)>getDate(task))" class="task-deadline body5">Кінець здачі: {{getDateString(task)}} {{'&#128293;'}}{{'&#128293;'}} {{'&#128293;'}}</div>
+              <div *ngIf="getDate(task)>currentDate || !(getDoneDate(task)>getDate(task))" class="task-deadline body5">Кінець здачі: {{getDateString(task)}} {{'&#128293;'}}{{'&#128293;'}}{{'&#128293;'}}</div>
             </div>
-            <button (click)="openModal('done')" class="task-status glass body5">Виконано</button>
+            <button *ngIf="task?.is_done===false" (click)="onOpenModal(task,'done')" class="task-status glass body5">Позначити</button>
+            <button *ngIf="task?.is_done===true" (click)="onOpenModal(task,'undone')" class="task-status glass body5">Виконано {{task.mark}}/{{task.max_mark}}</button>
           </div>
         </div>
         <button (click)="openModal('add')" class="add-task glass h3">+</button>

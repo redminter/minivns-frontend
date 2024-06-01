@@ -5,15 +5,7 @@
   <meta charset="UTF-8">
   <title>Marks</title>
 </head>
-      <div class="search-container">
-        <div class="search-bar">
-          <div class="search-icon">
-            <img src="../assets/resources/icons/search.svg" alt="Search Icon">
-          </div>
-          <div class="placeholder body4">Пошук...</div>
-        </div>
-        <div class="line"></div>
-      </div>
+
       <div class="subjects-container" >
         <div *ngFor="let taskGroup of arrayOfArrays; let i = index" class="subject">
           <div class="subject-name-container" (click)="isExpanded[i] = !isExpanded[i]">
@@ -25,18 +17,26 @@
               <div class="name-plus-buttons">
                 <div class="task-name h7">{{task.title}}</div>
                 <div class="task-buttons">
-                  <a href='{{task.link}}'><button class="task-button glass card-button">ВНС</button></a>
-                  <a href='{{task.metoda_link}}'><button class="task-button glass card-button">МЕТОДИЧКА</button></a>
-                  <button class="task-button glass card-button">
-                    <img src="../assets/resources/icons/edit.svg" alt="edit button">
-                  </button>
+                  <a *ngIf="task.link!=null&&task.link!=''; else elseBlock" href="{{task.link}}"><div class="task-button card-button glass">ВНС</div></a>
+                  <ng-template #elseBlock>
+                    <div class="task-button card-button glass">ВНС</div>
+                  </ng-template>
+                  <a *ngIf="task.metoda_link!=null&&task.metoda_link!=''; else elseBlock" href="{{task.metoda_link}}"><div class="task-button card-button glass">МЕТОДИЧКА</div></a>
+                  <ng-template #elseBlock>
+                    <div class="task-button card-button glass">МЕТОДИЧКА</div>
+                  </ng-template>
+                  <button (click)="onOpenModal(task,'edit')" *ngIf="(authority)" class="task-button glass card-button"> <img
+                    src="../assets/resources/icons/edit.svg" alt="edit button"> </button>
                 </div>
               </div>
               <div class="line-plus-status">
                 <div class="line"></div>
-                <div class="task-deadline body5">Кінець здачі: {{getDate(task)}}</div>
+                <div *ngIf="getDate(task)<currentDate && getDoneDate(task)>getDate(task)" class="task-deadline body5">Кінець здачі: {{getDateString(task)}} </div>
+                <div *ngIf="getDate(task)>currentDate || !(getDoneDate(task)>getDate(task))" class="task-deadline body5">Кінець здачі: {{getDateString(task)}} {{'&#128293;'}}{{'&#128293;'}}{{'&#128293;'}}</div>
               </div>
-              <button class="task-status glass body5">Виконано</button>
+              <button *ngIf="task?.is_done===false" (click)="onOpenModal(task,'done')" class="task-status glass body5">Позначити</button>
+              <button *ngIf="task?.is_done===true&&task.mark<task.max_mark/2" (click)="onOpenModal(task,'undone')" style="background-color: rgba(13,84,170,0.5)" class="task-status glass body5">Виконано {{task.mark}}/{{task.max_mark}}</button>
+              <button *ngIf="task?.is_done===true&&task.mark>task.max_mark/2" (click)="onOpenModal(task,'undone')" style="background-color: rgba(53,174,20,0.5)" class="task-status glass body5">Виконано {{task.mark}}/{{task.max_mark}}</button>
             </div>
           </div>
         </div>

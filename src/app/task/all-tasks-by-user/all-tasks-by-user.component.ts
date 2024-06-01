@@ -5,7 +5,10 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Task} from '../task';
 import {TokenStorageService} from "../../auth/token-storage.service";
 import {NgForm} from "@angular/forms";
-import {Subject} from "../../Subject/subject";
+import {Subject} from "../../subject/subject";
+import {DataTransferService} from "../../data-transfer.service";
+import {ModalService} from "../add-task-modal/modal.service";
+import {SubjectService} from "../../subject/subject.service";
 
 @Component({
   selector: 'app-all-tasks-by-user',
@@ -19,6 +22,8 @@ export class AllTasksByUserComponent {
   public totalMarksPerArray: number[] = [];
   public sortedTasks: Task[] = [];
   // @ts-ignore
+  subject_id: string | null;
+  // @ts-ignore
   user_id: string | null;
   // @ts-ignore
   doneTask: Task | null;
@@ -28,9 +33,17 @@ export class AllTasksByUserComponent {
   user_firstname: any;
   user_lastname: any;
   role: any;
-
-  constructor(private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService) {
+  // @ts-ignore
+  currentDate:Date;
+// @ts-ignore
+  deleteTask: Task | null;
+  // @ts-ignore
+  doneTask: Task | null;
+  constructor(private dataTransferService: DataTransferService, private modalService: ModalService, private taskService: TaskService, private activatedRoute: ActivatedRoute, private tokenStorage: TokenStorageService, subjectService:SubjectService) {
     this.user_id = this.activatedRoute.snapshot.paramMap.get('user_id');
+    this.dataTransferService.setUserId(this.user_id);
+    this.subject_id = this.activatedRoute.snapshot.paramMap.get('subject_id');
+    this.currentDate = new Date();
   }
 
   // @ts-ignore
@@ -51,13 +64,23 @@ export class AllTasksByUserComponent {
     }
   }
 
-  public getDate(task: Task): String {
+  public getDate(task: Task): Date {
+    const monthNames = ["Січня", "Лютого", "Березня", "Квітня", "Травня", "Червня", "Липня", "Серпня", "Вересня", "Жовтня", "Листопада", "Грудня"];
+    let date = new Date(task.deadline);
+    return date;
+
+  }
+  public getDoneDate(task: Task): Date {
+    let date = new Date(task.done_date);
+    return date;
+
+  }
+  public getDateString(task: Task): String {
     const monthNames = ["Січня", "Лютого", "Березня", "Квітня", "Травня", "Червня", "Липня", "Серпня", "Вересня", "Жовтня", "Листопада", "Грудня"];
     let date = new Date(task.deadline);
     return String(date.getDate()) + " " + monthNames[date.getMonth()];
 
   }
-
   public getTasksByUser(): void {
 
     this.taskService.getTasksByUser(this.user_id).subscribe(
@@ -134,57 +157,6 @@ export class AllTasksByUserComponent {
     }
   }
 
-  public onDoneTask(doneForm: NgForm, task_id: number | undefined): void {
-    // @ts-ignore
-    document.getElementById('done-task-form').click();
-    let task: Task;
-    task = doneForm.value;
-    task.is_done = true;
-    let subject_id = task.subject_id;
-    this.taskService.updateTask(this.user_id, String(subject_id), task_id, task).subscribe(
-      (response: Subject) => {
-        console.log(response);
-        this.getTasksByUser();
-      },
-      (error: HttpErrorResponse) => {
-        // alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        } else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
-  }
-
-  public onUndoneTask(doneForm: NgForm, task_id: number | undefined): void {
-    // @ts-ignore
-    document.getElementById('done-task-form').click();
-    let task: Task;
-    task = doneForm.value;
-    let subject_id = task.subject_id;
-    task.is_done = false;
-    this.taskService.updateTask(this.user_id, String(subject_id), task_id, task).subscribe(
-      (response: Subject) => {
-        console.log(response);
-        this.getTasksByUser();
-      },
-      (error: HttpErrorResponse) => {
-        // alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        } else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
-  }
 
   public onOpenModal(task: Task | null, mode: string): void {
     const container = document.getElementById('main-container');
@@ -192,26 +164,35 @@ export class AllTasksByUserComponent {
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-    // if (mode === 'add') {
-    //   button.setAttribute('data-target', '#addTaskModal');
-    // }
-    // // if (mode === 'edit') {
-    // //   this.editTask = task;
-    // //   button.setAttribute('data-target', '#updateTaskModal');
-    // // }
-    // // if (mode === 'delete') {
-    // //   this.deleteTask = task;
-    // //   button.setAttribute('data-target', '#deleteTaskModal');
-    // // }
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addTaskModal');
+    }
+    if (mode === 'edit') {
+      this.dataTransferService.setEditTask(task);
+      this.dataTransferService.setDeleteTask(task);
+      this.dataTransferService.setSubjectId(String(task?.subject_id?.id));
+      this.modalService.openEditModule();
+      button.setAttribute('data-target', '#updateTaskModal');
+    }
+    if (mode === 'delete') {
+      this.modalService.openDeleteModule();
+      button.setAttribute('data-target', '#deleteTaskModal');
+    }
     if (mode === 'user') {
+      this.deleteTask = task;
       button.setAttribute('data-target', '#infoUserModal');
     }
     if (mode === 'done') {
-      this.doneTask = task;
+      this.doneTask = <Task>task;
+      this.dataTransferService.setDoneTask(task);
+      this.dataTransferService.setUserId(this.user_id);
+      this.modalService.openDoneModule();
       button.setAttribute('data-target', '#doneTaskModal');
     }
     if (mode === 'undone') {
-      this.doneTask = task;
+      this.dataTransferService.setUnDoneTask(task);
+      this.modalService.openUnDoneModule();
+      this.doneTask = <Task>task;
       button.setAttribute('data-target', '#undoneTaskModal');
     }
     // @ts-ignore
