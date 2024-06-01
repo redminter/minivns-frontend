@@ -1,0 +1,95 @@
+<div class="modal">
+  <form #addForm="ngForm" (ngSubmit)="onAddSchedule(addForm)" class="forms-container glass" action="login-page.html" method="post">
+    <div class="title-close-button">
+      <div class="title h5">Додати пару</div>
+      <i (click)="close()" class="close-button fa fa-times glass" aria-hidden="true"></i>
+    </div>
+    <div class="inputs-selectors">
+      <div class="inputs-container">
+        <input class="input-text" type="text" id="teacher" ngModel name="teacher" placeholder="Викладач">
+        <input class="input-text" type="text" id="link" ngModel name="link" placeholder="Посилання на заняття">
+        <input class="input-text" type="text" id="classroom" ngModel name="classroom" placeholder="Аудиторія">
+      </div>
+      <div class="selectors-container">
+        <div class="label-selector">
+          <div class="name-label body4">Предмет</div>
+          <select class="input-text"  id="subject_id" ngModel name="subject_id">
+            <option *ngFor="let subject of subjects" value="{{subject.id}}">{{subject.title}}</option>
+          </select>
+        </div>
+        <div class="label-selector">
+          <div class="name-label body4">Тип заняття</div>
+          <select class="input-text"  id="type_of_lesson" ngModel name="type_of_lesson">
+            <option value="ЛЕКЦІЯ">Лекція</option>
+            <option value="ПРАКТИКА">Практика</option>
+            <option value="ЛАБОРАТОРНА">Лабораторна</option>
+          </select>
+        </div>
+        <div class="label-selector">
+          <div class="name-label body4">День</div>
+          <select class="input-text" id="day_of_week" ngModel name="day_of_week">
+            <option value="ПОНЕДІЛОК">Понеділок</option>
+            <option value="ВІВТОРОК">Вівторок</option>
+            <option value="СЕРЕДА">Середа</option>
+            <option value="ЧЕТВЕР">Четвер</option>
+            <option value="ПЯТНИЦЯ">П'ятниця</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-container">
+        <div class="label-selector">
+          <div class="name-label body4">Пара</div>
+          <select class="input-text" id="number" ngModel name="number" >
+            <option value="1">1 пара</option>
+            <option value="2">2 пара</option>
+            <option value="3">3 пара</option>
+            <option value="4">4 пара</option>
+            <option value="5">5 пара</option>
+            <option value="6">6 пара</option>
+            <option value="7">7 пара</option>
+            <option value="8">8 пара</option>
+          </select>
+        </div>
+        <div class="radio-container">
+          <div class="radio">
+            <label class="custom-radio-btn">
+              <span class="label">Чисельник</span>
+              <input type="radio" value="ODD" id="ODD" ngModel name="week_type">
+              <span class="checkmark"></span>
+            </label>
+            <label class="custom-radio-btn">
+              <span class="label">Знаменник</span>
+              <input type="radio" value="EVEN" id="EVEN" ngModel name="week_type">
+              <span class="checkmark"></span>
+            </label>
+            <label class="custom-radio-btn">
+              <span class="label">Немає</span>
+              <input type="radio" value="UNDEFINED" id="UNDEFINED" ngModel name="week_type">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <div class="radio">
+            <label class="custom-radio-btn">
+              <span class="label">І підгрупа</span>
+              <input type="radio" id="HALF_GROUP_1" value="HALF_GROUP_1" ngModel name="group_type">
+              <span class="checkmark"></span>
+            </label>
+            <label class="custom-radio-btn">
+              <span class="label">ІІ підгрупа</span>
+              <input type="radio" id="HALF_GROUP_2" value="group_type" ngModel name="group_type">
+              <span class="checkmark"></span>
+            </label>
+            <label class="custom-radio-btn">
+              <span class="label">Вся група</span>
+              <input type="radio"  id="FULL_GROUP" value="FULL_GROUP" ngModel name="group_type">
+              <span class="checkmark"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="buttons">
+      <button id="add-schedule-item-form" class="submit-button hbtn" type="submit" [disabled]="addForm.invalid">Додати</button>
+    </div>
+  </form>
+</div>
