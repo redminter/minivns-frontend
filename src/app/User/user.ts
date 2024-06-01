@@ -5,5 +5,5 @@ export interface User{
   email:string
   password:string;
   gender:boolean;
-  group:string;
+  group?:string;
 }

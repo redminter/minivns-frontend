@@ -3,9 +3,12 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 import {User} from "./user";
 import {UserService} from "./user.service";
+import {ModalService} from "../task/add-task-modal/modal.service";
+import {DataTransferService} from "../data-transfer.service";
 
 @Component({
-  templateUrl: './user.component.html'
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit{
   public users: User[] = [];
@@ -13,7 +16,7 @@ export class UserComponent implements OnInit{
   public editUser: User | null;
   // @ts-ignore
   public deleteUser: User | null;
-  constructor(private userService: UserService) {
+  constructor(private dataTransfer:DataTransferService, private modalService:ModalService, private userService: UserService) {
   }
   ngOnInit() {
     this.getUsers();
@@ -49,7 +52,7 @@ export class UserComponent implements OnInit{
         addForm.reset();
       },
       (error: HttpErrorResponse) => {
-        // alert(error.message);
+        //alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
         }else {
@@ -70,7 +73,7 @@ export class UserComponent implements OnInit{
         this.getUsers();
       },
       (error: HttpErrorResponse) => {
-        // alert(error.message);
+         //alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
         }else {
@@ -123,10 +126,14 @@ export class UserComponent implements OnInit{
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
     if (mode === 'add') {
+      this.modalService.openAddUserModule();
       button.setAttribute('data-target', '#addUserModal');
     }
     if (mode === 'edit') {
       this.editUser = user;
+      this.dataTransfer.setEditUser(user);
+      this.dataTransfer.setDeleteUser(user)
+      this.modalService.openEditUserModule();
       button.setAttribute('data-target', '#updateUserModal');
     }
     if (mode === 'delete') {
