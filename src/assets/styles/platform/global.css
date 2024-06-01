@@ -174,8 +174,13 @@ h4 {
   display: flex;
   gap: 40px;
 }
-
+app-sidebar{
+  height: fit-content;
+}
 .header-plus-body{
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
   flex: 1;
 }
 .line{

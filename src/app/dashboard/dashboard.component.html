@@ -14,12 +14,24 @@
             <div class="statistics glass">
               <div class="h3">{{doneTasksPercentage}}%</div>
               <div class="h5">Виконано!</div>
-              <div class="back-color"></div>
+              <div *ngIf="doneTasksPercentage>=97; else elseBlock" class="back-color" style="border-radius:30px" [style.height.%]="doneTasksPercentage"></div>
+              <ng-template #elseBlock>
+                <div class="back-color" [style.height.%]="doneTasksPercentage"></div>
+              </ng-template>
             </div>
           </div>
           <div class="expire-container">
             <span class="h5">Скоро спливає</span>
             <div class="tasks-container">
+              <ng-template>
+              <div *ngIF="sortedTasks.length==0; else elseBlock" class="task-card-container">
+                <div class="task-card-dashboard glass">
+                  <div class="name-time">
+                    <span class="task-name h6">Немає завдань</span>
+                  </div>
+                </div>
+              </div>
+              </ng-template>
               <div *ngFor="let task of sortedTasks" class="task-card-container">
                 <div class="task-card-dashboard glass">
                   <div class="name-time">
@@ -30,8 +42,14 @@
                     </div>
                   </div>
                   <div class="schedule-card-button-container">
-                    <a href="{{task.link}}" class="card-button"><div class="schedule-card-button glass">ВНС</div></a>
-                    <a href ="{{task.metoda_link}}" class="card-button"><div class="schedule-card-button glass lection-active">ЛЕКЦІЯ</div></a>
+                    <a *ngIf="task.link && task.link.trim() != ''; else elseBlock1" href="{{task.link}}"><div class="schedule-card-button card-button glass">ВНС</div></a>
+                    <ng-template #elseBlock1>
+                      <div class=" schedule-card-button card-button glass">ВНС</div>
+                    </ng-template>
+                    <a *ngIf="task.link && task.link.trim() != ''; else elseBlock2" href="{{task.metoda_link}}"><div class="schedule-card-button card-button glass">МЕТОДИЧКА</div></a>
+                    <ng-template #elseBlock2>
+                      <div class="schedule-card-button card-button glass">МЕТОДИЧКА</div>
+                    </ng-template>
                   </div>
                 </div>
                 <div class="task-deadline-dashboard glass">
@@ -62,26 +80,29 @@
         <span class="h5">{{getDateNow()}}</span>
         <div class="schedule-cards-container-plus-button">
           <div class="schedule-cards-container-dashboard">
-            <div *ngFor="let subject of subjects" class="schedule-item-dashboard">
+            <div *ngFor="let subject of schedules" class="schedule-item-dashboard">
               <div class="schedule-card glass">
                 <div class="name-time">
-                  <span class="discipline-name h6">{{subject.title}}</span>
+                  <span class="discipline-name h6">{{subject.subject_id.title}}</span>
                   <div class="teacher-time">
                     <span class="teacher body5">{{subject.teacher}}</span>
                     <div class="para-number-time body5">
-                      <span class="para-number">1 пара</span>
-                      <span class="time">8:30-10:00</span>
+                      <span class="para-number">{{subject.number}} пара</span>
+                      <span class="time">{{getTimeByNumber(subject.number)}}</span>
                     </div>
                   </div>
                 </div>
                 <div class="schedule-card-button-container">
-                  <a href="{{subject.vns_url}}"><div class="schedule-card-button card-button glass">ВНС</div></a>
-                  <a href="{{subject.lection_url}}"><div class="schedule-card-button card-button glass lection-active">ЛЕКЦІЯ</div></a>
-                  <a href="{{subject.lab_url}}"><div class="schedule-card-button card-button glass">ЛАБ</div></a>
-                  <a href="{{subject.pract_url}}"><div class="schedule-card-button card-button glass">ПРАКТИКА</div></a>
-                </div>
+                  <a *ngIf="subject.subject_id.link && subject.subject_id.link.trim() != ''; else elseBlock1" href="{{subject.subject_id.link}}"><div class="schedule-card-button card-button glass">ВНС</div></a>
+                  <ng-template #elseBlock1>
+                    <div class="schedule-card-button card-button glass">ВНС</div>
+                  </ng-template>
+                  <a *ngIf="subject.subject_id.link && subject.subject_id.link.trim() != ''; else elseBlock2" href="{{subject.link}}"><div class="schedule-card-button card-button glass">{{subject.type_of_lesson}}</div></a>
+                  <ng-template #elseBlock2>
+                    <div class="schedule-card-button card-button glass">{{subject.type_of_lesson}}</div>
+                  </ng-template></div>
               </div>
-              <div routerLink="../../../users/{{user_id}}/subjects/{{subject.id}}/tasks" class="schedule-button glass">
+              <div routerLink="../../../users/{{user_id}}/subjects/{{subject.subject_id.id}}/tasks" class="schedule-button-dashboard glass">
                 <img src="../assets/resources/icons/arrow-right.svg" alt="Arrow Right">
               </div>
             </div>

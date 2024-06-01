@@ -5,14 +5,13 @@
 }
 
 
-.schedule-card {
+.schedule-card-schedule {
     padding: 21px;
     display: flex;
     flex-direction: column;
     gap: 18px;
     box-shadow: none;
-    width: 284px;
-
+    justify-content: space-between;
 }
 
 .line {
@@ -58,25 +57,22 @@
     padding: 5px 10px 5px 10px;
     border-width: 1px;
     box-shadow: none;
-
 }
 
 .schedule-button {
-    display: flex;
-    padding: 0px 21px 0px 21px;
-    box-shadow: none;
-    justify-items: center;
+  padding: 61px 21px 61px 21px;
+  box-shadow: none;
+  align-content: center;
 }
 
 .schedule-card-container {
     display: flex;
     gap: 13px;
+    flex-wrap: wrap;
 }
 
-.schedule-cards-container {
+.schedule-cards-container-schedule {
     display: flex;
-    flex-wrap: wrap;
-    gap: 28px;
 }
 
 .main-container-schedule{
