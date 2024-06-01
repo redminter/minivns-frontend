@@ -1,10 +1,12 @@
-<nav class="left-menu-plus-body">
-  <app-sidebar></app-sidebar>
+<nav *ngIf="showHeaderAndSidebar" class="left-menu-plus-body">
+  <app-sidebar ></app-sidebar>
   <header class="header-plus-body">
-    <app-header></app-header>
+    <app-header ></app-header>
     <div class="main-container">
-      <router-outlet></router-outlet>
+      <router-outlet ></router-outlet>
     </div>
   </header>
 </nav>
-<app-footer></app-footer>
+<app-footer *ngIf="showHeaderAndSidebar" ></app-footer>
+
+<router-outlet *ngIf="showHeaderAndSidebar == false"></router-outlet>
