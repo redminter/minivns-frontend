@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {TaskService} from "../task/task.service";
 import {ActivatedRoute} from "@angular/router";
 import {TokenStorageService} from "../auth/token-storage.service";
-import {SubjectService} from "../Subject/subject.service";
+import {SubjectService} from "../subject/subject.service";
 
 @Component({
   selector: 'app-sidebar',

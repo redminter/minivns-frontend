@@ -1,11 +1,11 @@
-<nav class="left-menu-container">
+<nav class="left-menu-container glass">
   <div class="logo-menu-items-container">
     <span routerLink="../users/{{user_id}}/dashboard" class="logo">MINIVNS</span>
     <div class="menu-item-container">
       <div routerLink="../users/{{user_id}}/dashboard" class="menu-item hbtn">
         <p>Дешборд</p>
       </div>
-      <div routerLink="/subjects" class="menu-item hbtn">
+      <div routerLink="/schedule" class="menu-item hbtn">
         <p>Розклад</p>
       </div>
       <div routerLink="users/{{user_id}}/marks" class="menu-item hbtn">
@@ -16,6 +16,12 @@
       </div>
       <div *ngIf="(authority)&&(authority=='admin')" routerLink="/settings" class="menu-item hbtn">
         <p>Налаштування</p>
+      </div>
+      <div *ngIf="(authority)&&(authority=='admin')" routerLink="/subjects" class="menu-item hbtn">
+        <p>Предмети</p>
+      </div>
+      <div *ngIf="(authority)&&(authority=='admin')" routerLink="/users" class="menu-item hbtn">
+        <p>Користувачі</p>
       </div>
     </div>
   </div>
