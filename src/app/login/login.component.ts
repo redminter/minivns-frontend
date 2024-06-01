@@ -7,6 +7,7 @@ import { AuthLoginInfo } from '../auth/login-info';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -56,7 +57,6 @@ export class LoginComponent implements OnInit {
       },
       error => {
         console.log(error);
-        this.errorMessage = error.error.message;
         this.isLoginFailed = true;
       }
     );
