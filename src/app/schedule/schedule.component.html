@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule</title>
+</head>
+<div class="main-container-schedule">
+  <div *ngFor="let day of getDays() let i=index" class="schedule-item">
+    <div class="name-container" (click)="isExpanded[i] = !isExpanded[i]">
+      <div class="name-button">
+        <div *ngIf="day=='ПЯТНИЦЯ' else elseBlock" class="name h4">П'ЯТНИЦЯ</div>
+        <ng-template #elseBlock>
+          <div class="name h4">{{day}}</div>
+        </ng-template>
+        <div class="icon" ><img [style.transform]="'rotate(' + getRotation(i) + ')'" src="../assets/resources/icons/arrow-up.svg" alt="arrow-up"></div>
+      </div>
+      <div class="line"></div>
+    </div>
+    <div class="schedule-cards-container" *ngIf="isExpanded[i]">
+      <div class="schedule-card-container">
+        <div *ngFor="let schedule of groupedByDays[day] let i=index" class="schedule-card-schedule glass">
+          <div class="name-time">
+            <span class="discipline-name h6">{{schedule.subject_id.title | truncateEmail:20}} </span>
+            <div class="teacher-time">
+              <span class="teacher body5">{{schedule.teacher}}</span>
+              <div class="para-number-time body5">
+                <span class="para-number">{{schedule.number}} пара</span>
+                <span class="time">{{getTimeByNumber(schedule.number)}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="name-time-buttons">
+          <div class="schedule-card-button-container">
+            <a *ngIf="schedule.subject_id.link && schedule.subject_id.link.trim() != ''; else elseBlock1" href="{{schedule.subject_id.link}}"><div class="schedule-card-button card-button glass">ВНС</div></a>
+            <ng-template #elseBlock1>
+              <div class="schedule-card-button card-button glass">ВНС</div>
+            </ng-template>
+            <a *ngIf="schedule.link && schedule.link.trim() != ''; else elseBlock2" href="{{schedule.link}}"><div class="schedule-card-button card-button glass">{{schedule.type_of_lesson}}</div></a>
+            <ng-template #elseBlock2>
+              <div class="schedule-card-button card-button glass">{{schedule.type_of_lesson}}</div>
+            </ng-template>
+            <div class="schedule-card-button card-button glass">{{schedule.classroom}}</div>
+            <div *ngIf="schedule.week_type!='UNDEFINED'" class="schedule-card-button card-button glass">{{getWeekType(schedule.week_type)}}</div>
+            <div class="schedule-card-button card-button glass">{{getGroupType(schedule.group_type)}}</div>
+          </div>
+            <button (click)="openUpdateModal(schedule)"*ngIf="(authority)&&(authority=='admin')"  class="task-button glass card-button"> <img
+              src="../assets/resources/icons/edit.svg" alt="edit button"> </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button (click)="openModal()" class="add-task glass h3">+</button>
+</div>
+</html>

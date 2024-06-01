@@ -1,0 +1,20 @@
+<div class="modal">
+  <form #undoneForm="ngForm" (ngSubmit)="onUndoneTask(undoneForm)" class="form-container glass" action="login-page.html" method="post">
+    <div class="title-close-button">
+      <div class="title h5">Позначити невиконаним<br>{{undoneTask?.title}}</div>
+      <i (click)="close()" class="close-button fa fa-times glass" aria-hidden="true"></i>
+    </div>
+    <div type="hidden" class="input-forgot-password">
+      <input class="input-text" type="hidden" ngModel="{{undoneTask?.mark}}" name="mark" id="max" >
+      <input class="input-text" type="hidden" ngModel="{{undoneTask?.max_mark}}" name="max_mark" id="max_mark">
+      <input class="input-text" type="hidden" name="title" id="title" ngModel="{{undoneTask?.title}}" placeholder="Лабораторна" required>
+      <input class="input-text" type="hidden" name="link" id="link" ngModel="{{undoneTask?.link}}" placeholder="https://">
+      <input class="input-text" type="hidden" name="metoda_link" ngModel="{{undoneTask?.metoda_link}}" id="metoda_link" placeholder="https://">
+      <input class="input-text" type="hidden" name="deadline" ngModel="{{undoneTask?.deadline}}" id="deadline" value="2024-04-12">
+      <input type="hidden" ngModel="{{undoneTask?.id}}" name="task_id" class="form-control" id="task_id"
+             placeholder="id">
+    </div>
+    <div class="buttons">
+      <button id="undone-task-form" class="lg-button hbtn" type="submit">Позначити</button></div>
+  </form>
+</div>

@@ -1,0 +1,30 @@
+<div class="modal">
+  <form #addForm="ngForm" (ngSubmit)="onEditUser(addForm)" class="form-container glass" method="post">
+    <div class="title-close-button">
+      <div class="title h5">Додати користувача</div>
+      <i (click)="close()" class="close-button fa fa-times glass" aria-hidden="true"></i>
+    </div>
+    <div class="input-forgot-password">
+      <input class="input-text" type="text" ngModel="{{editUser?.first_name}}" name="first_name" id="first_name" placeholder="Ім'я" required>
+      <input class="input-text" type="text" ngModel="{{editUser?.last_name}}" name="last_name" id="link" placeholder="Прізвище">
+      <input class="input-text" type="text" ngModel="{{editUser?.email}}" name="email" id="email" placeholder="Пошта">
+      <input class="input-text" type="text" ngModel name="password" id="password" placeholder="Новий пароль">
+      <div class="radio-container">
+        <label class="custom-radio-btn">
+          <span class="label">Чоловік</span>
+          <input type="radio" id="true" value="true" ngModel="{{editUser?.gender}}" name="gender">
+          <span class="checkmark"></span>
+        </label>
+        <label class="custom-radio-btn">
+          <span class="label">Жінка</span>
+          <input type="radio"  id="false" value="false" ngModel="{{editUser?.gender}}" name="gender">
+          <span class="checkmark"></span>
+        </label>
+      </div>
+    </div>
+    <div class="buttons">
+      <button id="add-user-form" class="submit-button hbtn" type="submit" [disabled]="addForm.invalid">Додати</button>
+      <button (click)="openDelete()" class="delete-button hbtn" type="submit">Видалити завдання</button>
+    </div>
+  </form>
+</div>
