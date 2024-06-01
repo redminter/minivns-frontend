@@ -1,0 +1,16 @@
+<div class="modal">
+<form #addForm="ngForm" (ngSubmit)="onAddSubjects(addForm)" class="form-container glass" method="post">
+  <div class="title-close-button">
+  <div class="title h5">Додати завдання</div>
+  <i (click)="close()" class="close-button fa fa-times glass" aria-hidden="true"></i>
+  </div>
+  <div class="input-forgot-password">
+    <input class="input-text" type="text" ngModel name="title" id="title" placeholder="Назва" required>
+    <input class="input-text" type="text" ngModel name="link" id="link" placeholder="Посилання на предмет">
+    <input class="input-text" type="text" ngModel name="credit" id="credit" placeholder="Кредити">
+  </div>
+  <div class="buttons">
+    <button id="add-subject-form" class="submit-button hbtn" type="submit" [disabled]="addForm.invalid">Додати</button>
+  </div>
+</form>
+</div>

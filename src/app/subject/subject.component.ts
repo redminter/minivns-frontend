@@ -4,10 +4,12 @@ import {NgForm} from "@angular/forms";
 import {Subject} from "./subject";
 import {SubjectService} from "./subject.service";
 import {TokenStorageService} from "../auth/token-storage.service";
-import {ModalService} from "../add-task-modal/modal.service";
+import {ModalService} from "../task/add-task-modal/modal.service";
+import {DataTransferService} from "../data-transfer.service";
 
 @Component({
-  templateUrl: './subject.component.html'
+  templateUrl: './subject.component.html',
+  styleUrls: ['./subject.component.css']
 })
 export class SubjectComponent implements OnInit{
   isExpanded: boolean[] = [];
@@ -30,7 +32,7 @@ export class SubjectComponent implements OnInit{
   user_firstname:any;
   user_lastname:any;
   username:any;
-  constructor(private modalService: ModalService, private subjectService: SubjectService, private tokenStorage: TokenStorageService) {
+  constructor(private dataTransfer:DataTransferService, private modalService: ModalService, private subjectService: SubjectService, private tokenStorage: TokenStorageService) {
   }
   // @ts-ignore
   ngOnInit() {
@@ -65,19 +67,9 @@ export class SubjectComponent implements OnInit{
       (response: Subject[]) => {
         this.subjects = response;
         console.log(this.subjects);
-
-        let mondaySubjects = this.subjects.filter(subject => subject.at_monday);
-        let tuesdaySubjects = this.subjects.filter(subject => subject.at_tuesday);
-        let wednesdaySubjects = this.subjects.filter(subject => subject.at_wednesday);
-        let thursdaySubjects = this.subjects.filter(subject => subject.at_thursday);
-        let fridaySubjects = this.subjects.filter(subject => subject.at_friday);
-
-        this.weekDays= ['Понеділок', 'Вівторок', 'Середа', 'Четвер', "П'ятниця"];
-        this.weekSubjects = [mondaySubjects, tuesdaySubjects, wednesdaySubjects, thursdaySubjects, fridaySubjects];
-        console.log(this.weekSubjects);
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        //alert(error.message);
         if (error.status === 403) {
           window.location.assign("/forbidden");
         }else {
@@ -89,68 +81,6 @@ export class SubjectComponent implements OnInit{
       }
     );
 
-  }
-  public onAddSubject(addForm: NgForm): void {
-    // @ts-ignore
-    document.getElementById('add-subject-form').click();
-    this.subjectService.addSubject(addForm.value).subscribe(
-      (response: Subject) => {
-        console.log(response);
-        this.getSubjects();
-        addForm.reset();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        }else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
-  }
-  public onUpdateSubject(updateForm: NgForm, subjectId:number|undefined): void {
-    // @ts-ignore
-    document.getElementById('update-subject-form').click();
-    this.subjectService.updateSubject(subjectId, updateForm.value).subscribe(
-      (response: Subject) => {
-        console.log(response);
-        this.getSubjects();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        }else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
-  }
-  public onDeleteSubject( subjectId:number|undefined): void {
-    this.subjectService.deleteSubject(subjectId).subscribe(
-      (response: void) => {
-        console.log(response);
-        this.getSubjects();
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-        if (error.status === 403) {
-          window.location.assign("/forbidden");
-        }else {
-          window.location.assign("/error");
-        }
-        if (error.status === 401) {
-          window.location.assign("/forbidden");
-        }
-      }
-    );
   }
   public searchSubjects(keyWord: string): void {
     console.log(keyWord);
@@ -175,7 +105,9 @@ export class SubjectComponent implements OnInit{
       button.setAttribute('data-target', '#addSubjectModal');
     }
     if (mode === 'edit') {
-      this.editSubject = subject;
+      this.dataTransfer.setEditSubject(subject);
+      this.dataTransfer.setDeleteSubject(subject);
+      this.modalService.openEditSubjectModule();
       button.setAttribute('data-target', '#updateSubjectModal');
     }
     if (mode === 'delete') {
@@ -189,12 +121,6 @@ export class SubjectComponent implements OnInit{
     // @ts-ignore
     container.appendChild(button);
     button.click();
-  }
-  openModule() {
-    this.modalService.openEditSubjectModule();
-  }
-  getRotation(i: number) {
-    return this.isExpanded[i] ? '180deg' : '0deg';
   }
   logout() {
     this.tokenStorage.signOut();

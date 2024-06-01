@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule</title>
+</head>
+    <div class="main-container-schedule">
+      <div class="schedule-item">
+        <div class="schedule-cards-container">
+          <div *ngFor="let subject of subjects" class="schedule-card-container">
+            <div class="schedule-card glass">
+              <div class="name-time">
+                <span class="discipline-name h6">{{subject.title}}</span>
+              </div>
+              <div class="schedule-card-button-container">
+                <a *ngIf="subject.link && subject.link.trim() != ''; else elseBlock" href="{{subject.link}}"><div class="schedule-card-button card-button glass">ВНС</div></a>
+                <ng-template #elseBlock>
+                  <div class="schedule-card-button card-button glass">ВНС</div>
+                </ng-template>
+                <button *ngIf="(authority)&&(authority=='admin')" (click)="onOpenModal(subject, 'edit')" class="task-button glass card-button"> <img
+                  src="../assets/resources/icons/edit.svg" alt="edit button"> </button>
+              </div>
+            </div>
+            <div routerLink="../users/{{user_id}}/subjects/{{subject.id}}/tasks" class="schedule-button glass">
+              <img src="../assets/resources/icons/arrow-right.svg" alt="Arrow Right">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</html>

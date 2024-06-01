@@ -1,0 +1,17 @@
+<div class="modal">
+  <form #addForm="ngForm" (ngSubmit)="onEditSubject(addForm, editSubject?.id)" class="form-container glass" method="post">
+    <div class="title-close-button">
+      <div class="title h5">Редагувати предмет</div>
+      <i (click)="close()" class="close-button fa fa-times glass" aria-hidden="true"></i>
+    </div>
+    <div class="input-forgot-password">
+      <input class="input-text" type="text" ngModel="{{editSubject?.title}}" name="title" id="title" placeholder="Назва" required>
+      <input class="input-text" type="text" ngModel="{{editSubject?.link}}" name="link" id="link" placeholder="Посилання на предмет">
+      <input class="input-text" type="text" ngModel="{{editSubject?.credit}}" name="credit" id="credit" placeholder="Кредити">
+    </div>
+    <div class="buttons">
+      <button id="edit-subject-form" class="submit-button hbtn" type="submit" [disabled]="addForm.invalid">Додати</button>
+      <button (click)="openDelete()" class="delete-button hbtn" type="submit">Видалити предмет</button>
+    </div>
+  </form>
+</div>
